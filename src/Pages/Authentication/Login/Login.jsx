@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Contexts/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const {
@@ -25,6 +26,13 @@ const Login = () => {
     signIn(data.email, data.password)
       .then((result) => {
         console.log(result);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate(from);
       })
       .catch((error) => {

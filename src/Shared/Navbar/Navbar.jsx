@@ -2,13 +2,22 @@ import React, { use } from "react";
 import { Link, NavLink } from "react-router";
 import Logo from "../Logo/Logo";
 import { AuthContext } from "../../Contexts/AuthContext";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
 
   const handleLogout = () => {
     logOut()
-      .then((res) => console.log(res))
+      .then(() =>
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Logout Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      )
       .catch((error) => console.log(error));
   };
 
@@ -20,6 +29,22 @@ const Navbar = () => {
           to={"/"}
         >
           Home
+        </NavLink>
+      </li>
+      <li className="text-secondary font-medium text-lg">
+        <NavLink
+          className={({ isActive }) => (isActive ? "underline" : "")}
+          to={"/allDonations"}
+        >
+          All Donations
+        </NavLink>
+      </li>
+      <li className="text-secondary font-medium text-lg">
+        <NavLink
+          className={({ isActive }) => (isActive ? "underline" : "")}
+          to={"/dashBoard"}
+        >
+          Dashboard
         </NavLink>
       </li>
     </>
