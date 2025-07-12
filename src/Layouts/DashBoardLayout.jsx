@@ -21,6 +21,13 @@ const DashBoardLayout = () => {
          My Profile
         </NavLink>
       </li>
+     <li className="text-secondary font-medium text-lg">
+        <NavLink
+          className={({ isActive }) => (isActive ? "underline" : "")}
+          to={"/dashBoard/requestCharityRole"}
+        >Request Charity Role
+        </NavLink>
+      </li>
       {/* Restaurant */}
 
       <li className="text-secondary font-medium text-lg">

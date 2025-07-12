@@ -15,6 +15,7 @@ import AddDonation from "../Pages/DashBoard/RestaurantDashBoard/AddDonation/AddD
 import MyDonations from "../Pages/DashBoard/RestaurantDashBoard/MyDonations/MyDonations";
 import RequestedDonations from "../Pages/DashBoard/RestaurantDashBoard/RequestedDonations/RequestedDonations";
 import MyProfile from "../Pages/DashBoard/UserDashBoard/MyProfile/MyProfile";
+import RequestCharityRole from "../Pages/DashBoard/UserDashBoard/RequestCharityRole/RequestCharityRole";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
       {
         path: "myProfile",
         Component: MyProfile,
+      },
+      {
+        path: "requestCharityRole",
+        Component: RequestCharityRole,
       },
       {
         path: "restaurantProfile",
