@@ -7,8 +7,14 @@ import Registration from "../Pages/Authentication/Registration/Registration";
 import UnAuthorized from "../Pages/UnAuthorized/UnAuthorized";
 import ComingSoon from "../Pages/ComingSoon/ComingSoon";
 import AllDonations from "../Pages/AllDonations/AllDonations";
-import DashBoard from "../Pages/DashBoard/DashBoard";
 import PrivetRoutes from "../Pages/Authentication/PrivetRoute/PrivetRoute";
+import DashBoardLayout from "../Layouts/DashBoardLayout";
+import DashBoard from "../Pages/DashBoard/DashBoard";
+import RestaurantProfile from "../Pages/DashBoard/RestaurantDashBoard/RestaurantProfile/RestaurantProfile";
+import AddDonation from "../Pages/DashBoard/RestaurantDashBoard/AddDonation/AddDonation";
+import MyDonations from "../Pages/DashBoard/RestaurantDashBoard/MyDonations/MyDonations";
+import RequestedDonations from "../Pages/DashBoard/RestaurantDashBoard/RequestedDonations/RequestedDonations";
+import MyProfile from "../Pages/DashBoard/UserDashBoard/MyProfile/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -52,7 +58,33 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "dashBoard",
-    Component: DashBoard,
+    path: "/dashBoard",
+    Component: DashBoardLayout,
+    children: [
+      {
+        index: true,
+        Component: DashBoard,
+      },
+      {
+        path: "myProfile",
+        Component: MyProfile,
+      },
+      {
+        path: "restaurantProfile",
+        Component: RestaurantProfile,
+      },
+      {
+        path: "addDonation",
+        Component: AddDonation,
+      },
+      {
+        path: "myDonations",
+        Component: MyDonations,
+      },
+      {
+        path: "requestedDonations",
+        Component: RequestedDonations,
+      },
+    ],
   },
 ]);

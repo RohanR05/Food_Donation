@@ -1,11 +1,11 @@
 import React from 'react'
 
-const DashBoard = () => {
+const MyReviews = () => {
   return (
     <div>
-      Home
+      
     </div>
   )
 }
 
-export default DashBoard
+export default MyReviews
