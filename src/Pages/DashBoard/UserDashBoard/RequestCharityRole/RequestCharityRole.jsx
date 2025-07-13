@@ -63,10 +63,13 @@ const CharityPaymentForm = ({ userData }) => {
     } else if (paymentIntent.status === "succeeded") {
       try {
         await axiosSecure.post("/charity-requests", {
-          ...userData, // includes name, email, organization, mission
+          name: userData.name || "No Name",
+          email: userData.email,
+          organization: userData.organization,
+          mission: userData.mission,
           paymentAmount: 25,
-          paymentId: paymentIntent.id, // Stripe payment ID
-          status: "Charity pending",
+          paymentId: paymentIntent.id,
+          status: "pending", // status used in backend to filter
           requestedAt: new Date().toISOString(),
         });
 

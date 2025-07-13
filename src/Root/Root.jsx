@@ -16,9 +16,11 @@ import MyDonations from "../Pages/DashBoard/RestaurantDashBoard/MyDonations/MyDo
 import RequestedDonations from "../Pages/DashBoard/RestaurantDashBoard/RequestedDonations/RequestedDonations";
 import MyProfile from "../Pages/DashBoard/UserDashBoard/MyProfile/MyProfile";
 import RequestCharityRole from "../Pages/DashBoard/UserDashBoard/RequestCharityRole/RequestCharityRole";
-import ManageCharityRequests from "../Pages/DashBoard/Admin/ManageCharityRequests/manageCharityRequests.";
 import ManageUser from "../Pages/DashBoard/Admin/ManageUser/ManageUser";
 import AdminProfile from "../Pages/DashBoard/Admin/AdminProfile/AdminProfile";
+import ManageRoleRequests from "../Pages/DashBoard/Admin/ManageRoleRequests/ManageRoleRequests";
+import ManageDonations from "../Pages/DashBoard/Admin/ManageDonations/ManageDonations";
+import CharityProfile from "../Pages/DashBoard/Charity/CharityProfile/CharityProfile";
 
 export const router = createBrowserRouter([
   {
@@ -78,16 +80,24 @@ export const router = createBrowserRouter([
         Component: RequestCharityRole,
       },
       {
-        path: "manageCharityRequests",
-        Component: ManageCharityRequests,
+        path: "charityProfile",
+        Component: CharityProfile,
       },
       {
-path:"manageUsers",
-Component:ManageUser
+        path: "manageUsers",
+        Component: ManageUser,
       },
       {
-path:'adminProfile',
-Component:AdminProfile
+        path: "adminProfile",
+        Component: AdminProfile,
+      },
+      {
+        path: "manageRoleRequests",
+        Component: ManageRoleRequests,
+      },
+      {
+        path: "manageDonations",
+        Component: ManageDonations,
       },
       {
         path: "restaurantProfile",

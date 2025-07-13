@@ -20,6 +20,14 @@ const DashBoardLayout = () => {
           Admin Profile
         </NavLink>
       </li>
+      <li className="text-secondary font-medium text-lg">
+        <NavLink
+          className={({ isActive }) => (isActive ? "underline" : "")}
+          to={"/dashBoard/manageRoleRequests"}
+        >
+          Manage Role Requests
+        </NavLink>
+      </li>
       {/* User */}
      <li className="text-secondary font-medium text-lg">
         <NavLink
@@ -40,16 +48,22 @@ const DashBoardLayout = () => {
      <li className="text-secondary font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
-          to={"/dashBoard/manageCharityRequests"}
-        >
-        Manage Charity Requests 
+          to={"/dashBoard/requestCharityRole"}
+        >Request Charity Role
         </NavLink>
       </li>
      <li className="text-secondary font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
-          to={"/dashBoard/requestCharityRole"}
-        >Request Charity Role
+          to={"/dashBoard/charityProfile"}
+        >Charity Profile
+        </NavLink>
+      </li>
+     <li className="text-secondary font-medium text-lg">
+        <NavLink
+          className={({ isActive }) => (isActive ? "underline" : "")}
+          to={"/dashBoard/manageDonations"}
+        >Manage Donations
         </NavLink>
       </li>
       {/* Restaurant */}
