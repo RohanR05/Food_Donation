@@ -55,6 +55,13 @@ const DashBoardLayout = () => {
      <li className="text-secondary font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
+          to={"/dashBoard/myPickups"}
+        >My Pickups
+        </NavLink>
+      </li>
+     <li className="text-secondary font-medium text-lg">
+        <NavLink
+          className={({ isActive }) => (isActive ? "underline" : "")}
           to={"/dashBoard/transactionHistory"}
         >Transaction History
         </NavLink>
