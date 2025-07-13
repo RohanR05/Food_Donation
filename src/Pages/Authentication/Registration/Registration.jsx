@@ -5,9 +5,11 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import AxiosSecure from "../../../Hooks/AxiosSecure";
 
 const Registration = () => {
   const { createUser, updateUserProfile } = use(AuthContext);
+  const axiosInstance = AxiosSecure();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -15,7 +17,6 @@ const Registration = () => {
   const [profileImage, setProfileImage] = useState("");
   const [imageUploading, setImageUploading] = useState(false);
 
-//   const axiosInstance = AxiosInstance();
   const {
     register,
     handleSubmit,
@@ -62,14 +63,14 @@ const Registration = () => {
 
         await updateUserProfile(userProfile);
 
-        // const userInfo = {
-        //   email: data.email,
-        //   role: "user",
-        //   created_at: new Date().toISOString(),
-        //   last_login: new Date().toISOString(),
-        // };
+        const userInfo = {
+          email: data.email,
+          role: "user",
+          created_at: new Date().toISOString(),
+          last_login: new Date().toISOString(),
+        };
 
-        // await axiosInstance.post("/users", userInfo);
+        await axiosInstance.post("/users", userInfo);
 
         // ✅ Show SweetAlert success message
         await Swal.fire({

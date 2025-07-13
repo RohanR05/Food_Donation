@@ -1,13 +1,23 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth } from "../Firebase/Firebase";
 import { AuthContext } from "./AuthContext";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosSecure = useAxiosSecure();
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -33,15 +43,28 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-      // console.log("user in the auth state change", createUser);
       setLoading(false);
+
+      if (currentUser) {
+        const userInfo = {
+          name: currentUser.displayName || "No Name",
+          email: currentUser.email,
+        };
+
+        try {
+          await axiosSecure.post("/users", userInfo);
+        } catch (err) {
+          console.error("❌ Failed to add user to DB:", err);
+        }
+      }
     });
+
     return () => {
       unSubscribe();
     };
-  }, []);
+  }, [axiosSecure]);
 
   const authInfo = {
     user,

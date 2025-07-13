@@ -25,7 +25,9 @@ const CharityPaymentForm = ({ userData }) => {
   const { data: clientSecret, isLoading } = useQuery({
     queryKey: ["payment-intent"],
     queryFn: async () => {
-      const res = await axiosSecure.post("/create-payment-intent", { amount: 2500 });
+      const res = await axiosSecure.post("/create-payment-intent", {
+        amount: 2500,
+      });
       return res.data.clientSecret;
     },
     enabled: !!userData?.email,
@@ -61,10 +63,10 @@ const CharityPaymentForm = ({ userData }) => {
     } else if (paymentIntent.status === "succeeded") {
       try {
         await axiosSecure.post("/charity-requests", {
-          ...userData,
+          ...userData, // includes name, email, organization, mission
           paymentAmount: 25,
-          paymentId: paymentIntent.id,
-          status: "pending",
+          paymentId: paymentIntent.id, // Stripe payment ID
+          status: "Charity pending",
           requestedAt: new Date().toISOString(),
         });
 
@@ -134,7 +136,8 @@ const RequestCharityRole = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Name */}
           <div className="form-control">
-            <label className="label font-semibold">Your Name</label><br />
+            <label className="label font-semibold">Your Name</label>
+            <br />
             <input
               type="text"
               readOnly
@@ -145,7 +148,8 @@ const RequestCharityRole = () => {
 
           {/* Email */}
           <div className="form-control">
-            <label className="label font-semibold">Email</label><br />
+            <label className="label font-semibold">Email</label>
+            <br />
             <input
               type="email"
               readOnly
@@ -156,7 +160,8 @@ const RequestCharityRole = () => {
 
           {/* Organization Name */}
           <div className="form-control">
-            <label className="label font-semibold">Organization Name</label><br />
+            <label className="label font-semibold">Organization Name</label>
+            <br />
             <input
               type="text"
               {...register("organization", { required: true })}
@@ -172,7 +177,8 @@ const RequestCharityRole = () => {
 
           {/* Mission Statement */}
           <div className="form-control">
-            <label className="label font-semibold">Mission Statement</label><br />
+            <label className="label font-semibold">Mission Statement</label>
+            <br />
             <textarea
               {...register("mission", { required: true })}
               placeholder="Describe your mission"

@@ -12,13 +12,37 @@ const DashBoardLayout = () => {
           Home
         </NavLink>
       </li>
+      <li className="text-secondary font-medium text-lg">
+        <NavLink
+          className={({ isActive }) => (isActive ? "underline" : "")}
+          to={"/dashBoard/adminProfile"}
+        >
+          Admin Profile
+        </NavLink>
+      </li>
       {/* User */}
+     <li className="text-secondary font-medium text-lg">
+        <NavLink
+          className={({ isActive }) => (isActive ? "underline" : "")}
+          to={"/dashBoard/manageUsers"}
+        >
+        Manage Users
+        </NavLink>
+      </li>
      <li className="text-secondary font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
           to={"/dashBoard/myProfile"}
         >
          My Profile
+        </NavLink>
+      </li>
+     <li className="text-secondary font-medium text-lg">
+        <NavLink
+          className={({ isActive }) => (isActive ? "underline" : "")}
+          to={"/dashBoard/manageCharityRequests"}
+        >
+        Manage Charity Requests 
         </NavLink>
       </li>
      <li className="text-secondary font-medium text-lg">

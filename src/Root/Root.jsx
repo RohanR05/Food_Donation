@@ -16,6 +16,9 @@ import MyDonations from "../Pages/DashBoard/RestaurantDashBoard/MyDonations/MyDo
 import RequestedDonations from "../Pages/DashBoard/RestaurantDashBoard/RequestedDonations/RequestedDonations";
 import MyProfile from "../Pages/DashBoard/UserDashBoard/MyProfile/MyProfile";
 import RequestCharityRole from "../Pages/DashBoard/UserDashBoard/RequestCharityRole/RequestCharityRole";
+import ManageCharityRequests from "../Pages/DashBoard/Admin/ManageCharityRequests/manageCharityRequests.";
+import ManageUser from "../Pages/DashBoard/Admin/ManageUser/ManageUser";
+import AdminProfile from "../Pages/DashBoard/Admin/AdminProfile/AdminProfile";
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +76,18 @@ export const router = createBrowserRouter([
       {
         path: "requestCharityRole",
         Component: RequestCharityRole,
+      },
+      {
+        path: "manageCharityRequests",
+        Component: ManageCharityRequests,
+      },
+      {
+path:"manageUsers",
+Component:ManageUser
+      },
+      {
+path:'adminProfile',
+Component:AdminProfile
       },
       {
         path: "restaurantProfile",

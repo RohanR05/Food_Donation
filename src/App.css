@@ -7,4 +7,6 @@
   default: true;
   --color-primary: #E7EFC7;
   --color-secondary: #3B3B1A;
+  --color-third: "#2563EB";   
+  --color-fourth: "#1D4ED8",
 }

@@ -6,6 +6,7 @@
 import { use } from "react";
 import { AuthContext } from "../../../Contexts/AuthContext";
 import { useLocation, useNavigate } from "react-router";
+import AxiosSecure from "../../../Hooks/AxiosSecure";
 
 const SocialLogin = () => {
   const { googleUser } = use(AuthContext);
@@ -13,7 +14,7 @@ const SocialLogin = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from || "/";
-//   const axiosInstance = AxiosInstance();
+  const axiosInstance = AxiosSecure();
 
   const handleGoogleUser = () => {
     googleUser()
@@ -21,14 +22,14 @@ const SocialLogin = () => {
         const user = result.user;
         console.log(user);
 
-        // const userInfo = {
-        //   email: user.email,
-        //   role: "user",
-        //   created_at: new Date().toISOString(),
-        //   last_login: new Date().toISOString(),
-        // };
+        const userInfo = {
+          email: user.email,
+          role: "user",
+          created_at: new Date().toISOString(),
+          last_login: new Date().toISOString(),
+        };
 
-        // const res = await axiosInstance.post("/users", userInfo);
+        await axiosInstance.post("/users", userInfo);
         // console.log("user update info", res.data);
 
         navigate(from);
