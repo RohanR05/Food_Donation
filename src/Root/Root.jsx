@@ -23,6 +23,7 @@ import ManageDonations from "../Pages/DashBoard/Admin/ManageDonations/ManageDona
 import CharityProfile from "../Pages/DashBoard/Charity/CharityProfile/CharityProfile";
 import TransactionHistory from "../Pages/DashBoard/Charity/TransactionHistory/TransactionHistory";
 import MyPickups from "../Pages/DashBoard/Charity/MyPickups/MyPickups";
+import ReceivedDonations from "../Pages/DashBoard/Charity/ReceivedDonations/ReceivedDonations";
 
 export const router = createBrowserRouter([
   {
@@ -92,6 +93,9 @@ export const router = createBrowserRouter([
       {
         path:"TransactionHistory",
         Component:TransactionHistory
+      },{
+        path:"receivedDonations",
+        Component:ReceivedDonations
       },
       {
         path:"myPickups",
