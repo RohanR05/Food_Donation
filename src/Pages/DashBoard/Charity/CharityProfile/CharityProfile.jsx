@@ -9,7 +9,6 @@ const CharityProfile = () => {
 
   const {
     data: userInfo = {},
-    isLoading,
   } = useQuery({
     queryKey: ["charity-profile", user?.email],
     enabled: !loading && !!user?.email,

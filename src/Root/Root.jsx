@@ -21,6 +21,7 @@ import AdminProfile from "../Pages/DashBoard/Admin/AdminProfile/AdminProfile";
 import ManageRoleRequests from "../Pages/DashBoard/Admin/ManageRoleRequests/ManageRoleRequests";
 import ManageDonations from "../Pages/DashBoard/Admin/ManageDonations/ManageDonations";
 import CharityProfile from "../Pages/DashBoard/Charity/CharityProfile/CharityProfile";
+import TransactionHistory from "../Pages/DashBoard/Charity/TransactionHistory/TransactionHistory";
 
 export const router = createBrowserRouter([
   {
@@ -86,6 +87,10 @@ export const router = createBrowserRouter([
       {
         path: "manageUsers",
         Component: ManageUser,
+      },
+      {
+        path:"TransactionHistory",
+        Component:TransactionHistory
       },
       {
         path: "adminProfile",
