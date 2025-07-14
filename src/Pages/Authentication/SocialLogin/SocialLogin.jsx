@@ -6,7 +6,7 @@
 import { use } from "react";
 import { AuthContext } from "../../../Contexts/AuthContext";
 import { useLocation, useNavigate } from "react-router";
-import AxiosSecure from "../../../Hooks/AxiosSecure";
+import AxiosInctanse from "../../../Hooks/AxiosSecure";
 
 const SocialLogin = () => {
   const { googleUser } = use(AuthContext);
@@ -14,7 +14,7 @@ const SocialLogin = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from || "/";
-  const axiosInstance = AxiosSecure();
+  const axiosInstance = AxiosInctanse();
 
   const handleGoogleUser = () => {
     googleUser()

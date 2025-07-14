@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const axiosSecure = axios.create({
+const axiosInstanse = axios.create({
   baseURL: `http://localhost:5000`,
 });
 
-const AxiosSecure = () => {
-  return axiosSecure;
+const AxiosInctanse = () => {
+  return axiosInstanse;
 };
 
-export default AxiosSecure;
+export default AxiosInctanse;

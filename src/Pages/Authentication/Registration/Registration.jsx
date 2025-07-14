@@ -5,11 +5,11 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
 import SocialLogin from "../SocialLogin/SocialLogin";
-import AxiosSecure from "../../../Hooks/AxiosSecure";
+import AxiosInctanse from "../../../Hooks/AxiosSecure";
 
 const Registration = () => {
   const { createUser, updateUserProfile } = use(AuthContext);
-  const axiosInstance = AxiosSecure();
+  const axiosInstance = AxiosInctanse();
 
   const location = useLocation();
   const navigate = useNavigate();
