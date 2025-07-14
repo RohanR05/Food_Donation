@@ -17,7 +17,7 @@ const RequestDonation = () => {
     try {
       const response = await axiosSecure.post("/donation-requests", {
         ...data,
-        status: "Requested",
+        status: "pending",
         requestedAt: new Date().toISOString(),
       });
 
@@ -40,9 +40,7 @@ const RequestDonation = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Donation Title */}
         <div className="form-control">
-          <label className="label font-semibold text-[#36213e]">
-            Donation Title
-          </label>
+          <label className="label font-semibold text-[#36213e]">Donation Title</label>
           <br />
           <input
             type="text"
@@ -57,9 +55,7 @@ const RequestDonation = () => {
 
         {/* Restaurant Name */}
         <div className="form-control">
-          <label className="label font-semibold text-[#423144]">
-            Restaurant Name
-          </label>
+          <label className="label font-semibold text-[#423144]">Restaurant Name</label>
           <br />
           <input
             type="text"
@@ -68,17 +64,13 @@ const RequestDonation = () => {
             className="input input-bordered bg-[#fff4e6] text-[#2a1e2e] border-[#ddb892]"
           />
           {errors.restaurant && (
-            <span className="text-red-500 text-sm mt-1">
-              Restaurant name is required
-            </span>
+            <span className="text-red-500 text-sm mt-1">Restaurant name is required</span>
           )}
         </div>
 
         {/* Food Type */}
         <div className="form-control">
-          <label className="label font-semibold text-[#503047]">
-            Food Type
-          </label>
+          <label className="label font-semibold text-[#503047]">Food Type</label>
           <br />
           <input
             type="text"
@@ -87,9 +79,7 @@ const RequestDonation = () => {
             className="input input-bordered bg-[#fcefee] text-[#3e2c41] border-[#d1a1bc]"
           />
           {errors.foodType && (
-            <span className="text-red-500 text-sm mt-1">
-              Food type is required
-            </span>
+            <span className="text-red-500 text-sm mt-1">Food type is required</span>
           )}
         </div>
 
@@ -104,21 +94,24 @@ const RequestDonation = () => {
             className="input input-bordered bg-[#e4d6f1] text-[#261c2c] border-[#bfa2db]"
           />
           {errors.quantity && (
-            <span className="text-red-500 text-sm mt-1">
-              Enter a valid quantity
-            </span>
+            <span className="text-red-500 text-sm mt-1">Enter a valid quantity</span>
           )}
         </div>
-        <label className="block mb-1 font-semibold">Request Description</label>
-        <textarea
-          {...register("description", { required: "Description is required" })}
-          className="textarea textarea-bordered w-full mb-3"
-          rows={4}
-          placeholder="Add details about your request"
-        />
-        {errors.description && (
-          <p className="text-red-600 mb-3">{errors.description.message}</p>
-        )}
+
+        {/* Request Description */}
+        <div className="form-control">
+          <label className="label font-semibold text-[#553c68]">Request Description</label>
+          <br />
+          <textarea
+            {...register("description", { required: "Description is required" })}
+            rows={4}
+            placeholder="Add details about your request"
+            className="textarea textarea-bordered w-full bg-[#f7f1f7] text-[#4b3c57] border-[#a58caf]"
+          />
+          {errors.description && (
+            <p className="text-red-600 mt-1">{errors.description.message}</p>
+          )}
+        </div>
 
         <button
           type="submit"
