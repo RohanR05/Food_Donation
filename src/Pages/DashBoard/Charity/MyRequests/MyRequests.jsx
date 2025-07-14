@@ -75,7 +75,7 @@ const MyRequests = () => {
             </h3>
             <p className="text-gray-700 mb-1">
               <span className="font-semibold">Restaurant:</span>{" "}
-              <span className="text-red-500">{req.restaurantName}</span>
+              <span className="text-red-500">{req.restaurant}</span>
             </p>
             <p className="text-gray-700 mb-1">
               <span className="font-semibold">Food Type:</span>{" "}
