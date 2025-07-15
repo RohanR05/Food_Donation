@@ -80,7 +80,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <div>
-      <AuthContext value={authInfo}>{children}</AuthContext>
+      <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
     </div>
   );
 };
