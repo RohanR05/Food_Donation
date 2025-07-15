@@ -53,6 +53,24 @@ const DashBoardLayout = () => {
       <li className="text-secondary font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
+          to={"/dashBoard/favorites"}
+        >
+          <FiUserPlus className="inline mr-2" />
+          Favorites
+        </NavLink>
+      </li>
+      <li className="text-secondary font-medium text-lg">
+        <NavLink
+          className={({ isActive }) => (isActive ? "underline" : "")}
+          to={"/dashBoard/myReviews"}
+        >
+          <FiUserPlus className="inline mr-2" />
+          MyReviews
+        </NavLink>
+      </li>
+      <li className="text-secondary font-medium text-lg">
+        <NavLink
+          className={({ isActive }) => (isActive ? "underline" : "")}
           to={"/dashBoard/transactionHistory"}
         >
           <FiCreditCard className="inline mr-2" /> Transaction History

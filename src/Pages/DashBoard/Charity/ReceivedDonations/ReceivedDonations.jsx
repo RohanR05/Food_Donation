@@ -79,7 +79,7 @@ const ReceivedDonations = () => {
                     setSelectedDonation(donation);
                     setIsOpen(true);
                   }}
-                  className="btn btn-sm mt-3 bg-primary text-white"
+                  className="btn btn-sm mt-3 bg-primary text-secondary"
                 >
                   Add Review
                 </button>

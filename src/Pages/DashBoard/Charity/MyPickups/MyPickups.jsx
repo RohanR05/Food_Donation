@@ -60,7 +60,7 @@ const MyPickups = () => {
                 {donation.title}
               </h3>
               <p><strong>Restaurant:</strong> {donation.restaurantName}</p>
-              <p><strong>Location:</strong> {donation.restaurantLocation || "N/A"}</p>
+              <p><strong>Location:</strong> {donation.location || "N/A"}</p>
               <p><strong>Food Type:</strong> {donation.foodType}</p>
               <p><strong>Quantity:</strong> {donation.quantity}</p>
               <p><strong>Status:</strong> <span className="text-green-600 capitalize font-semibold">{donation.status}</span></p>

@@ -27,6 +27,9 @@ import ReceivedDonations from "../Pages/DashBoard/Charity/ReceivedDonations/Rece
 import RequestDonation from "../Pages/DashBoard/Charity/RequestDonation/RequestDonation";
 import MyRequests from "../Pages/DashBoard/Charity/MyRequests/MyRequests";
 import ManageRequests from "../Pages/DashBoard/Admin/ManageRequests/ManageRequests";
+import DonationDetails from "../Pages/AllDonations/DonationDetails";
+import Favorites from "../Pages/DashBoard/UserDashBoard/Favorites/Favorites";
+import MyReviews from "../Pages/DashBoard/UserDashBoard/MyReviews/MyReviews";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +47,10 @@ export const router = createBrowserRouter([
             <AllDonations></AllDonations>
           </PrivetRoutes>
         ),
+      },
+      {
+        path: "donations/:id",
+        Component: DonationDetails,
       },
       {
         path: "unAuthorized",
@@ -84,6 +91,14 @@ export const router = createBrowserRouter([
       {
         path: "requestCharityRole",
         Component: RequestCharityRole,
+      },
+      {
+        path: "favorites",
+        Component: Favorites,
+      },
+      {
+        path: "myReviews",
+        Component: MyReviews,
       },
       {
         path: "charityProfile",
