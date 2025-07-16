@@ -16,10 +16,12 @@ import {
   FiSend,
   FiUserPlus,
   FiBox,
+  FiMessageSquare,
+  FiHeart,
 } from "react-icons/fi";
 
 const DashBoardLayout = () => {
-  const { role, } = useUserRole();
+  const { role } = useUserRole();
 
   const links = (
     <>
@@ -54,19 +56,21 @@ const DashBoardLayout = () => {
           className={({ isActive }) => (isActive ? "underline" : "")}
           to={"/dashBoard/favorites"}
         >
-          <FiUserPlus className="inline mr-2" />
+          <FiHeart className="inline mr-2" />
           Favorites
         </NavLink>
       </li>
+
       <li className="text-secondary font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
           to={"/dashBoard/myReviews"}
         >
-          <FiUserPlus className="inline mr-2" />
-          MyReviews
+          <FiMessageSquare className="inline mr-2" />
+          My Reviews
         </NavLink>
       </li>
+
       <li className="text-secondary font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
@@ -77,7 +81,7 @@ const DashBoardLayout = () => {
       </li>
 
       <p>Restaurant</p>
-      {role && (
+      {role === "restaurant" && (
         <>
           <li className="text-secondary font-medium text-lg">
             <NavLink
@@ -115,7 +119,7 @@ const DashBoardLayout = () => {
       )}
 
       <p>Charity</p>
-      {role && (
+      {role === "charity" && (
         <>
           <li className="text-secondary font-medium text-lg">
             <NavLink
@@ -153,7 +157,7 @@ const DashBoardLayout = () => {
       )}
 
       <p>Admin</p>
-      {role && (
+      {role === "admin" && (
         <>
           <li className="text-secondary font-medium text-lg">
             <NavLink
