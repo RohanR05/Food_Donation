@@ -1,18 +1,20 @@
 // DonationDetails.jsx
-import React, { useContext, useState } from "react";
+import React, { use, useState } from "react";
 import { useParams } from "react-router";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { AuthContext } from "../../Contexts/AuthContext";
 import Swal from "sweetalert2";
 import RequestDonationModal from "./RequestDonationModal";
 import AddReviewModal from "./AddReviewModal";
+import { AuthContext } from "../../Contexts/AuthContext";
+import useUserRole from "../../Hooks/useUserRole";
 
 const DonationDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
-  const { user } = useContext(AuthContext);
+  const { user } = use(AuthContext);
+  const { role } = useUserRole();
   const [showRequestModal, setShowRequestModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
 
@@ -87,8 +89,10 @@ const DonationDetails = () => {
         </p>
         <p>
           <strong>Status:</strong>{" "}
-          <span className="font-semibold text-indigo-600">
-            {donation.status}
+          <span className="text-indigo-600 font-semibold">
+            {donation.status === "Assigned"
+              ? `Assigned to ${donation.assignedTo} (${donation.assignedType})`
+              : donation.status}
           </span>
         </p>
 
@@ -99,7 +103,7 @@ const DonationDetails = () => {
           >
             Save to Favorites
           </button>
-          {user?.role === "charity" && donation.status === "Verified" && (
+          {role === "charity" && donation.status === "Verified" && (
             <button
               onClick={() => setShowRequestModal(true)}
               className="btn btn-success"
@@ -107,7 +111,7 @@ const DonationDetails = () => {
               Request Donation
             </button>
           )}
-          {user?.role === "charity" && donation.status === "Accepted" && (
+          {role === "charity" && donation.status === "Accepted" && (
             <button onClick={handleConfirmPickup} className="btn btn-warning">
               Confirm Pickup
             </button>

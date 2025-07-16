@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../../Contexts/AuthContext";
 
@@ -9,109 +9,94 @@ const MyRequests = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
-  const { data: requests = [], isLoading, error } = useQuery({
+  // Fetch donation requests made by the logged-in charity
+  const { data: requests = [], isLoading } = useQuery({
     queryKey: ["myDonationRequests", user?.email],
     queryFn: async () => {
-      if (!user?.email) return [];
-      const res = await axiosSecure.get(`/donation-requests?email=${user.email}`);
+      const res = await axiosSecure.get(
+        `/donation-requests?charityEmail=${user?.email}`
+      );
       return res.data;
     },
     enabled: !!user?.email,
   });
 
-  const handleCancel = async (id) => {
-    const confirm = await Swal.fire({
-      title: "Are you sure?",
-      text: "Cancel this pending request?",
+  // Cancel request (only if status is Pending)
+  const cancelRequest = useMutation({
+    mutationFn: async (id) => {
+      await axiosSecure.delete(`/donation-requests/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["myDonationRequests"]);
+      Swal.fire("Cancelled", "Your request has been removed.", "success");
+    },
+    onError: () => {
+      Swal.fire("Error", "Failed to cancel the request.", "error");
+    },
+  });
+
+  const handleCancel = (id) => {
+    Swal.fire({
+      title: "Cancel this request?",
+      text: "This cannot be undone.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Yes, cancel it!",
-    });
-
-    if (confirm.isConfirmed) {
-      try {
-        await axiosSecure.delete(`/donation-requests/${id}`);
-        Swal.fire("Cancelled!", "Your request has been cancelled.", "success");
-        queryClient.invalidateQueries(["myDonationRequests", user.email]);
-      } catch (err) {
-        console.error(err);
-        Swal.fire("Error", "Failed to cancel request.", "error");
+      confirmButtonText: "Yes, cancel it",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        cancelRequest.mutate(id);
       }
-    }
+    });
   };
 
-  if (isLoading) {
-    return (
-      <p className="text-center py-4 text-gray-600">Loading your requests...</p>
-    );
-  }
-
-  if (error) {
-    return (
-      <p className="text-center py-4 text-red-600">Failed to load requests.</p>
-    );
-  }
+  if (isLoading)
+    return <div className="text-center mt-8">Loading your requests...</div>;
 
   return (
-    <div className="max-w-5xl mx-auto p-6 space-y-8">
-      <h2 className="text-4xl font-extrabold text-center text-gradient bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 mb-8">
-        My Donation Requests
-      </h2>
-
-      {requests.length === 0 && (
-        <p className="text-center text-gray-400 italic">
-          You have no donation requests yet.
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+      {requests.length === 0 ? (
+        <p className="col-span-full text-center text-gray-500">
+          No donation requests found.
         </p>
-      )}
-
-      <div className="grid md:grid-cols-2 gap-8">
-        {requests.map((req) => (
+      ) : (
+        requests.map((req) => (
           <div
             key={req._id}
-            className="p-6 rounded-xl shadow-lg border border-gray-200 bg-white hover:shadow-2xl transition-shadow duration-300"
+            className="bg-white shadow-md rounded-xl p-4 space-y-2"
           >
-            <h3 className="text-2xl font-bold mb-3 text-indigo-600">
-              {req.donationTitle}
-            </h3>
-            <p className="text-gray-700 mb-1">
-              <span className="font-semibold">Restaurant:</span>{" "}
-              <span className="text-red-500">{req.restaurant}</span>
+            <h2 className="text-xl font-semibold">{req.donationTitle}</h2>
+            <p>
+              <span className="font-medium">Restaurant:</span>{" "}
+              {req.restaurantName}
             </p>
-            <p className="text-gray-700 mb-1">
-              <span className="font-semibold">Food Type:</span>{" "}
-              <span className="text-green-600">{req.foodType}</span>
+            <p>
+              <span className="font-medium">Pickup Time:</span> {req.pickupTime}
             </p>
-            <p className="text-gray-700 mb-1">
-              <span className="font-semibold">Quantity:</span> {req.quantity}
-            </p>
-            <p className="mb-3">
-              <span className="font-semibold">Status:</span>{" "}
+            <p>
+              <span className="font-medium">Status:</span>{" "}
               <span
-                className={`font-semibold ${
+                className={`px-2 py-1 rounded text-white ${
                   req.status === "Pending"
-                    ? "text-yellow-500"
+                    ? "bg-yellow-500"
                     : req.status === "Accepted"
-                    ? "text-green-600"
-                    : req.status === "Rejected"
-                    ? "text-red-600"
-                    : "text-gray-600"
+                    ? "bg-green-600"
+                    : "bg-red-500"
                 }`}
               >
                 {req.status}
               </span>
             </p>
-
-            {req.status === "pending" && (
+            {req.status === "Pending" && (
               <button
                 onClick={() => handleCancel(req._id)}
-                className="mt-2 w-full py-2 rounded-md bg-gradient-to-r from-red-500 to-pink-600 text-white font-semibold hover:from-pink-600 hover:to-red-500 transition-colors duration-300"
+                className="mt-2 bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition"
               >
-                Cancel Request
+                Cancel
               </button>
             )}
           </div>
-        ))}
-      </div>
+        ))
+      )}
     </div>
   );
 };

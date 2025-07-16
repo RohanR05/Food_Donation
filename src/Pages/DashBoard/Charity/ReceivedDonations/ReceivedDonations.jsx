@@ -58,6 +58,7 @@ const ReceivedDonations = () => {
               className="card bg-base-100 shadow-xl border"
             >
               <div className="card-body">
+                <img src={donation.image} alt="" />
                 <h3 className="card-title text-xl">{donation.title}</h3>
                 <p>
                   <strong>Restaurant:</strong> {donation.restaurantName}

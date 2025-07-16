@@ -1,76 +1,117 @@
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import React, { useContext } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { AuthContext } from "../../../../Contexts/AuthContext";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-import Loading from "../../../../Shared/Loading/Loadign";
 
 const MyPickups = () => {
-  const { user, loading } = React.useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient();
 
-  // Get all verified donations for this charity
+  // Fetch pickups assigned to this charity
   const {
-    data: verifiedDonations = [],
-    refetch,
+    data: pickups = [],
     isLoading,
+    error,
   } = useQuery({
-    queryKey: ["charity-verified-donations", user?.email],
-    enabled: !loading && !!user?.email,
+    queryKey: ["pickups", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/donations/verified?email=${user.email}`);
+      const res = await axiosSecure.get(`/my-pickups?email=${user.email}`);
       return res.data;
+    },
+    enabled: !!user?.email,
+  });
+
+  // Mutation to confirm pickup
+  const { mutate: confirmPickup, isLoading: confirming } = useMutation({
+    mutationFn: async (id) => {
+      const res = await axiosSecure.patch(`/donations/pickup/${id}`);
+      return res.data;
+    },
+    onSuccess: () => {
+      Swal.fire("Success", "Pickup confirmed!", "success");
+      queryClient.invalidateQueries(["pickups", user?.email]);
+    },
+    onError: () => {
+      Swal.fire("Error", "Failed to confirm pickup.", "error");
     },
   });
 
-  // Confirm pickup
-  const handleConfirmPickup = async (id) => {
-    try {
-      const res = await axiosSecure.patch(`/donations/pickup/${id}`, {
-        status: "picked",
-      });
-      if (res.data.modifiedCount > 0) {
-        Swal.fire("Success", "Donation marked as picked up!", "success");
-        refetch();
-      }
-    } catch (error) {
-      console.error("Pickup error:", error);
-      Swal.fire("Error", "Failed to update donation status", "error");
-    }
-  };
-
-  if (loading || isLoading) return <Loading/>;
+  if (isLoading)
+    return <div className="text-center mt-10">Loading pickups...</div>;
+  if (error)
+    return (
+      <div className="text-red-500 text-center">Failed to load pickups</div>
+    );
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
-      <h2 className="text-3xl font-bold text-secondary text-center mb-6">
+    <div className="p-4">
+      <h2 className="text-3xl font-bold text-center mb-6 text-success">
         My Pickups
       </h2>
-
-      {verifiedDonations.length === 0 ? (
-        <p className="text-center text-gray-500">No verified donations available.</p>
+      {pickups.length === 0 ? (
+        <p className="text-center">No pickups found.</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {verifiedDonations.map((donation) => (
-            <div
-              key={donation._id}
-              className="border rounded-lg p-5 shadow bg-primary"
-            >
-              <h3 className="text-xl font-bold text-secondary mb-2">
-                {donation.title}
-              </h3>
-              <p><strong>Restaurant:</strong> {donation.restaurantName}</p>
-              <p><strong>Location:</strong> {donation.location || "N/A"}</p>
-              <p><strong>Food Type:</strong> {donation.foodType}</p>
-              <p><strong>Quantity:</strong> {donation.quantity}</p>
-              <p><strong>Status:</strong> <span className="text-green-600 capitalize font-semibold">{donation.status}</span></p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {pickups.map((pickup) => (
+            <div key={pickup._id} className="card bg-base-100 shadow-xl border">
+              <figure>
+                <img
+                  src={pickup.image}
+                  alt={pickup.donationTitle}
+                  className="w-full h-48 object-cover"
+                />
+              </figure>
+              <div className="card-body">
+                <h3 className="text-xl font-bold">{pickup.donationTitle}</h3>
+                <p>
+                  <span className="font-semibold">Restaurant:</span>{" "}
+                  {pickup.restaurantName}
+                </p>
+                <p>
+                  <span className="font-semibold">Location:</span>{" "}
+                  {pickup.location}
+                </p>
+                <p>
+                  <span className="font-semibold">Food Type:</span>{" "}
+                  {pickup.foodType}
+                </p>
+                <p>
+                  <span className="font-semibold">Quantity:</span>{" "}
+                  {pickup.quantity}
+                </p>
+                <p>
+                  <span className="font-semibold">Pickup Time:</span>{" "}
+                  {pickup.pickupTime}
+                </p>
+                <div className="mt-2">
+                  <span
+                    className={`badge ${
+                      pickup.status === "Picked"
+                        ? "badge-success"
+                        : "badge-info"
+                    }`}
+                  >
+                    {pickup.status}
+                  </span>
+                </div>
 
-              <button
-                onClick={() => handleConfirmPickup(donation._id)}
-                className="btn btn-sm mt-4 bg-green-600 text-white"
-              >
-                Confirm Pickup
-              </button>
+                {pickup.status === "Accepted" ||
+                pickup.status === "Assigned" ? (
+                  <button
+                    className="btn btn-success btn-sm mt-4"
+                    onClick={() => confirmPickup(pickup._id)}
+                    disabled={confirming}
+                  >
+                    {confirming ? "Confirming..." : "Confirm Pickup"}
+                  </button>
+                ) : (
+                  <p className="text-sm text-green-600 mt-3">
+                    Pickup confirmed
+                  </p>
+                )}
+              </div>
             </div>
           ))}
         </div>

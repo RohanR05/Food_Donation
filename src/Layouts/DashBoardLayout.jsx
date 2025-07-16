@@ -19,8 +19,7 @@ import {
 } from "react-icons/fi";
 
 const DashBoardLayout = () => {
-  const { role, isLoading } = useUserRole();
-  console.log(role, isLoading);
+  const { role, } = useUserRole();
 
   const links = (
     <>
@@ -194,14 +193,6 @@ const DashBoardLayout = () => {
               to={"/dashBoard/manageRequests"}
             >
               <FiClipboard className="inline mr-2" /> Manage Requests
-            </NavLink>
-          </li>
-          <li className="text-secondary font-medium text-lg">
-            <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/requestDonation"}
-            >
-              <FiSend className="inline mr-2" /> My Request for Donation
             </NavLink>
           </li>
         </>

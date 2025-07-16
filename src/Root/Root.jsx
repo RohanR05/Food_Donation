@@ -24,7 +24,6 @@ import CharityProfile from "../Pages/DashBoard/Charity/CharityProfile/CharityPro
 import TransactionHistory from "../Pages/DashBoard/Charity/TransactionHistory/TransactionHistory";
 import MyPickups from "../Pages/DashBoard/Charity/MyPickups/MyPickups";
 import ReceivedDonations from "../Pages/DashBoard/Charity/ReceivedDonations/ReceivedDonations";
-import RequestDonation from "../Pages/DashBoard/Charity/RequestDonation/RequestDonation";
 import MyRequests from "../Pages/DashBoard/Charity/MyRequests/MyRequests";
 import ManageRequests from "../Pages/DashBoard/Admin/ManageRequests/ManageRequests";
 import DonationDetails from "../Pages/AllDonations/DonationDetails";
@@ -127,10 +126,6 @@ export const router = createBrowserRouter([
       {
         path: "manageRequests",
         Component: ManageRequests,
-      },
-      {
-        path: "requestDonation",
-        Component: RequestDonation,
       },
       {
         path: "adminProfile",

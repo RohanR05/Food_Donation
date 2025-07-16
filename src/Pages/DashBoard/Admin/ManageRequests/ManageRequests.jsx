@@ -1,93 +1,105 @@
-import React from "react";
-import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import React, { useContext } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { AuthContext } from "../../../../Contexts/AuthContext";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const ManageRequests = () => {
+  const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
-  // Fetch all donation requests
-  const { data: requests = [], isLoading, error } = useQuery({
-    queryKey: ["donationRequests"],
+  // Use charityEmail query param from logged-in user's email
+  const {
+    data: requests = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["donation-requests", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get("/donation-requests");
+      if (!user?.email) return [];
+      const res = await axiosSecure.get(
+        `/donation-requests?charityEmail=${user.email}`
+      );
       return res.data;
     },
+    enabled: !!user?.email,
   });
 
-  // Handle delete request
-  const handleDelete = async (id) => {
-    const confirm = await Swal.fire({
+  const handleDelete = (id) => {
+    Swal.fire({
       title: "Are you sure?",
       text: "This will permanently delete the request.",
       icon: "warning",
       showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
       confirmButtonText: "Yes, delete it!",
-    });
-
-    if (confirm.isConfirmed) {
-      try {
-        await axiosSecure.delete(`/donation-requests/${id}`);
-        Swal.fire("Deleted!", "The request has been deleted.", "success");
-        queryClient.invalidateQueries(["donationRequests"]);
-      } catch (err) {
-        console.error(err);
-        Swal.fire("Error", "Failed to delete the request.", "error");
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axiosSecure.delete(`/donation-requests/${id}`);
+          Swal.fire("Deleted!", "The request has been deleted.", "success");
+          queryClient.invalidateQueries(["donation-requests", user?.email]);
+        } catch (error) {
+          Swal.fire(
+            "Error",
+            "Failed to delete the request. Try again later.",
+            "error"
+          );
+        }
       }
-    }
+    });
   };
 
-  if (isLoading) return <p className="text-center py-4">Loading requests...</p>;
-  if (error) return <p className="text-center py-4 text-red-600">Failed to load requests.</p>;
+  if (isLoading) return <p>Loading donation requests...</p>;
+  if (error)
+    return <p>Error loading requests: {error.message || "Unknown error"}</p>;
+
+  if (requests.length === 0) return <p>No donation requests available.</p>;
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
-      <h2 className="text-4xl font-bold mb-6 text-center text-indigo-700">
-        Manage Donation Requests
-      </h2>
-
-      {requests.length === 0 ? (
-        <p className="text-center text-gray-500 italic">No donation requests found.</p>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="min-w-full border border-gray-300 rounded-lg shadow-sm">
-            <thead className="bg-indigo-100 text-indigo-700">
-              <tr>
-                <th className="p-3 border border-gray-300 text-left">Donation Title</th>
-                <th className="p-3 border border-gray-300 text-left">Restaurant</th>
-                <th className="p-3 border border-gray-300 text-left">Food Type</th>
-                <th className="p-3 border border-gray-300 text-left">Quantity</th>
-                <th className="p-3 border border-gray-300 text-left">Description</th>
-                <th className="p-3 border border-gray-300 text-left">Status</th>
-                <th className="p-3 border border-gray-300 text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {requests.map((req) => (
-                <tr key={req._id} className="even:bg-gray-50 odd:bg-white">
-                  <td className="p-3 border border-gray-300">{req.title}</td>
-                  <td className="p-3 border border-gray-300">{req.restaurant}</td>
-                  <td className="p-3 border border-gray-300">{req.foodType}</td>
-                  <td className="p-3 border border-gray-300">{req.quantity}</td>
-                  <td className="p-3 border border-gray-300 max-w-xs truncate">{req.description || "-"}</td>
-                  <td className="p-3 border border-gray-300 font-semibold text-center">
-                    {req.status.charAt(0).toUpperCase() + req.status.slice(1)}
-                  </td>
-                  <td className="p-3 border border-gray-300 text-center">
-                    <button
-                      onClick={() => handleDelete(req._id)}
-                      className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+    <div className="overflow-x-auto">
+      <h2 className="text-2xl font-semibold mb-4">Manage Donation Requests</h2>
+      <table className="table-auto w-full border-collapse border border-gray-300">
+        <thead>
+          <tr>
+            <th className="border border-gray-300 px-4 py-2">Donation Title</th>
+            <th className="border border-gray-300 px-4 py-2">Charity Name</th>
+            <th className="border border-gray-300 px-4 py-2">Charity Email</th>
+            <th className="border border-gray-300 px-4 py-2">
+              Request Description
+            </th>
+            <th className="border border-gray-300 px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {requests.map((request) => (
+            <tr key={request._id}>
+              <td className="border border-gray-300 px-4 py-2">
+                {request.donationTitle}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {request.charityName}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {request.charityEmail}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {request.requestDescription}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                <button
+                  onClick={() => handleDelete(request._id)}
+                  className="btn btn-sm btn-error"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

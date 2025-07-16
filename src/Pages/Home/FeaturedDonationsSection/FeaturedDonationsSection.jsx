@@ -48,7 +48,7 @@ const FeaturedDonationsSection = () => {
                 {donation.status}
               </p>
 
-              <Link to={`/donationDetails/${donation._id}`}>
+              <Link to={`/donations/${donation._id}`}>
                 <button className="mt-4 w-full bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white py-2 rounded-md font-medium transition">
                   View Details
                 </button>

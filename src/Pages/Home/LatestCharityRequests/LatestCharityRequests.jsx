@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { AuthContext } from "../../../Contexts/AuthContext";
 
 const LatestCharityRequests = () => {
   const axiosSecure = useAxiosSecure();
+  const { user, loading: authLoading } = useContext(AuthContext);
 
   const {
     data: requests = [],
@@ -13,8 +15,9 @@ const LatestCharityRequests = () => {
     queryKey: ["latestCharityRequests"],
     queryFn: async () => {
       const res = await axiosSecure.get("/charity-requests");
-      return res.data.slice(-3).reverse(); // latest 3
+      return res.data.slice(-3).reverse();
     },
+    enabled: !!user && !authLoading, // only fetch when user is ready
   });
 
   if (isLoading) {
