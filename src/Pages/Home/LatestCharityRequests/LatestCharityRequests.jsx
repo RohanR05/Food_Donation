@@ -7,20 +7,22 @@ const LatestCharityRequests = () => {
   const axiosSecure = useAxiosSecure();
   const { user, loading: authLoading } = useContext(AuthContext);
 
-  const {
-    data: requests = [],
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["latestCharityRequests"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/charity-requests");
-      return res.data.slice(-3).reverse();
-    },
-    enabled: !!user && !authLoading, // only fetch when user is ready
-  });
+const {
+  data: requests = [],
+  // isLoading,
+  isFetching,
+  error,
+} = useQuery({
+  queryKey: ["latestCharityRequests"],
+  queryFn: async () => {
+    const res = await axiosSecure.get("/charity-requests");
+    return res.data.slice(-3).reverse();
+  },
+  enabled: !!user?.email && !authLoading,
+});
 
-  if (isLoading) {
+
+  if (isFetching) {
     return (
       <p className="text-center text-gray-500 py-6">
         Loading charity requests...

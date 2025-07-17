@@ -1,23 +1,27 @@
-import React from "react";
+import React, { use } from "react";
 import Swal from "sweetalert2";
 import { Trash2, Shield, UtensilsCrossed, HeartHandshake } from "lucide-react";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { AuthContext } from "../../../../Contexts/AuthContext";
 
 const ManageUsers = () => {
-  const axiosSecure = useAxiosSecure();
+const { user } = use(AuthContext); // ✅ Add this
+const axiosSecure = useAxiosSecure();
 
-  const {
-    data: users = [],
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/users");
-      return res.data;
-    },
-  });
+const {
+  data: users = [],
+  refetch,
+  isLoading,
+} = useQuery({
+  queryKey: ["users"],
+  enabled: !!user?.email, // ✅ Run only when user is ready
+  queryFn: async () => {
+    const res = await axiosSecure.get("/users");
+    return res.data;
+  },
+});
+
 
   const handleRoleChange = async (id, newRole) => {
     try {

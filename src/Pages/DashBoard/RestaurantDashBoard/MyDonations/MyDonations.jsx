@@ -37,7 +37,7 @@ const MyDonation = () => {
     };
 
     fetchDonations();
-  }, [user?.email, axiosSecure]);
+  }, [user?.email]);
 
   // Delete donation handler
   const handleDelete = async (id) => {

@@ -1,20 +1,25 @@
-import React from "react";
+import React, { use } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { Link } from "react-router";
+import { AuthContext } from "../../../Contexts/AuthContext";
 
 const FeaturedDonationsSection = () => {
+  const { user } = use(AuthContext);
   const axiosSecure = useAxiosSecure();
 
   const { data: donations = [], isLoading, error } = useQuery({
     queryKey: ["verifiedDonations"],
+    enabled: !!user?.email,  // only fetch when user is ready
     queryFn: async () => {
       const res = await axiosSecure.get("/donations");
-      return res.data.slice(0, 4); // show only top 4
+      return res.data.slice(0, 4);
     },
   });
-
   if (isLoading) return <p className="text-center py-10 text-gray-600">Loading featured donations...</p>;
+    if (!user?.email || isLoading)
+    return <p className="text-center py-10 text-gray-600">Loading featured donations...</p>;
+
   if (error) return <p className="text-center py-10 text-red-500">Failed to load donations.</p>;
 
   return (

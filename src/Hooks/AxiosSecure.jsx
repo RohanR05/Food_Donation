@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstanse = axios.create({
-  baseURL: `http://localhost:5000`,
+  baseURL: `https://assignment-12-server-ten-umber.vercel.app`,
 });
 
 const AxiosInctanse = () => {

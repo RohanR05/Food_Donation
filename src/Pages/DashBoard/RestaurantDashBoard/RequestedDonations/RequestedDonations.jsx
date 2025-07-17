@@ -7,21 +7,23 @@ import { AuthContext } from "../../../../Contexts/AuthContext";
 const RequestedDonations = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
-  const { user } = useContext(AuthContext); // get user.email
+  const { user } = useContext(AuthContext);
+  const userEmail = user?.email;
 
+  // ✅ This hook will be skipped internally until userEmail exists
   const {
     data: requests = [],
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["donationRequests", user?.email],
+    queryKey: ["donationRequests", userEmail],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/donation-requests?restaurantEmail=${encodeURIComponent(user.email)}`
+        `/donation-requests?restaurantEmail=${encodeURIComponent(userEmail)}`
       );
       return res.data;
     },
-    enabled: !!user?.email,
+    enabled: !!userEmail, // ✅ run only when email is available
   });
 
   const acceptMutation = useMutation({
@@ -29,7 +31,7 @@ const RequestedDonations = () => {
       axiosSecure.patch(`/donation-requests/accept/${id}`),
     onSuccess: () => {
       Swal.fire("Accepted", "Request accepted and others rejected.", "success");
-      queryClient.invalidateQueries(["donationRequests", user.email]);
+      queryClient.invalidateQueries(["donationRequests", userEmail]);
     },
     onError: () => Swal.fire("Error", "Failed to accept request.", "error"),
   });
@@ -39,16 +41,18 @@ const RequestedDonations = () => {
       axiosSecure.patch(`/donation-requests/reject/${id}`),
     onSuccess: () => {
       Swal.fire("Rejected", "Request rejected.", "success");
-      queryClient.invalidateQueries(["donationRequests", user.email]);
+      queryClient.invalidateQueries(["donationRequests", userEmail]);
     },
     onError: () => Swal.fire("Error", "Failed to reject request.", "error"),
   });
 
-  if (isLoading) return <p>Loading requests...</p>;
+  if (!userEmail || isLoading) return <p>Loading requests...</p>;
+
   if (error)
     return (
       <p className="text-red-600">Error loading requests. Try again later.</p>
     );
+
   if (requests.length === 0)
     return <p>No donation requests available for your restaurant.</p>;
 
@@ -75,7 +79,7 @@ const RequestedDonations = () => {
               <strong>Description:</strong> {req.requestDescription}
             </p>
             <p>
-              <strong>Status:</strong>
+              <strong>Status:</strong>{" "}
               <span
                 className={`font-semibold ${
                   req.status === "Pending"

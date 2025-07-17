@@ -81,7 +81,7 @@ const DashBoardLayout = () => {
       </li>
 
       <p>Restaurant</p>
-      {role === "restaurant" && (
+      {role  && (
         <>
           <li className="text-secondary font-medium text-lg">
             <NavLink
@@ -119,7 +119,7 @@ const DashBoardLayout = () => {
       )}
 
       <p>Charity</p>
-      {role === "charity" && (
+      {role  && (
         <>
           <li className="text-secondary font-medium text-lg">
             <NavLink
@@ -157,7 +157,7 @@ const DashBoardLayout = () => {
       )}
 
       <p>Admin</p>
-      {role === "admin" && (
+      {role  && (
         <>
           <li className="text-secondary font-medium text-lg">
             <NavLink

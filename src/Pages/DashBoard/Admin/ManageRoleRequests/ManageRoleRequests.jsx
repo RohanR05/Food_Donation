@@ -1,13 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { AuthContext } from "../../../../Contexts/AuthContext";
+import { use } from "react";
 
 const ManageCharityRequests = () => {
+  const { user } = use(AuthContext); // ✅ Add this
   const axiosSecure = useAxiosSecure();
 
-  // Fetch all charity requests (pending/approved/rejected)
-  const { data: charityRequests = [], refetch, isLoading } = useQuery({
+  const {
+    data: charityRequests = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["charityRequests"],
+    enabled: !!user?.email, // ✅ Prevent 401 until user is ready
     queryFn: async () => {
       const res = await axiosSecure.get("/charity-requests");
       return res.data;
