@@ -35,14 +35,16 @@ const DashBoardLayout = () => {
       </li>
 
       {/* user */}
-      <li className="text-secondary font-medium text-lg">
-        <NavLink
-          className={({ isActive }) => (isActive ? "underline" : "")}
-          to={"/dashBoard/myProfile"}
-        >
-          <FiUser className="inline mr-2" /> My Profile
-        </NavLink>
-      </li>
+      {role === "user" && (
+        <li className="text-secondary font-medium text-lg">
+          <NavLink
+            className={({ isActive }) => (isActive ? "underline" : "")}
+            to={"/dashBoard/myProfile"}
+          >
+            <FiUser className="inline mr-2" /> My Profile
+          </NavLink>
+        </li>
+      )}
       <li className="text-secondary font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
@@ -80,8 +82,8 @@ const DashBoardLayout = () => {
         </NavLink>
       </li>
 
-      <p>Restaurant</p>
-      {role  && (
+      {/* <p>Restaurant Role</p> */}
+      {role === "restaurant" && (
         <>
           <li className="text-secondary font-medium text-lg">
             <NavLink
@@ -118,8 +120,8 @@ const DashBoardLayout = () => {
         </>
       )}
 
-      <p>Charity</p>
-      {role  && (
+      {/* <p>Charity Role</p> */}
+      {role === "charity" && (
         <>
           <li className="text-secondary font-medium text-lg">
             <NavLink
@@ -156,8 +158,8 @@ const DashBoardLayout = () => {
         </>
       )}
 
-      <p>Admin</p>
-      {role  && (
+      {/* <p>Admin</p> */}
+      {role === "admin" && (
         <>
           <li className="text-secondary font-medium text-lg">
             <NavLink

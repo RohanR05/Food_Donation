@@ -8,7 +8,7 @@ const Logo = () => {
       {" "}
       <div className="flex items-end bg-secondary px-2 py-1 rounded-2xl">
         <img className="mb-2" src={img} alt="" />
-        <div className="text-3xl  -ml-3 font-medium text-yellow-400">
+        <div className="text-2xl md:text-3xl -ml-3 font-medium text-yellow-400">
           ICE<span className="text-sky-200">GOLD</span>
         </div>
       </div>
