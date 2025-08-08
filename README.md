@@ -1,12 +1,51 @@
-# React + Vite
+# 🍲 Food Donation Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-featured MERN stack web application that connects restaurants with verified charities to reduce food waste and support communities. Built with secure authentication, dynamic user roles, and a responsive UI, this project promotes real-world impact through technology.
 
-Currently, two official plugins are available:
+Live Link: https://assignment-12-7f281.web.app/
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧰 Technologies Used
 
-## Expanding the ESLint configuration
+- **React.js** – Frontend framework
+- **Tailwind CSS & DaisyUI** – UI styling
+- **Framer Motion** – UI animations
+- **Node.js + Express.js** – Backend server
+- **MongoDB** – NoSQL database
+- **Firebase Auth** – Authentication
+- **JWT (JSON Web Tokens)** – Secure route access
+- **Stripe** – Payment integration
+- **TanStack Query (React Query)** – Efficient data fetching
+- **Axios** – HTTP client for API calls
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ✨ Core Features
+
+- 🍽️ Restaurant dashboard to donate extra food
+- ✅ Admin panel to verify donations
+- 🏢 Charity dashboard to request donations
+- 🔐 Secure authentication with Firebase and JWT
+- 💳 Stripe payment for optional charity fees
+- 📦 RESTful API with protected routes
+- 🧠 Smart data fetching using TanStack Query
+- 📱 Fully responsive & animated user interface
+
+---
+
+## 📦 Dependencies
+
+> A few important ones (see full list in `package.json`):
+
+- `react`, `react-router-dom`, `axios`, `@tanstack/react-query`
+- `firebase`, `jsonwebtoken`, `bcryptjs`
+- `stripe`, `mongoose`, `cors`, `dotenv`, `express`
+
+---
+
+## 🛠️ Run Project Locally
+
+### 1. Clone the repo
+```bash
+git clone https://github.com/your-username/food-donation-platform.git
+cd food-donation-platform
