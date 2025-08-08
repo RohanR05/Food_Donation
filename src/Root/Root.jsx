@@ -29,6 +29,7 @@ import ManageRequests from "../Pages/DashBoard/Admin/ManageRequests/ManageReques
 import DonationDetails from "../Pages/AllDonations/DonationDetails";
 import Favorites from "../Pages/DashBoard/UserDashBoard/Favorites/Favorites";
 import MyReviews from "../Pages/DashBoard/UserDashBoard/MyReviews/MyReviews";
+import FeatureDonations from "../Pages/DashBoard/Admin/FeatureDonations/FeatureDonations";
 
 export const router = createBrowserRouter([
   {
@@ -126,6 +127,10 @@ export const router = createBrowserRouter([
       {
         path: "manageRequests",
         Component: ManageRequests,
+      },
+      {
+        path: "FeatureDonations",
+        Component: FeatureDonations,
       },
       {
         path: "adminProfile",

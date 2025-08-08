@@ -201,6 +201,14 @@ const DashBoardLayout = () => {
               <FiClipboard className="inline mr-2" /> Manage Requests
             </NavLink>
           </li>
+          <li className="text-secondary font-medium text-lg">
+            <NavLink
+              className={({ isActive }) => (isActive ? "underline" : "")}
+              to={"/dashBoard/featureDonations"}
+            >
+              <FiClipboard className="inline mr-2" /> Feature Donations
+            </NavLink>
+          </li>
         </>
       )}
     </>
