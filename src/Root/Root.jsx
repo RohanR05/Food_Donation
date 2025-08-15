@@ -30,6 +30,7 @@ import DonationDetails from "../Pages/AllDonations/DonationDetails";
 import Favorites from "../Pages/DashBoard/UserDashBoard/Favorites/Favorites";
 import MyReviews from "../Pages/DashBoard/UserDashBoard/MyReviews/MyReviews";
 import FeatureDonations from "../Pages/DashBoard/Admin/FeatureDonations/FeatureDonations";
+import IceGold from "../Pages/IceGold/IceGold";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
       {
         path: "donations/:id",
         Component: DonationDetails,
+      },
+      {
+        path:'iceGold',
+        Component:IceGold
       },
       {
         path: "unAuthorized",

@@ -14,13 +14,13 @@ const Footer = () => {
         <Link to={"/comingSoon"}>History</Link>
       </li>
       <li>
-        <Link to={"/comingSoon"}>Term's</Link>
+        <Link to={"/iceGold"}>ICEGOLD</Link>
       </li>
     </>
   );
   return (
     <div>
-      <footer className="footer footer-horizontal footer-center bg-primary text-base-content rounded p-10">
+      <footer className="footer footer-horizontal footer-center bg-secondary text-primary rounded p-10">
         <ul className="grid grid-flow-col gap-4">{links}</ul>
 
         <nav>

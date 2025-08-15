@@ -7,7 +7,7 @@ import LatestCharityRequests from "../LatestCharityRequests/LatestCharityRequest
 
 const Home = () => {
   return (
-    <div>
+    <div className="flex flex-col gap-16 pt-14 md:pt-16 lg:pt-16">
       <Banner></Banner>
       <ImpactStats></ImpactStats>
       <CommunityStories></CommunityStories>
