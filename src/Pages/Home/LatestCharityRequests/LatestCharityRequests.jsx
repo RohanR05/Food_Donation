@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../../Contexts/AuthContext";
 import { motion } from "framer-motion";
 import { FaHandsHelping, FaInfoCircle } from "react-icons/fa";
+import Loading from "../../../Shared/Loading/Loadign";
 
 const LatestCharityRequests = () => {
   const axiosSecure = useAxiosSecure();
@@ -24,9 +25,7 @@ const LatestCharityRequests = () => {
 
   if (isFetching) {
     return (
-      <p className="text-center text-gray-500 py-6">
-        Loading charity requests...
-      </p>
+     <Loading></Loading>
     );
   }
 
@@ -59,8 +58,8 @@ const LatestCharityRequests = () => {
           >
             <div className="p-5 space-y-3">
               <div className="flex items-center gap-2">
-                <FaHandsHelping className="text-indigo-600 text-xl" />
-                <h3 className="text-xl font-bold text-indigo-700">{req.name}</h3>
+                <FaHandsHelping className="text-secondary text-xl" />
+                <h3 className="text-xl font-bold text-secondary">{req.name}</h3>
               </div>
 
               <p className="text-gray-700 text-sm flex items-start gap-1">

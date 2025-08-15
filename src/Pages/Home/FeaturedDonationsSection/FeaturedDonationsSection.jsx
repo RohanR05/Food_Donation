@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { Link } from "react-router";
 import { AuthContext } from "../../../Contexts/AuthContext";
 import { motion } from "framer-motion";
+import Loading from "../../../Shared/Loading/Loadign";
 
 const FeaturedDonationsSection = () => {
   const { user } = useContext(AuthContext);
@@ -24,9 +25,7 @@ const FeaturedDonationsSection = () => {
 
   if (isLoading)
     return (
-      <p className="text-center py-10 text-gray-600">
-        Loading featured donations...
-      </p>
+    <Loading></Loading>
     );
 
   if (!user?.email)
@@ -45,7 +44,7 @@ const FeaturedDonationsSection = () => {
 
   return (
     <div className=" bg-white mx-auto px-4 py-16">
-      <h2 className="text-4xl font-bold text-center mb-12 text-green-700">
+      <h2 className="text-4xl font-bold text-center mb-12 text-secondary">
         🌟 Featured Donations
       </h2>
 

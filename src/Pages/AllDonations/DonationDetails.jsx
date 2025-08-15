@@ -1,5 +1,4 @@
-// DonationDetails.jsx
-import React, { use, useState } from "react";
+import React, { useState, useContext } from "react";
 import { useParams } from "react-router";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -8,21 +7,18 @@ import RequestDonationModal from "./RequestDonationModal";
 import AddReviewModal from "./AddReviewModal";
 import { AuthContext } from "../../Contexts/AuthContext";
 import useUserRole from "../../Hooks/useUserRole";
+import Loading from "../../Shared/Loading/Loadign";
 
 const DonationDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
   const { role } = useUserRole();
   const [showRequestModal, setShowRequestModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
 
-  const {
-    data: donation,
-    isLoading,
-    error,
-  } = useQuery({
+  const { data: donation, isLoading, error } = useQuery({
     queryKey: ["donation", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/donations/${id}`);
@@ -60,86 +56,95 @@ const DonationDetails = () => {
   };
 
   if (isLoading)
-    return <p className="text-center py-6">Loading donation details...</p>;
+    return <Loading></Loading>
   if (error)
-    return <p className="text-center text-red-500">Failed to load donation.</p>;
+    return <p className="text-center py-10 text-red-500">Failed to load donation.</p>;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
-      <div className="bg-white rounded-xl shadow-lg p-6 space-y-4">
+    <div className="mx-auto px-6 py-12 space-y-12 bg-[#e1e2e2]">
+      <h2 className="text-2xl md:text-5xl text-secondary font-medium text-center">Donation Details</h2>
+      {/* Donation Info */}
+      <div className="bg-white rounded-2xl shadow-md p-8 space-y-6 border border-[#00458B]">
         <img
           src={donation.image}
           alt="Food"
-          className="w-1/2 rounded-lg mb-4"
+          className="w-full md:w-3/4 mx-auto rounded-lg border border-[#00458B]"
         />
-        <h2 className="text-3xl font-bold">{donation.title}</h2>
-        <p>
-          <strong>Restaurant:</strong> {donation.restaurant} (
-          {donation.location})
-        </p>
-        <p>
-          <strong>Food Type:</strong> {donation.foodType}
-        </p>
-        <p>
-          <strong>Quantity:</strong> {donation.quantity}
-        </p>
-        <p>
-          <strong>Pickup Window:</strong>{" "}
-          {donation.pickupTime || "Not specified"}
-        </p>
-        <p>
-          <strong>Status:</strong>{" "}
-          <span className="text-indigo-600 font-semibold">
-            {donation.status === "Assigned"
-              ? `Assigned to ${donation.assignedTo} (${donation.assignedType})`
-              : donation.status}
-          </span>
-        </p>
+        <h2 className="text-3xl font-bold text-center text-[#00458B]">
+          {donation.title}
+        </h2>
 
-        <div className="flex flex-wrap gap-3 mt-4">
+        <div className="space-y-2 text-[#00458B] text-lg">
+          <p>🏪 <strong>Restaurant:</strong> {donation.restaurant} ({donation.location})</p>
+          <p>🍽 <strong>Food Type:</strong> {donation.foodType}</p>
+          <p>📦 <strong>Quantity:</strong> {donation.quantity}</p>
+          <p>⏰ <strong>Pickup Window:</strong> {donation.pickupTime || "Not specified"}</p>
+          <p>📌 <strong>Status:</strong>{" "}
+            <span className="font-semibold">
+              {donation.status === "Assigned"
+                ? `Assigned to ${donation.assignedTo} (${donation.assignedType})`
+                : donation.status}
+            </span>
+          </p>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex flex-wrap gap-4 justify-center mt-6">
           <button
             onClick={() => favoriteMutation.mutate()}
-            className="btn btn-outline  btn-secondary"
+            className=" btn btn-secondary text-white hover:bg-white hover:text-secondary transition"
           >
             Save to Favorites
           </button>
+
           {role === "charity" && donation.status === "Verified" && (
             <button
               onClick={() => setShowRequestModal(true)}
-              className="btn btn-success"
+              className="btn btn-secondary text-white hover:bg-white hover:text-secondary transition"
             >
               Request Donation
             </button>
           )}
+
           {role === "charity" && donation.status === "Accepted" && (
-            <button onClick={handleConfirmPickup} className="btn btn-warning">
+            <button
+              onClick={handleConfirmPickup}
+              className="w-full md:w-auto py-2 px-4 rounded-lg border border-[#00458B] text-[#00458B] hover:bg-[#00458B] hover:text-white transition"
+            >
               Confirm Pickup
             </button>
           )}
+
           <button
             onClick={() => setShowReviewModal(true)}
-            className="btn btn-info"
+            className="btn btn-outline border-[#00458B] text-[#00458B] hover:bg-[#00458B] hover:text-white transition"
           >
             Add Review
           </button>
         </div>
       </div>
 
-      <div className="mt-10">
-        <h3 className="text-2xl font-bold mb-4">Reviews</h3>
+      {/* Reviews */}
+      <div className="bg-white rounded-2xl shadow-md p-8 border border-[#00458B] space-y-6">
+        <h3 className="text-2xl font-bold text-center text-[#00458B] mb-4">
+          Reviews
+        </h3>
         {reviews.length === 0 ? (
-          <p>No reviews yet.</p>
+          <p className="text-center text-[#00458B]">No reviews yet.</p>
         ) : (
-          reviews.map((r, i) => (
-            <div key={i} className="border-b py-3">
-              <p className="font-bold">{r.reviewerName}</p>
-              <p className="text-sm text-gray-500">Rating: {r.rating}/5</p>
-              <p>{r.description}</p>
-            </div>
-          ))
+          <div className="space-y-4">
+            {reviews.map((r, i) => (
+              <div key={i} className="border-b border-[#00458B] pb-4">
+                <p className="font-semibold text-[#00458B]">{r.reviewerName}</p>
+                <p className="text-sm text-[#00458B]">Rating: {r.rating}/5</p>
+                <p className="text-[#00458B]">{r.description}</p>
+              </div>
+            ))}
+          </div>
         )}
       </div>
 
+      {/* Modals */}
       {showRequestModal && (
         <RequestDonationModal
           donation={donation}

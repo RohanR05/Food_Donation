@@ -65,7 +65,7 @@ const CommunityStories = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
-            className="card bg-base-200 shadow-xl overflow-hidden hover:shadow-2xl transition"
+            className="card shadow-md shadow-secondary overflow-hidden hover:shadow-2xl transition"
           >
             <figure className="px-4 pt-4">
               <img
@@ -75,7 +75,7 @@ const CommunityStories = () => {
               />
             </figure>
             <div className="card-body text-center">
-              <h3 className="text-xl font-semibold">{s.name}</h3>
+              <h3 className="text-xl text-secondary font-semibold">{s.name}</h3>
               <p className="text-sm text-base-content opacity-80 mb-3">
                 {s.role}
               </p>
