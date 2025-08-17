@@ -18,7 +18,11 @@ const DonationDetails = () => {
   const [showRequestModal, setShowRequestModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
 
-  const { data: donation, isLoading, error } = useQuery({
+  const {
+    data: donation,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["donation", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/donations/${id}`);
@@ -55,31 +59,46 @@ const DonationDetails = () => {
     }
   };
 
-  if (isLoading)
-    return <Loading></Loading>
+  if (isLoading) return <Loading></Loading>;
   if (error)
-    return <p className="text-center py-10 text-red-500">Failed to load donation.</p>;
+    return (
+      <p className="text-center py-10 text-red-500">Failed to load donation.</p>
+    );
 
   return (
     <div className="mx-auto px-6 py-12 space-y-12 bg-[#e1e2e2]">
-      <h2 className="text-2xl md:text-5xl text-secondary font-medium text-center">Donation Details</h2>
+      <h2 className="text-2xl md:text-5xl text-secondary font-medium text-center">
+        Donation Details
+      </h2>
       {/* Donation Info */}
       <div className="bg-white rounded-2xl shadow-md p-8 space-y-6 border border-[#00458B]">
         <img
-          src={donation.image}
+          src={donation.image || "https://via.placeholder.com/400x250"}
           alt="Food"
-          className="w-full md:w-3/4 mx-auto rounded-lg border border-[#00458B]"
+          className="w-10/12 h-48 md:h-60 object-cover mx-auto rounded-lg border border-[#00458B]"
         />
+
         <h2 className="text-3xl font-bold text-center text-[#00458B]">
           {donation.title}
         </h2>
 
         <div className="space-y-2 text-[#00458B] text-lg">
-          <p>🏪 <strong>Restaurant:</strong> {donation.restaurant} ({donation.location})</p>
-          <p>🍽 <strong>Food Type:</strong> {donation.foodType}</p>
-          <p>📦 <strong>Quantity:</strong> {donation.quantity}</p>
-          <p>⏰ <strong>Pickup Window:</strong> {donation.pickupTime || "Not specified"}</p>
-          <p>📌 <strong>Status:</strong>{" "}
+          <p>
+            🏪 <strong>Restaurant:</strong> {donation.restaurant} (
+            {donation.location})
+          </p>
+          <p>
+            🍽 <strong>Food Type:</strong> {donation.foodType}
+          </p>
+          <p>
+            📦 <strong>Quantity:</strong> {donation.quantity}
+          </p>
+          <p>
+            ⏰ <strong>Pickup Window:</strong>{" "}
+            {donation.pickupTime || "Not specified"}
+          </p>
+          <p>
+            📌 <strong>Status:</strong>{" "}
             <span className="font-semibold">
               {donation.status === "Assigned"
                 ? `Assigned to ${donation.assignedTo} (${donation.assignedType})`
