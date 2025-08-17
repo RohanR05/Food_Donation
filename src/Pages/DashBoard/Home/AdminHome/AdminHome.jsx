@@ -1,9 +1,9 @@
 import React from 'react'
+import AdminProfile from '../../Admin/AdminProfile/AdminProfile'
 
 const AdminHome = () => {
   return (
-    <div>
-      admin home
+    <div><AdminProfile></AdminProfile>
     </div>
   )
 }

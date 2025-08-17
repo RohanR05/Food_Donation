@@ -10,6 +10,7 @@ import { AuthContext } from "../../../Contexts/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import Swal from "sweetalert2";
+import Logo from "../../../Shared/Logo/Logo";
 
 const Login = () => {
   const {
@@ -41,8 +42,11 @@ const Login = () => {
   };
 
   return (
-    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+    <div className="card bg-base-100 w-full max-w-sm mx-auto shrink-0 shadow-2xl">
       <div className="card-body">
+        <div className="w-36">
+          <Logo></Logo>
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset className="fieldset">
             <h1 className="text-5xl font-bold">Login now!</h1>

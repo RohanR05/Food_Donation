@@ -1,9 +1,10 @@
 import React from 'react'
+import MyProfile from '../../UserDashBoard/MyProfile/MyProfile'
 
 const UserHome = () => {
   return (
     <div>
-      User Home
+      <MyProfile></MyProfile>
     </div>
   )
 }

@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { Link } from "react-router";
-import { AuthContext } from "../../../Contexts/AuthContext";
 import { motion } from "framer-motion";
 import Loading from "../../../Shared/Loading/Loadign";
 
 const FeaturedDonationsSection = () => {
-  const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
 
   const {
@@ -16,24 +13,21 @@ const FeaturedDonationsSection = () => {
     error,
   } = useQuery({
     queryKey: ["verifiedDonations"],
-    enabled: !!user?.email,
+    // enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get("/donations");
       return res.data.slice(0, 4);
     },
   });
 
-  if (isLoading)
-    return (
-    <Loading></Loading>
-    );
+  if (isLoading) return <Loading></Loading>;
 
-  if (!user?.email)
-    return (
-      <p className="text-center py-10 text-gray-600">
-        Loading featured donations...
-      </p>
-    );
+  // if (!user?.email)
+  //   return (
+  //     <p className="text-center py-10 text-gray-600">
+  //       Loading featured donations...
+  //     </p>
+  //   );
 
   if (error)
     return (

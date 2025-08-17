@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import CharityProfile from "../../Charity/CharityProfile/CharityProfile";
 
 const CharityHome = () => {
   return (
     <div>
-       Charity Home
+      <CharityProfile></CharityProfile>
     </div>
-  )
-}
+  );
+};
 
-export default CharityHome
+export default CharityHome;

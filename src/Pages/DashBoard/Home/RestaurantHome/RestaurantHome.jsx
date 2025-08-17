@@ -1,9 +1,9 @@
 import React from 'react'
+import RestaurantProfile from '../../RestaurantDashBoard/RestaurantProfile/RestaurantProfile'
 
 const RestaurantHome = () => {
   return (
-    <div>
-      restaurant home
+    <div><RestaurantProfile></RestaurantProfile>
     </div>
   )
 }

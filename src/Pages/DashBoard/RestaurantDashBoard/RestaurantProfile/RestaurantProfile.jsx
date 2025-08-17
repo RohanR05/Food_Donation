@@ -17,41 +17,47 @@ const RestaurantProfile = () => {
     },
   });
 
-  if (loading || isLoading) return <Loading />;
+  if (loading || isLoading) return <Loading message="Loading profile..." />;
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-white shadow-xl rounded-xl p-8">
-      <div className="text-center">
+    <div className="max-w-md mx-auto mt-12 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+      {/* Header */}
+      <div className="bg-secondary/10 p-6 text-center">
         <img
           src={user?.photoURL || "https://i.ibb.co/4Jf0x9T/user.png"}
           alt="Profile"
-          className="w-28 h-28 mx-auto rounded-full object-cover border-4 border-primary"
+          className="w-28 h-28 mx-auto rounded-full border-4 border-secondary shadow-md object-cover"
         />
-        <h2 className="text-3xl font-bold text-secondary mt-4">
+        <h2 className="mt-4 text-3xl font-bold text-secondary">
           {user?.displayName || "Restaurant"}
         </h2>
         <p className="mt-1 text-gray-600 text-sm">
-          Role: <span className="font-medium text-yellow-600">Restaurant</span>
+          Role:{" "}
+          <span className="font-semibold text-yellow-600">Restaurant</span>
         </p>
       </div>
 
-      <div className="mt-6 space-y-3 text-gray-700 text-sm">
-        <div>
-          <span className="font-semibold">Email:</span> {user?.email}
+      {/* Details Section */}
+      <div className="p-6 space-y-4 text-gray-700">
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-semibold">Email:</span>
+          <span>{user?.email}</span>
         </div>
-        <div>
-          <span className="font-semibold">Address:</span>{" "}
-          {restaurantData?.address || "Not Provided"}
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-semibold">Address:</span>
+          <span>{restaurantData?.address || "Not Provided"}</span>
         </div>
-        <div>
-          <span className="font-semibold">Contact Number:</span>{" "}
-          {restaurantData?.phone || "Not Provided"}
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-semibold">Contact Number:</span>
+          <span>{restaurantData?.phone || "Not Provided"}</span>
         </div>
-        <div>
-          <span className="font-semibold">Registered On:</span>{" "}
-          {restaurantData?.createdAt
-            ? new Date(restaurantData.createdAt).toLocaleDateString("en-GB")
-            : "Unknown"}
+        <div className="flex justify-between border-b pb-2">
+          <span className="font-semibold">Registered On:</span>
+          <span>
+            {restaurantData?.createdAt
+              ? new Date(restaurantData.createdAt).toLocaleDateString("en-GB")
+              : "Unknown"}
+          </span>
         </div>
       </div>
     </div>

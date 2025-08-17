@@ -33,26 +33,20 @@ const DashBoardLayout = () => {
           <FiHome className="inline mr-2" /> Home
         </NavLink>
       </li>
-
-      {/* user */}
       {role === "user" && (
-        <li className="text-secondary font-medium text-lg">
-          <NavLink
-            className={({ isActive }) => (isActive ? "underline" : "")}
-            to={"/dashBoard/myProfile"}
-          >
-            <FiUser className="inline mr-2" /> My Profile
-          </NavLink>
-        </li>
+        <>
+          {" "}
+          <li className="text-secondary font-medium text-lg">
+            <NavLink
+              className={({ isActive }) => (isActive ? "underline" : "")}
+              to={"/dashBoard/requestCharityRole"}
+            >
+              <FiUserPlus className="inline mr-2" /> Request Charity Role
+            </NavLink>
+          </li>
+        </>
       )}
-      <li className="text-secondary font-medium text-lg">
-        <NavLink
-          className={({ isActive }) => (isActive ? "underline" : "")}
-          to={"/dashBoard/requestCharityRole"}
-        >
-          <FiUserPlus className="inline mr-2" /> Request Charity Role
-        </NavLink>
-      </li>
+
       <li className="text-secondary font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
@@ -88,14 +82,6 @@ const DashBoardLayout = () => {
           <li className="text-secondary font-medium text-lg">
             <NavLink
               className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/restaurantProfile"}
-            >
-              <FiUser className="inline mr-2" /> Restaurant Profile
-            </NavLink>
-          </li>
-          <li className="text-secondary font-medium text-lg">
-            <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
               to={"/dashBoard/addDonation"}
             >
               <FiPlusSquare className="inline mr-2" /> Add Donation
@@ -126,14 +112,6 @@ const DashBoardLayout = () => {
           <li className="text-secondary font-medium text-lg">
             <NavLink
               className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/charityProfile"}
-            >
-              <FiUser className="inline mr-2" /> Charity Profile
-            </NavLink>
-          </li>
-          <li className="text-secondary font-medium text-lg">
-            <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
               to={"/dashBoard/myRequests"}
             >
               <FiSend className="inline mr-2" /> My Requests
@@ -161,14 +139,6 @@ const DashBoardLayout = () => {
       {/* <p>Admin</p> */}
       {role === "admin" && (
         <>
-          <li className="text-secondary font-medium text-lg">
-            <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/adminProfile"}
-            >
-              <FiUserCheck className="inline mr-2" /> Admin Profile
-            </NavLink>
-          </li>
           <li className="text-secondary font-medium text-lg">
             <NavLink
               className={({ isActive }) => (isActive ? "underline" : "")}

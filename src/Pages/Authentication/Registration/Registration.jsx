@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import AxiosInctanse from "../../../Hooks/AxiosSecure";
+import Logo from "../../../Shared/Logo/Logo";
 
 const Registration = () => {
   const { createUser, updateUserProfile } = use(AuthContext);
@@ -89,7 +90,10 @@ const Registration = () => {
   };
 
   return (
-    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+    <div className="card bg-base-100 w-full max-w-sm shrink-0 mx-auto shadow-2xl">
+       <div className="w-36">
+          <Logo></Logo>
+        </div>
       <form onSubmit={handleSubmit(onSubmit)} className="card-body">
         <fieldset className="fieldset">
           <h1 className="text-5xl font-bold">Regisgration now!</h1>

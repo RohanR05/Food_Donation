@@ -12,16 +12,14 @@ import { loadStripe } from "@stripe/stripe-js";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 
-// Stripe publishable key
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_KEY);
 
-// -------------- Payment Form Component --------------
+// -------- Payment Form --------
 const CharityPaymentForm = ({ userData }) => {
   const axiosSecure = useAxiosSecure();
   const stripe = useStripe();
   const elements = useElements();
 
-  // Get clientSecret from backend
   const { data: clientSecret, isLoading } = useQuery({
     queryKey: ["payment-intent"],
     queryFn: async () => {
@@ -33,8 +31,8 @@ const CharityPaymentForm = ({ userData }) => {
     enabled: !!userData?.email,
   });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (!stripe || !elements || !clientSecret) return;
 
     const card = elements.getElement(CardElement);
@@ -75,8 +73,7 @@ const CharityPaymentForm = ({ userData }) => {
         });
 
         Swal.fire("Success", "Charity request submitted!", "success");
-      } catch (error) {
-        console.error("Request save failed:", error);
+      } catch (err) {
         Swal.fire("Error", "Failed to save charity request", "error");
       }
     }
@@ -85,23 +82,23 @@ const CharityPaymentForm = ({ userData }) => {
   return isLoading ? (
     <p className="text-center text-gray-500">Preparing payment...</p>
   ) : (
-    <form onSubmit={handleSubmit} className="space-y-5 mt-6">
+    <form onSubmit={handleSubmit} className="space-y-6 mt-6">
       <CardElement
         options={{
           style: {
             base: {
               fontSize: "16px",
-              color: "#424770",
+              color: "#333",
               "::placeholder": { color: "#aab7c4" },
             },
             invalid: { color: "#9e2146" },
           },
         }}
-        className="border p-3 rounded"
+        className="p-4 border border-gray-300 rounded-lg shadow-sm"
       />
       <button
         type="submit"
-        className="btn bg-primary w-full mt-4"
+        className="w-full py-3 rounded-xl font-semibold text-white bg-secondary hover:bg-secondary/90 transition"
         disabled={!stripe || !clientSecret}
       >
         Pay $25 & Submit Request
@@ -110,7 +107,7 @@ const CharityPaymentForm = ({ userData }) => {
   );
 };
 
-// -------------- Main Component --------------
+// -------- Main Component --------
 const RequestCharityRole = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
@@ -126,11 +123,9 @@ const RequestCharityRole = () => {
   const [hasRequested, setHasRequested] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // Check if user already requested charity role
   useEffect(() => {
-    const checkExistingRequest = async () => {
+    const checkRequest = async () => {
       if (!user?.email) return;
-
       try {
         const res = await axiosSecure.get("/charity-requests");
         const match = res.data.find(
@@ -138,16 +133,14 @@ const RequestCharityRole = () => {
             r.email === user.email &&
             (r.status === "pending" || r.status === "approved")
         );
-
         setHasRequested(!!match);
       } catch (err) {
-        console.error("Failed to check existing request", err);
+        console.error("Check failed", err);
       } finally {
         setLoading(false);
       }
     };
-
-    checkExistingRequest();
+    checkRequest();
   }, [user, axiosSecure]);
 
   const onSubmit = (data) => {
@@ -156,88 +149,109 @@ const RequestCharityRole = () => {
   };
 
   if (loading) {
-    return <p className="text-center mt-10 text-gray-500">Checking request status...</p>;
+    return (
+      <p className="text-center mt-10 text-gray-500">
+        Checking request status...
+      </p>
+    );
   }
 
   if (hasRequested) {
     return (
-      <div className="max-w-xl mx-auto p-6 mt-10 text-center bg-base-200 rounded-lg shadow">
-        <h2 className="text-2xl font-bold text-secondary mb-4">Request Already Submitted</h2>
-        <p className="text-gray-700">
-          You already submitted a charity role request. Please wait for admin approval.
+      <div className="max-w-xl mx-auto p-8 mt-10 text-center bg-white border border-gray-200 rounded-2xl shadow-lg">
+        <h2 className="text-2xl font-bold text-secondary mb-4">
+          Request Already Submitted
+        </h2>
+        <p className="text-gray-600">
+          You have already requested a charity role. Please wait for admin
+          approval.
         </p>
       </div>
     );
   }
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-base-100 shadow-xl rounded-xl mt-10">
+    <div className="max-w-xl mx-auto p-8 bg-white border border-gray-200 rounded-2xl shadow-lg mt-12">
       <h2 className="text-3xl font-bold text-secondary mb-6 text-center">
         Request Charity Role
       </h2>
 
       {!formSubmitted ? (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Name */}
-          <div className="form-control">
-            <label className="label font-semibold">Your Name</label><br />
+          <div>
+            <label className="block font-semibold text-gray-700 mb-1">
+              Your Name
+            </label>
             <input
               type="text"
               readOnly
               value={user?.displayName || ""}
-              className="input input-bordered bg-base-200"
+              className="w-full input input-bordered bg-gray-100"
             />
           </div>
 
           {/* Email */}
-          <div className="form-control">
-            <label className="label font-semibold">Email</label><br />
+          <div>
+            <label className="block font-semibold text-gray-700 mb-1">
+              Email
+            </label>
             <input
               type="email"
               readOnly
               value={user?.email || ""}
-              className="input input-bordered bg-base-200"
+              className="w-full input input-bordered bg-gray-100"
             />
           </div>
 
           {/* Organization */}
-          <div className="form-control">
-            <label className="label font-semibold">Organization</label><br />
+          <div>
+            <label className="block font-semibold text-gray-700 mb-1">
+              Organization
+            </label>
             <input
               type="text"
               {...register("organization", { required: true })}
               placeholder="Organization name"
-              className="input input-bordered"
+              className="w-full input input-bordered"
             />
             {errors.organization && (
-              <span className="text-error text-sm">
+              <p className="text-sm text-red-600 mt-1">
                 Organization is required
-              </span>
+              </p>
             )}
           </div>
 
           {/* Mission */}
-          <div className="form-control">
-            <label className="label font-semibold">Mission Statement</label><br />
+          <div>
+            <label className="block font-semibold text-gray-700 mb-1">
+              Mission Statement
+            </label>
             <textarea
               {...register("mission", { required: true })}
-              placeholder="Your mission statement"
-              className="textarea textarea-bordered"
+              placeholder="Describe your mission"
               rows={4}
+              className="w-full textarea textarea-bordered"
             />
             {errors.mission && (
-              <span className="text-error text-sm">
+              <p className="text-sm text-red-600 mt-1">
                 Mission statement is required
-              </span>
+              </p>
             )}
           </div>
 
-          <p className="text-lg font-semibold text-center text-secondary">
-            You need to pay <span className="text-red-600">$25</span> to request
-            the Charity role.
-          </p>
+          <div className="text-center">
+            <p className="text-lg font-medium text-gray-700">
+              You need to pay{" "}
+              <span className="font-bold text-red-600">$25</span> to request the
+              Charity role.
+            </p>
+          </div>
 
-          <button type="submit" className="btn bg-primary w-full">
+          <button
+            type="submit"
+            className="w-full py-3 rounded-xl font-semibold text-white bg-secondary hover:bg-secondary/90 transition"
+          >
             Proceed to Payment
           </button>
         </form>
