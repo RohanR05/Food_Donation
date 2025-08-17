@@ -2,7 +2,7 @@ import React from "react";
 
 const AboutDev = () => {
   return (
-    <div className="max-w-4xl mx-auto mt-12 p-8 bg-white shadow-xl rounded-xl border border-secondary">
+    <div className="mx-auto my-12 p-8 bg-white shadow-xl rounded-xl border border-secondary">
       {/* Header */}
       <div className="flex flex-col items-center text-center gap-4">
         <h2 className="text-3xl font-bold text-primary">Rohan Kabir</h2>

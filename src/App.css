@@ -2,11 +2,10 @@
 @plugin "daisyui";
 
 
+
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: #e1e2e2;
+  --color-primary: #e1e2ef;
   --color-secondary: #00458b;
-  --color-logo: "#99ddff";   
-  --color-fourth: "#1D4ED8",
 }

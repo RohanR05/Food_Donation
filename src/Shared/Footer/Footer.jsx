@@ -1,26 +1,24 @@
 import React from "react";
 import { Link } from "react-router";
+import Theme from "../Theme/Theme";
 
 const Footer = () => {
   const links = (
     <>
       <li>
-        <Link to={"/comingSoon"}>About US</Link>
+        <Link to={"/comingSoon"}>Contact US</Link>
       </li>
       <li>
-        <Link to={"/comingSoon"}>Contect US</Link>
+        <Theme></Theme>
       </li>
       <li>
-        <Link to={"/comingSoon"}>History</Link>
-      </li>
-      <li>
-        <Link to={"/iceGold"}>ICEGOLD</Link>
+        <Link to={"/aboutDeveloper"}>About Developer</Link>
       </li>
     </>
   );
   return (
     <div>
-      <footer className="footer footer-horizontal footer-center bg-secondary text-primary rounded p-10">
+      <footer className="footer footer-horizontal footer-center bg-secondary text-primary rounded p-10 mt-16">
         <ul className="grid grid-flow-col gap-4">{links}</ul>
 
         <nav>

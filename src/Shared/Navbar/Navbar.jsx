@@ -55,13 +55,21 @@ const Navbar = () => {
           About Developer
         </NavLink>
       </li>
+      <li className="text-secondary font-medium text-lg">
+        <NavLink
+          className={({ isActive }) => (isActive ? "underline" : "")}
+          to={"/comingSoon"}
+        >
+          About Us
+        </NavLink>
+      </li>
     </>
   );
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg w-full">
-        <div className="navbar max-w-7xl mx-auto px-4">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg w-full ">
+        <div className="navbar mx-auto">
           <div className="navbar-start">
             {/* Mobile menu */}
             <div className="dropdown">
@@ -88,7 +96,6 @@ const Navbar = () => {
                 {links}
               </ul>
             </div>
-
             <Logo />
           </div>
 
