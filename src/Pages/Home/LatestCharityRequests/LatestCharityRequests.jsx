@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { AuthContext } from "../../../Contexts/AuthContext";
 import { motion } from "framer-motion";
 import { FaHandsHelping, FaInfoCircle } from "react-icons/fa";
 import Loading from "../../../Shared/Loading/Loadign";
 
 const LatestCharityRequests = () => {
   const axiosSecure = useAxiosSecure();
-  const { user, loading: authLoading } = useContext(AuthContext);
 
   const {
     data: requests = [],
@@ -20,13 +18,11 @@ const LatestCharityRequests = () => {
       const res = await axiosSecure.get("/charity-requests");
       return res.data.slice(-3).reverse();
     },
-    enabled: !!user?.email && !authLoading,
+    // enabled: !!user?.email && !authLoading,
   });
 
   if (isFetching) {
-    return (
-     <Loading></Loading>
-    );
+    return <Loading></Loading>;
   }
 
   if (error) {
@@ -65,14 +61,16 @@ const LatestCharityRequests = () => {
               <p className="text-gray-700 text-sm flex items-start gap-1">
                 <FaInfoCircle className="mt-1 text-gray-400" />
                 <span>
-                  <strong>Mission:</strong> {req.mission || "No description available"}
+                  <strong>Mission:</strong>{" "}
+                  {req.mission || "No description available"}
                 </span>
               </p>
 
               <p className="text-gray-700 text-sm flex items-start gap-1">
                 <FaInfoCircle className="mt-1 text-gray-400" />
                 <span>
-                  <strong>Organization:</strong> {req.organization || "Not specified"}
+                  <strong>Organization:</strong>{" "}
+                  {req.organization || "Not specified"}
                 </span>
               </p>
             </div>

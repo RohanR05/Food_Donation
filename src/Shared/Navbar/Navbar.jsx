@@ -119,7 +119,7 @@ const Navbar = () => {
                 />
               </div>
             ) : (
-              <Link className="btn btn-primary text-white" to="/login">
+              <Link className="btn btn-secondary text-white" to="/login">
                 Login
               </Link>
             )}
