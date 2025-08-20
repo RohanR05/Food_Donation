@@ -5,7 +5,7 @@ const AboutDev = () => {
     <div className="mx-auto my-12 p-8 bg-white shadow-xl rounded-xl border border-secondary">
       {/* Header */}
       <div className="flex flex-col items-center text-center gap-4">
-        <h2 className="text-3xl font-bold text-primary">Rohan Kabir</h2>
+        <h2 className="text-3xl font-bold text-secondary">Rohan Kabir</h2>
         <p className="text-secondary font-medium">
           🚀 MERN Stack Developer | MongoDB • Express.js • React • Node.js
         </p>
@@ -15,7 +15,7 @@ const AboutDev = () => {
             href="mailto:rohankabirr061@gmail.com"
             className="text-blue-600 underline"
           >
-            rohankabirr061@gmail.com
+            rohankabir061@gmail.com
           </a>
         </p>
         <p className="text-secondary">
@@ -54,7 +54,7 @@ const AboutDev = () => {
             rel="noopener noreferrer"
             className="text-green-600 hover:text-green-800 transition-colors flex items-center gap-1"
           >
-            Resume
+            Portfolio
           </a>
         </div>
       </div>
@@ -77,7 +77,7 @@ const AboutDev = () => {
 
       {/* Skills Section */}
       <div className="mt-6">
-        <h3 className="text-xl font-bold text-primary mb-3">Key Skills</h3>
+        <h3 className="text-xl font-bold text-secondary mb-3">Key Skills</h3>
         <ul className="list-disc list-inside space-y-2 text-gray-700">
           <li>
             MongoDB Database Management – Proficient in NoSQL databases for
