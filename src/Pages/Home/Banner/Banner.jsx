@@ -4,9 +4,9 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import img1 from "../../../assets/Brown White Rustic Wedding Banner.png";
-import img2 from "../../../assets/Brown White Rustic Wedding Banner (1).png";
-import img3 from "../../../assets/Brown White Rustic Wedding Banner (2).png";
+import img1 from "../../../assets/1.jpg";
+import img2 from "../../../assets/2.jpg";
+import img3 from "../../../assets/3.jpg";
 
 const slides = [img1, img2, img3];
 
@@ -15,7 +15,7 @@ const Banner = () => {
     <div className="w-full">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        autoplay={{ delay: 5000 }}
+        autoplay={{ delay: 2000 }}
         pagination={{ clickable: true }}
         navigation={true}
         loop={true}

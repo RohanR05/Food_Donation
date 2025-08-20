@@ -48,12 +48,12 @@ const TransactionHistory = () => {
               {transactions.map((txn) => (
                 <tr key={txn._id} className="hover:bg-gray-50 border-t">
                   <td className="py-2 px-4 text-xs">
-                    {txn.transaction?.paymentId || "N/A"}
+                    {txn.paymentId || "N/A"}
                   </td>
-                  <td>${txn.transaction?.amount || 0}</td>
+                  <td>${txn.paymentAmount || 0}</td>
                   <td>{txn.organization || "N/A"}</td>
                   <td>
-                    {new Date(txn.transaction?.timestamp).toLocaleDateString("en-GB")}
+                    {new Date(txn.requestedAt).toLocaleDateString("en-GB")}
                   </td>
                   <td>
                     <span

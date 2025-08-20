@@ -50,7 +50,8 @@ const FeaturedDonationsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="relative bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 hover:shadow-2xl transition duration-300"
+            className="relative bg-white rounded-xl
+             shadow-md shadow-secondary overflow-hidden transform hover:scale-105 hover:shadow-2xl transition duration-300"
           >
             {/* Image with gradient overlay */}
             <div className="relative h-48">

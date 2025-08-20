@@ -1,9 +1,42 @@
-import React from "react";
+import React, { use } from "react";
 import { FaLeaf, FaHandHoldingHeart, FaBoxOpen } from "react-icons/fa";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import { AuthContext } from "../../../Contexts/AuthContext";
 
 const ImpactStats = () => {
+  const axiosSecure = useAxiosSecure();
+
+  const { user } = use(AuthContext);
+
+  const { data: users = [] } = useQuery({
+    queryKey: ["users"],
+    enabled: !!user?.email, // ✅ Run only when user is ready
+    queryFn: async () => {
+      const res = await axiosSecure.get("/users");
+      return res.data;
+    },
+  });
+
+  const { data: myReviews = [] } = useQuery({
+    queryKey: ["myReviews", user?.email],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/my-reviews/${user.email}`);
+      return res.data;
+    },
+  });
+
+  const { data: donations = [] } = useQuery({
+    queryKey: ["donations"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/donations");
+      return res.data;
+    },
+  });
+
   return (
-    <div className="py-12 bg-base-200 text-center">
+    <div className="py-12 bg-base-200 text-center text-secondary">
       <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-8">
         Platform Impact
       </h2>
@@ -12,25 +45,24 @@ const ImpactStats = () => {
           <div className="stat-figure text-secondary text-5xl">
             <FaBoxOpen />
           </div>
-          <div className="stat-title">Total Food Donated</div>
-          <div className="stat-value text-secondary">4,200 kg</div>
-          <div className="stat-desc">From 120+ restaurants</div>
+          <div className="stat-title text-secondary">Total Food Donated</div>
+          <div className="stat-value">{donations.length} Times</div>
         </div>
         <div className="stat bg-base-100 rounded-box shadow">
           <div className="stat-figure text-secondary text-5xl">
             <FaHandHoldingHeart />
           </div>
-          <div className="stat-title">Meals Served</div>
-          <div className="stat-value text-secondary">15,000+</div>
-          <div className="stat-desc">Through 50 charities</div>
+          <div className="stat-title text-secondary">Total User</div>
+          <div className="stat-value text-secondary">{users.length} Person</div>
         </div>
         <div className="stat bg-base-100 rounded-box shadow">
           <div className="stat-figure text-secondary text-5xl">
             <FaLeaf />
           </div>
-          <div className="stat-title">CO₂ Emissions Reduced</div>
-          <div className="stat-value text-secondary">8,600 kg</div>
-          <div className="stat-desc ">By saving surplus food</div>
+          <div className="stat-title">My Total Reviews</div>
+          <div className="stat-value text-secondary">
+            {myReviews.length} Reviews
+          </div>
         </div>
       </div>
     </div>

@@ -38,7 +38,7 @@ const AllDonations = () => {
       {donations.map((donation) => (
         <div
           key={donation._id}
-          className="bg-base-100 rounded-2xl shadow-lg border border-primary flex flex-col overflow-hidden hover:shadow-2xl transition-all h-full"
+          className="bg-base-100 rounded-2xl shadow-lg shadow-secondary border border-primary flex flex-col overflow-hidden hover:shadow-2xl transition-all h-full"
         >
           <div className="h-48 w-full overflow-hidden">
             <img
@@ -70,7 +70,7 @@ const AllDonations = () => {
 
             <Link
               to={`/donations/${donation._id}`}
-              className="mt-auto block w-full text-center py-2 px-4 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white transition"
+              className="mt-auto block w-full text-center py-2 px-4 rounded-lg border border-primary text-secondary hover:bg-secondary hover:text-white transition"
             >
               View Details
             </Link>
