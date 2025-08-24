@@ -77,7 +77,7 @@ const ManageCharityRequests = () => {
               </td>
               <td className="space-x-2">
                 <button
-                  className="btn btn-success btn-sm"
+                  className="btn btn-secondary btn-sm"
                   onClick={() => handleApprove(req._id, req.email)}
                   disabled={req.status !== "pending"}
                 >

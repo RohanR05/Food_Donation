@@ -63,7 +63,7 @@ const {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
+    <div className="max-w-4xl mx-auto px-4 py-10">
       <h2 className="text-4xl font-bold text-center mb-8 text-secondary">
         Manage Users
       </h2>
@@ -95,7 +95,7 @@ const {
                   {user.role !== "admin" && (
                     <button
                       onClick={() => handleRoleChange(user._id, "admin")}
-                      className="btn btn-xs bg-blue-600 text-white"
+                      className="btn btn-xs bg-secondary text-white"
                     >
                       <Shield className="w-4 h-4 mr-1" /> Admin
                     </button>
@@ -103,7 +103,7 @@ const {
                   {user.role !== "restaurant" && (
                     <button
                       onClick={() => handleRoleChange(user._id, "restaurant")}
-                      className="btn btn-xs bg-yellow-500 text-white"
+                      className="btn btn-xs bg-green-600 text-white"
                     >
                       <UtensilsCrossed className="w-4 h-4 mr-1" /> Restaurant
                     </button>
@@ -111,7 +111,7 @@ const {
                   {user.role !== "charity" && (
                     <button
                       onClick={() => handleRoleChange(user._id, "charity")}
-                      className="btn btn-xs bg-purple-600 text-white"
+                      className="btn btn-xs bg-primary text-black"
                     >
                       <HeartHandshake className="w-4 h-4 mr-1" /> Charity
                     </button>

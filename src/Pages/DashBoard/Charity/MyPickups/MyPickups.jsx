@@ -46,8 +46,8 @@ const MyPickups = () => {
     );
 
   return (
-    <div className="p-4">
-      <h2 className="text-3xl font-bold text-center mb-6 text-success">
+    <div className="max-w-4xl mx-auto p-4 bg-primary rounded-2xl mt-16">
+      <h2 className="font-bold text-center mb-6 text-secondary text-4xl">
         My Pickups
       </h2>
       {pickups.length === 0 ? (
@@ -100,14 +100,14 @@ const MyPickups = () => {
                 {pickup.status === "Accepted" ||
                 pickup.status === "Assigned" ? (
                   <button
-                    className="btn btn-success btn-sm mt-4"
+                    className="btn btn-secondary btn-outline btn-sm mt-4"
                     onClick={() => confirmPickup(pickup._id)}
                     disabled={confirming}
                   >
                     {confirming ? "Confirming..." : "Confirm Pickup"}
                   </button>
                 ) : (
-                  <p className="text-sm text-green-600 mt-3">
+                  <p className="btn btn-secondary btn-outline mt-3">
                     Pickup confirmed
                   </p>
                 )}

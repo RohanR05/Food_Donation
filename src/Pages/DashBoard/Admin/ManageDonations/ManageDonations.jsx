@@ -65,14 +65,14 @@ const ManageDonations = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
+    <div className="max-w-4xl mx-auto px-4 py-10">
       <h2 className="text-3xl font-bold text-center mb-8 text-secondary">
         Manage Donations
       </h2>
 
       <div className="overflow-x-auto shadow-lg rounded-lg bg-white">
         <table className="table w-full text-sm">
-          <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
+          <thead className="bg-gray-100 uppercase text-xs">
             <tr>
               <th>Title</th>
               <th>Food Type</th>
@@ -98,10 +98,10 @@ const ManageDonations = () => {
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-medium ${
                       donation.status === "Verified"
-                        ? "bg-green-100 text-green-700"
+                        ? " text-secondary"
                         : donation.status === "Rejected"
                         ? "bg-red-100 text-red-600"
-                        : "bg-yellow-100 text-yellow-800"
+                        : "bg-primary "
                     }`}
                   >
                     {donation.status || "Pending"}
@@ -112,13 +112,13 @@ const ManageDonations = () => {
                     <>
                       <button
                         onClick={() => handleVerify(donation._id, donation.title)}
-                        className="btn btn-xs bg-blue-600 text-white"
+                        className="btn btn-xs bg-secondary text-white"
                       >
                         Verify
                       </button>
                       <button
                         onClick={() => handleReject(donation._id, donation.title)}
-                        className="btn btn-xs bg-red-600 text-white"
+                        className="btn btn-xs bg-primary text-secondary"
                       >
                         Reject
                       </button>

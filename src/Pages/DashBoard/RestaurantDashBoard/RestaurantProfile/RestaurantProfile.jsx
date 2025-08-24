@@ -20,7 +20,7 @@ const RestaurantProfile = () => {
   if (loading || isLoading) return <Loading message="Loading profile..." />;
 
   return (
-    <div className="max-w-md mx-auto mt-12 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+    <div className="max-w-4xl mx-auto mt-12 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
       {/* Header */}
       <div className="bg-secondary/10 p-6 text-center">
         <img

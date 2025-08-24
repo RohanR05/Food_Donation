@@ -34,14 +34,14 @@ const FeatureDonations = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
-      <h2 className="text-3xl font-bold mb-6 text-center text-green-700">
+    <div className="max-w-4xl mx-auto p-6">
+      <h2 className="text-3xl font-bold mb-6 text-center text-secondary">
         🌟 Feature Donations (Admin Only)
       </h2>
 
       <div className="overflow-x-auto">
         <table className="table w-full">
-          <thead className="bg-green-100 text-green-800">
+          <thead className="bg-primary text-secondary">
             <tr>
               <th>#</th>
               <th>Image</th>
@@ -70,7 +70,7 @@ const FeatureDonations = () => {
                   <span
                     className={`px-2 py-1 text-xs rounded-full font-medium ${
                       donation.status === "Verified"
-                        ? "bg-green-200 text-green-800"
+                        ? "bg-green-200 text-green-600"
                         : "bg-yellow-100 text-yellow-700"
                     }`}
                   >

@@ -53,50 +53,57 @@ const MyRequests = () => {
     return <div className="text-center mt-8">Loading your requests...</div>;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-      {requests.length === 0 ? (
-        <p className="col-span-full text-center text-gray-500">
-          No donation requests found.
-        </p>
-      ) : (
-        requests.map((req) => (
-          <div
-            key={req._id}
-            className="bg-white shadow-md rounded-xl p-4 space-y-2"
-          >
-            <h2 className="text-xl font-semibold">{req.donationTitle}</h2>
-            <p>
-              <span className="font-medium">Restaurant:</span>{" "}
-              {req.restaurantName}
-            </p>
-            <p>
-              <span className="font-medium">Pickup Time:</span> {req.pickupTime}
-            </p>
-            <p>
-              <span className="font-medium">Status:</span>{" "}
-              <span
-                className={`px-2 py-1 rounded text-white ${
-                  req.status === "Pending"
-                    ? "bg-yellow-500"
-                    : req.status === "Accepted"
-                    ? "bg-green-600"
-                    : "bg-red-500"
-                }`}
-              >
-                {req.status}
-              </span>
-            </p>
-            {req.status === "Pending" && (
-              <button
-                onClick={() => handleCancel(req._id)}
-                className="mt-2 bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition"
-              >
-                Cancel
-              </button>
-            )}
-          </div>
-        ))
-      )}
+    <div className="max-w-4xl mx-auto mt-16 bg-primary rounded-2xl">
+      <h2 className="text-3xl font-semibold text-center text-secondary pt-5">
+        {" "}
+        My Request
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+        {requests.length === 0 ? (
+          <p className="col-span-full text-center text-gray-500">
+            No donation requests found.
+          </p>
+        ) : (
+          requests.map((req) => (
+            <div
+              key={req._id}
+              className="bg-white shadow-md rounded-xl p-4 space-y-2"
+            >
+              <h2 className="text-xl font-semibold">{req.donationTitle}</h2>
+              <p>
+                <span className="font-medium">Restaurant:</span>{" "}
+                {req.restaurantName}
+              </p>
+              <p>
+                <span className="font-medium">Pickup Time:</span>{" "}
+                {req.pickupTime}
+              </p>
+              <p>
+                <span className="font-medium">Status:</span>{" "}
+                <span
+                  className={`px-2 py-1 rounded text-white ${
+                    req.status === "Pending"
+                      ? "bg-green-600"
+                      : req.status === "Accepted"
+                      ? "bg-secondary"
+                      : "bg-black"
+                  }`}
+                >
+                  {req.status}
+                </span>
+              </p>
+              {req.status === "Pending" && (
+                <button
+                  onClick={() => handleCancel(req._id)}
+                  className="btn  btn-outline btn-secondary hover:bg-primary hover:text-black transition"
+                >
+                  Cancel
+                </button>
+              )}
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 };
