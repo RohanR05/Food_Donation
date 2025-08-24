@@ -32,23 +32,23 @@ const MyReviews = () => {
   if (isLoading) return <p className="text-center py-6">Loading your reviews...</p>;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold mb-6">My Reviews</h2>
+    <div className="max-w-4xl mx-auto px-4 py-10 bg-primary mt-16">
+      <h2 className="text-3xl font-bold mb-6  text-secondary">My Reviews</h2>
 
       {myReviews.length === 0 ? (
         <p>No reviews yet.</p>
       ) : (
         myReviews.map((review) => (
-          <div key={review._id} className="border p-4 rounded mb-4 shadow-sm">
+          <div key={review._id} className="border p-4 rounded mb-4 shadow-sm bg-white ">
             <p className="text-lg font-semibold">{review.donationTitle}</p>
-            <p className="text-sm text-gray-500 mb-1">Restaurant: {review.restaurant}</p>
-            <p className="text-sm text-gray-400 mb-2">
+            <p className="text-sm mb-1">Restaurant: {review.restaurant}</p>
+            <p className="text-sm mb-2">
               Reviewed on: {new Date(review.createdAt).toLocaleString()}
             </p>
             <p className="mb-2">{review.description}</p>
             <p className="text-sm">Rating: {review.rating}/5</p>
             <button
-              className="btn btn-xs btn-error mt-2"
+              className="btn btn-xs btn-secondary mt-2"
               onClick={() =>
                 Swal.fire({
                   title: "Are you sure?",

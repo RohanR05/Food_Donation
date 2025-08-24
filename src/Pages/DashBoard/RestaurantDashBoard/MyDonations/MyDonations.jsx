@@ -79,13 +79,13 @@ const MyDonation = () => {
     return <p className="text-center py-10">No donations found.</p>;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold mb-8 text-center">My Donations</h2>
+    <div className="max-w-4xl mx-auto px-4 py-10">
+      <h2 className="text-3xl font-bold mb-8 text-center text-secondary">My Donations</h2>
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {donations.map((donation) => (
           <div
             key={donation._id}
-            className="card bg-base-100 shadow-lg border rounded-lg overflow-hidden"
+            className="card bg-base-100 shadow-lg border border-secondary rounded-lg overflow-hidden"
           >
             {donation.image && (
               <img
@@ -110,10 +110,10 @@ const MyDonation = () => {
                 <span
                   className={
                     donation.status === "Verified"
-                      ? "text-green-600 font-semibold"
+                      ? "text-secondary font-semibold"
                       : donation.status === "Rejected"
-                      ? "text-red-600 font-semibold"
-                      : "text-yellow-600 font-semibold"
+                      ? "text-secondary font-semibold"
+                      : "text-green-600 font-semibold"
                   }
                 >
                   {donation.status}
@@ -132,7 +132,7 @@ const MyDonation = () => {
 
                 <button
                   onClick={() => handleDelete(donation._id)}
-                  className="btn btn-sm btn-error"
+                  className="btn btn-sm btn-secondary"
                 >
                   Delete
                 </button>

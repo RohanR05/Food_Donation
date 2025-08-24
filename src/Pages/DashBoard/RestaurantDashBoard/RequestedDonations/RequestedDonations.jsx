@@ -63,7 +63,7 @@ const RequestedDonations = () => {
       {requests.map((req) => (
         <div
           key={req._id}
-          className="border rounded-md p-4 flex flex-col md:flex-row justify-between items-center gap-4"
+          className="border rounded-md p-4 flex flex-col md:flex-row justify-between items-center gap-4 bg-primary"
         >
           <div className="flex-1">
             <p>
@@ -83,7 +83,7 @@ const RequestedDonations = () => {
               <span
                 className={`font-semibold ${
                   req.status === "Pending"
-                    ? "text-yellow-600"
+                    ? "text-secondary"
                     : req.status === "Accepted"
                     ? "text-green-600"
                     : req.status === "Rejected"
@@ -100,14 +100,14 @@ const RequestedDonations = () => {
             <div className="flex gap-2">
               <button
                 onClick={() => acceptMutation.mutate(req._id)}
-                className="btn btn-success"
+                className="btn btn-secondary btn-outline"
                 disabled={acceptMutation.isLoading}
               >
                 {acceptMutation.isLoading ? "Accepting..." : "Accept"}
               </button>
               <button
                 onClick={() => rejectMutation.mutate(req._id)}
-                className="btn btn-error"
+                className="btn btn-secondary"
                 disabled={rejectMutation.isLoading}
               >
                 {rejectMutation.isLoading ? "Rejecting..." : "Reject"}

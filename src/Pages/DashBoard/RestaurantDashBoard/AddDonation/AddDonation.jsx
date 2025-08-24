@@ -66,13 +66,13 @@ const AddDonation = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-10">
+    <div className="max-w-4xl mx-auto px-4 py-10">
       <div className="card bg-base-100 shadow-xl shadow-secondary p-8">
         <h2 className="text-3xl font-bold text-secondary mb-6 text-center">
           Add Surplus Food Donation
         </h2>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 max-w-xl mx-auto">
           {/* Title */}
           <div className="form-control">
             <label className="label text-secondary font-semibold">Donation Title</label><br />

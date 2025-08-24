@@ -25,7 +25,7 @@ const TransactionHistory = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold text-secondary mb-6 text-center">
         Charity Role Request Transactions
       </h2>
@@ -59,7 +59,7 @@ const TransactionHistory = () => {
                     <span
                       className={`px-3 py-1 text-xs rounded-full font-semibold ${
                         txn.status === "approved"
-                          ? "bg-green-100 text-green-700"
+                          ? "border text-secondary"
                           : txn.status === "pending"
                           ? "bg-yellow-100 text-yellow-700"
                           : "bg-red-100 text-red-700"
