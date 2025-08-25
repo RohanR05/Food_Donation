@@ -63,14 +63,14 @@ const {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
+    <div className="max-w-4xl mx-auto px-4 py-10 mt-16 bg-primary">
       <h2 className="text-4xl font-bold text-center mb-8 text-secondary">
         Manage Users
       </h2>
 
-      <div className="overflow-x-auto shadow-lg rounded-lg bg-white">
+      <div className="overflow-x-auto shadow-lg rounded-lg bg-base-100">
         <table className="table w-full text-sm">
-          <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
+          <thead className="bg-base-100 text-secondary uppercase text-xs">
             <tr>
               <th className="py-4 px-6">Name</th>
               <th>Email</th>
@@ -82,12 +82,12 @@ const {
             {users.map((user) => (
               <tr
                 key={user._id}
-                className="hover:bg-gray-50 border-t border-gray-200"
+                className="hover:opacity-80 border-t border-secondary"
               >
                 <td className="py-3 px-6">{user.name || "N/A"}</td>
                 <td>{user.email}</td>
                 <td>
-                  <span className="capitalize px-3 py-1 rounded-full text-xs font-medium bg-gray-200 text-gray-700">
+                  <span className="capitalize px-3 py-1 rounded-full text-xs font-medium bg-secondary text-primary opacity-80">
                     {user.role || "user"}
                   </span>
                 </td>
@@ -95,7 +95,7 @@ const {
                   {user.role !== "admin" && (
                     <button
                       onClick={() => handleRoleChange(user._id, "admin")}
-                      className="btn btn-xs bg-secondary text-white"
+                      className="btn btn-xs bg-secondary text-primary"
                     >
                       <Shield className="w-4 h-4 mr-1" /> Admin
                     </button>
@@ -111,7 +111,7 @@ const {
                   {user.role !== "charity" && (
                     <button
                       onClick={() => handleRoleChange(user._id, "charity")}
-                      className="btn btn-xs bg-primary text-black"
+                      className="btn btn-xs bg-primary text-secondary"
                     >
                       <HeartHandshake className="w-4 h-4 mr-1" /> Charity
                     </button>

@@ -39,7 +39,7 @@ const MyReviews = () => {
         <p>No reviews yet.</p>
       ) : (
         myReviews.map((review) => (
-          <div key={review._id} className="border p-4 rounded mb-4 shadow-sm bg-white ">
+          <div key={review._id} className="border p-4 rounded mb-4 shadow-sm bg-base-100 text-secondary">
             <p className="text-lg font-semibold">{review.donationTitle}</p>
             <p className="text-sm mb-1">Restaurant: {review.restaurant}</p>
             <p className="text-sm mb-2">
@@ -48,7 +48,7 @@ const MyReviews = () => {
             <p className="mb-2">{review.description}</p>
             <p className="text-sm">Rating: {review.rating}/5</p>
             <button
-              className="btn btn-xs btn-secondary mt-2"
+              className="btn btn-xs btn-secondary mt-2 text-primary"
               onClick={() =>
                 Swal.fire({
                   title: "Are you sure?",

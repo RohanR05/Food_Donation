@@ -47,25 +47,29 @@ const DashBoardLayout = () => {
         </>
       )}
 
-      <li className="text-secondary font-medium text-lg">
-        <NavLink
-          className={({ isActive }) => (isActive ? "underline" : "")}
-          to={"/dashBoard/favorites"}
-        >
-          <FiHeart className="inline mr-2" />
-          Favorites
-        </NavLink>
-      </li>
+      {role !== "admin" && (
+        <>
+          <li className="text-secondary font-medium text-lg">
+            <NavLink
+              className={({ isActive }) => (isActive ? "underline" : "")}
+              to={"/dashBoard/favorites"}
+            >
+              <FiHeart className="inline mr-2" />
+              Favorites
+            </NavLink>
+          </li>
 
-      <li className="text-secondary font-medium text-lg">
-        <NavLink
-          className={({ isActive }) => (isActive ? "underline" : "")}
-          to={"/dashBoard/myReviews"}
-        >
-          <FiMessageSquare className="inline mr-2" />
-          My Reviews
-        </NavLink>
-      </li>
+          <li className="text-secondary font-medium text-lg">
+            <NavLink
+              className={({ isActive }) => (isActive ? "underline" : "")}
+              to={"/dashBoard/myReviews"}
+            >
+              <FiMessageSquare className="inline mr-2" />
+              My Reviews
+            </NavLink>
+          </li>
+        </>
+      )}
 
       <li className="text-secondary font-medium text-lg">
         <NavLink

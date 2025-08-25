@@ -34,7 +34,7 @@ const FeatureDonations = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-6 my-16 bg-primary text-secondary">
       <h2 className="text-3xl font-bold mb-6 text-center text-secondary">
         🌟 Feature Donations (Admin Only)
       </h2>
@@ -70,7 +70,7 @@ const FeatureDonations = () => {
                   <span
                     className={`px-2 py-1 text-xs rounded-full font-medium ${
                       donation.status === "Verified"
-                        ? "bg-green-200 text-green-600"
+                        ? "bg-secondary text-primary"
                         : "bg-yellow-100 text-yellow-700"
                     }`}
                   >

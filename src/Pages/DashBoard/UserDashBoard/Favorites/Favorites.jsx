@@ -32,13 +32,13 @@ const Favorites = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-4 bg-primary mt-16">
-      <h2 className="text-3xl font-bold mb-6 text-center text-secondary mt-12">My Favorites</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-secondary my-6">My Favorites</h2>
       {favorites.length === 0 ? (
         <p>You have no favorites saved.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {favorites.map((fav) => (
-            <div key={fav.favoriteId} className="card bg-white shadow-md shadow-secondary p-4 rounded">
+            <div key={fav.favoriteId} className="card bg-base-100 shadow-md shadow-secondary p-4 rounded text-secondary">
               <img
                 src={fav.image}
                 alt={fav.title}
@@ -57,7 +57,7 @@ const Favorites = () => {
               <div className="mt-3 flex gap-3">
                 <Link
                   to={`/donations/${fav.donationId}`}
-                  className="btn btn-secondary"
+                  className="btn btn-secondary text-primary"
                 >
                   Details
                 </Link>

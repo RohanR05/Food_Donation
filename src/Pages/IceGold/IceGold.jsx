@@ -125,7 +125,7 @@ const IceGold = () => {
           >
             {feature.icon}
             <h3 className="text-2xl font-semibold mb-3">{feature.title}</h3>
-            <p className="text-gray-600">{feature.description}</p>
+            <p className="text-secondary">{feature.description}</p>
           </motion.div>
         ))}
       </div>
@@ -135,7 +135,7 @@ const IceGold = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4, duration: 0.6 }}
-        className="bg-white text-primary-content p-6 rounded-lg shadow-md"
+        className="bg-base-100 text-primary-content p-6 rounded-lg shadow-md"
       >
         <h2 className=" text-secondary text-2xl font-bold mb-3">📌 Summary</h2>
         <p className="leading-relaxed text-secondary">

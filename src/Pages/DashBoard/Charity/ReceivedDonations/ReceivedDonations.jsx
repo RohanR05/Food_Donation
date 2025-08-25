@@ -41,7 +41,7 @@ const ReceivedDonations = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
+    <div className="max-w-4xl mx-auto px-4 my-16 bg-primary py-6">
       <h2 className="text-3xl md:text-4xl font-bold text-secondary text-center mb-8">
         Received Donations
       </h2>
@@ -53,7 +53,7 @@ const ReceivedDonations = () => {
           {donations.map((donation) => (
             <div
               key={donation._id}
-              className="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden flex flex-col hover:shadow-xl transition-all h-full"
+              className="bg-base-100 text-secondary rounded-2xl shadow-md border border-secondary overflow-hidden flex flex-col hover:shadow-xl transition-all h-full"
             >
               <div className="h-48 w-full overflow-hidden">
                 <img
@@ -67,16 +67,16 @@ const ReceivedDonations = () => {
                   <h3 className="text-xl font-semibold text-gray-800">
                     {donation.title}
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-secondary">
                     <strong>Restaurant:</strong> {donation.restaurantName}
                   </p>
-                  <p className="text-gray-600">
+                  <p className="text-secondary">
                     <strong>Food Type:</strong> {donation.foodType}
                   </p>
-                  <p className="text-gray-600">
+                  <p className="text-secondary">
                     <strong>Quantity:</strong> {donation.quantity}
                   </p>
-                  <p className="text-gray-600">
+                  <p className="text-secondary">
                     <strong>Pickup Date:</strong>{" "}
                     {new Date(
                       donation.updatedAt || donation.pickupDate || Date.now()
@@ -88,7 +88,7 @@ const ReceivedDonations = () => {
                     setSelectedDonation(donation);
                     setIsOpen(true);
                   }}
-                  className="btn mt-4 bg-secondary text-white hover:bg-primary/90 transition"
+                  className="btn mt-4 bg-secondary text-primary hover:bg-primary/90 transition"
                 >
                   Add Review
                 </button>

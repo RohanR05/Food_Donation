@@ -71,7 +71,7 @@ const DonationDetails = () => {
         Donation Details
       </h2>
       {/* Donation Info */}
-      <div className="bg-white rounded-2xl shadow-md p-8 space-y-6 border border-[#00458B]">
+      <div className="bg-secondary rounded-2xl shadow-md p-8 space-y-6 border border-[#00458B]">
         <img
           src={donation.image || "https://via.placeholder.com/400x250"}
           alt="Food"

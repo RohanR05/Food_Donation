@@ -58,7 +58,7 @@ const Banner = () => {
                 <p className="text-lg md:text-xl text-gray-200 mt-4 max-w-2xl animate-fadeInUp delay-200">
                   {slide.subtitle}
                 </p>
-           <NavLink to={'/dashBoard'} className={`btn btn-secondary mt-3`}>Explore Your DashBoard</NavLink>
+           <NavLink to={'/dashBoard'} className={`btn btn-[#00458b] mt-3`}>Explore Your DashBoard</NavLink>
               </div>
             </div>
           </SwiperSlide>

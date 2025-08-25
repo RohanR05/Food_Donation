@@ -45,7 +45,7 @@ const CommunityStories = () => {
       </motion.div>
 
       {/* Reviews Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto px-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto px-4 ">
         {reviews.map((r, i) => (
           <motion.div
             key={r._id}
@@ -53,7 +53,7 @@ const CommunityStories = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
-            className="card bg-base-100 border border-base-200 shadow-md hover:shadow-xl transition p-6"
+            className="card bg-primary border border-base-200 shadow-md hover:shadow-xl shadow-secondary transition p-6"
           >
             {/* Reviewer Info */}
             <div className="flex items-center gap-4">
@@ -61,10 +61,10 @@ const CommunityStories = () => {
                 <h3 className="text-lg font-semibold text-secondary">
                   {r.reviewerName}
                 </h3>
-                <p className="text-sm text-base-content opacity-70">
+                <p className="text-sm text-secondary opacity-70">
                   {r.reviewerEmail}
                 </p>
-                <p className="text-xs text-base-content opacity-60">
+                <p className="text-xs text-secondary opacity-60">
                   {new Date(r.createdAt).toLocaleDateString()}
                 </p>
               </div>

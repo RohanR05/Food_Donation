@@ -37,7 +37,7 @@ const FeaturedDonationsSection = () => {
     );
 
   return (
-    <div className=" bg-white mx-auto px-4 py-16">
+    <div className=" bg-base-100 mx-auto px-4 py-16">
       <h2 className="text-4xl font-bold text-center mb-12 text-secondary">
         🌟 Featured Donations
       </h2>
@@ -50,7 +50,7 @@ const FeaturedDonationsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="relative bg-white rounded-xl
+            className="relative bg-primary rounded-xl
              shadow-md shadow-secondary overflow-hidden transform hover:scale-105 hover:shadow-2xl transition duration-300"
           >
             {/* Image with gradient overlay */}
@@ -63,17 +63,17 @@ const FeaturedDonationsSection = () => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-              <span className="absolute top-3 right-3 px-3 py-1 bg-secondary text-white text-xs font-semibold rounded">
+              <span className="absolute top-3 right-3 px-3 py-1 bg-secondary text-primary text-xs font-semibold rounded">
                 {donation.status}
               </span>
             </div>
 
             {/* Card Content */}
             <div className="p-4 text-center">
-              <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-1">
+              <h3 className="text-lg md:text-xl font-bold text-secondary mb-1">
                 {donation.foodType}
               </h3>
-              <p className="text-gray-600 text-sm mb-3">
+              <p className="text-secondary text-sm mb-3">
                 🍽 {donation.restaurant} <br />
                 📍 {donation.location || "Unknown"}
               </p>

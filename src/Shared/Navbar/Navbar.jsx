@@ -23,7 +23,7 @@ const Navbar = () => {
 
   const links = (
     <>
-      <li className="text-secondary font-medium text-lg">
+      <li className="text-[#00458b]  font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
           to={"/"}
@@ -31,7 +31,7 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      <li className="text-secondary font-medium text-lg">
+      <li className="text-[#00458b] font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
           to={"/allDonations"}
@@ -39,7 +39,7 @@ const Navbar = () => {
           All Donations
         </NavLink>
       </li>
-      <li className="text-secondary font-medium text-lg">
+      <li className="text-[#00458b] font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
           to={"/dashBoard"}
@@ -47,7 +47,7 @@ const Navbar = () => {
           Dashboard
         </NavLink>
       </li>
-      <li className="text-secondary font-medium text-lg">
+      <li className="text-[#00458b] font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
           to={"/aboutDeveloper"}
@@ -55,7 +55,7 @@ const Navbar = () => {
           About Developer
         </NavLink>
       </li>
-      <li className="text-secondary font-medium text-lg">
+      <li className="text-[#00458b] font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
           to={"/comingSoon"}
@@ -108,7 +108,7 @@ const Navbar = () => {
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleLogout}
-                  className="btn btn-outline text-secondary"
+                  className="btn btn-outline text-[#00458b]"
                 >
                   Log Out
                 </button>
@@ -119,7 +119,7 @@ const Navbar = () => {
                 />
               </div>
             ) : (
-              <Link className="btn btn-secondary text-white" to="/login">
+              <Link className="btn btn-[#00458b] text-secondary" to="/login">
                 Login
               </Link>
             )}

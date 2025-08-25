@@ -2,18 +2,18 @@ import React from "react";
 
 const AboutDev = () => {
   return (
-    <div className="mx-auto my-12 p-8 bg-white shadow-xl rounded-xl border border-secondary">
+    <div className="mx-auto my-12 p-8 bg-base-100 shadow-xl rounded-xl border border-secondary">
       {/* Header */}
       <div className="flex flex-col items-center text-center gap-4">
         <h2 className="text-3xl font-bold text-secondary">Rohan Kabir</h2>
         <p className="text-secondary font-medium">
           🚀 MERN Stack Developer | MongoDB • Express.js • React • Node.js
         </p>
-        <p className="text-gray-600">
+        <p className="text-secondary">
           Email:{" "}
           <a
             href="mailto:rohankabirr061@gmail.com"
-            className="text-blue-600 underline"
+            className="text-secondary underline"
           >
             rohankabir061@gmail.com
           </a>
@@ -28,7 +28,7 @@ const AboutDev = () => {
             href="https://github.com/RohanR05"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-700 hover:text-black transition-colors"
+            className="text-secondary bg-secondary rounded-full hover:text-black transition-colors"
           >
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
@@ -60,7 +60,7 @@ const AboutDev = () => {
       </div>
 
       {/* Bio Section */}
-      <div className="mt-8 text-gray-700 space-y-4">
+      <div className="mt-8 text-secondary space-y-4">
         <p>
           I’ve recently completed a comprehensive MERN Stack Developer course,
           gaining hands-on experience building full-stack web applications.
@@ -78,7 +78,7 @@ const AboutDev = () => {
       {/* Skills Section */}
       <div className="mt-6">
         <h3 className="text-xl font-bold text-secondary mb-3">Key Skills</h3>
-        <ul className="list-disc list-inside space-y-2 text-gray-700">
+        <ul className="list-disc list-inside space-y-2 text-secondary">
           <li>
             MongoDB Database Management – Proficient in NoSQL databases for
             optimized performance.
@@ -131,7 +131,7 @@ const AboutDev = () => {
       </div>
 
       {/* Footer */}
-      <div className="mt-6 text-gray-600">
+      <div className="mt-6 text-secondary">
         <p>
           I'm passionate about clean code, performance optimization, and
           crafting user-friendly experiences. Currently exploring Stripe

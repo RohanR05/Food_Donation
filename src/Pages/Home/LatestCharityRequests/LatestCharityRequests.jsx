@@ -32,7 +32,7 @@ const LatestCharityRequests = () => {
   }
 
   return (
-    <div className=" w-full mx-auto p-6 bg-white">
+    <div className=" w-full mx-auto p-6 bg-base-100">
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -50,7 +50,7 @@ const LatestCharityRequests = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden transform hover:scale-105 hover:shadow-xl transition-all duration-300"
+            className="bg-primary rounded-xl shadow-md border border-gray-200 overflow-hidden transform hover:scale-105 hover:shadow-xl transition-all duration-300"
           >
             <div className="p-5 space-y-3">
               <div className="flex items-center gap-2">
@@ -58,16 +58,16 @@ const LatestCharityRequests = () => {
                 <h3 className="text-xl font-bold text-secondary">{req.name}</h3>
               </div>
 
-              <p className="text-gray-700 text-sm flex items-start gap-1">
-                <FaInfoCircle className="mt-1 text-gray-400" />
+              <p className="text-secondary text-sm flex items-start gap-1">
+                <FaInfoCircle className="mt-1 text-secondary" />
                 <span>
                   <strong>Mission:</strong>{" "}
                   {req.mission || "No description available"}
                 </span>
               </p>
 
-              <p className="text-gray-700 text-sm flex items-start gap-1">
-                <FaInfoCircle className="mt-1 text-gray-400" />
+              <p className="text-secondary text-sm flex items-start gap-1">
+                <FaInfoCircle className="mt-1 text-secondary" />
                 <span>
                   <strong>Organization:</strong>{" "}
                   {req.organization || "Not specified"}

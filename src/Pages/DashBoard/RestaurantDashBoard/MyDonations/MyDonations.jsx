@@ -79,8 +79,10 @@ const MyDonation = () => {
     return <p className="text-center py-10">No donations found.</p>;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold mb-8 text-center text-secondary">My Donations</h2>
+    <div className="max-w-4xl mx-auto px-4 py-10 my-16 bg-primary text-secondary">
+      <h2 className="text-3xl font-bold mb-8 text-center text-secondary">
+        My Donations
+      </h2>
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {donations.map((donation) => (
           <div
@@ -132,7 +134,7 @@ const MyDonation = () => {
 
                 <button
                   onClick={() => handleDelete(donation._id)}
-                  className="btn btn-sm btn-secondary"
+                  className="btn btn-sm btn-secondary text-primary"
                 >
                   Delete
                 </button>

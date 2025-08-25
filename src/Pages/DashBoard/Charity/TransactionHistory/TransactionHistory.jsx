@@ -25,17 +25,17 @@ const TransactionHistory = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-4xl mx-auto mt-16 p-6 bg-primary shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold text-secondary mb-6 text-center">
         Charity Role Request Transactions
       </h2>
 
       {transactions.length === 0 ? (
-        <p className="text-center text-gray-400">No transactions found.</p>
+        <p className="text-center text-secondary">No transactions found.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="table w-full text-sm border">
-            <thead className="bg-base-200 text-gray-700 uppercase text-xs">
+            <thead className="bg-base-200 text-secondary uppercase text-xs">
               <tr>
                 <th className="py-2 px-4">Transaction ID</th>
                 <th>Amount</th>
@@ -46,7 +46,7 @@ const TransactionHistory = () => {
             </thead>
             <tbody>
               {transactions.map((txn) => (
-                <tr key={txn._id} className="hover:bg-gray-50 border-t">
+                <tr key={txn._id} className="hover:bg-primary hover:opacity-70 border-t">
                   <td className="py-2 px-4 text-xs">
                     {txn.paymentId || "N/A"}
                   </td>

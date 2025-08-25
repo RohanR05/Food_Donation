@@ -65,14 +65,14 @@ const ManageDonations = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
+    <div className="max-w-4xl mx-auto px-4 py-10 mt-16 bg-primary ">
       <h2 className="text-3xl font-bold text-center mb-8 text-secondary">
         Manage Donations
       </h2>
 
-      <div className="overflow-x-auto shadow-lg rounded-lg bg-white">
+      <div className="overflow-x-auto shadow-lg rounded-lg bg-primary">
         <table className="table w-full text-sm">
-          <thead className="bg-gray-100 uppercase text-xs">
+          <thead className="bg-primary uppercase text-xs text-secondary">
             <tr>
               <th>Title</th>
               <th>Food Type</th>
@@ -87,7 +87,7 @@ const ManageDonations = () => {
             {donations.map((donation) => (
               <tr
                 key={donation._id}
-                className="hover:bg-gray-50 border-t border-gray-200"
+                className="hover:opacity-80 border-t border-secondary"
               >
                 <td className="py-3 px-4">{donation.title}</td>
                 <td>{donation.foodType}</td>
@@ -112,7 +112,7 @@ const ManageDonations = () => {
                     <>
                       <button
                         onClick={() => handleVerify(donation._id, donation.title)}
-                        className="btn btn-xs bg-secondary text-white"
+                        className="btn btn-xs bg-secondary text-primary"
                       >
                         Verify
                       </button>
@@ -125,7 +125,7 @@ const ManageDonations = () => {
                     </>
                   )}
                   {donation.status !== "Pending" && (
-                    <span className="text-gray-400 text-xs">No action needed</span>
+                    <span className="text-secondary opacity-80 text-xs">No action needed</span>
                   )}
                 </td>
               </tr>

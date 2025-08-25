@@ -53,7 +53,7 @@ const MyRequests = () => {
     return <div className="text-center mt-8">Loading your requests...</div>;
 
   return (
-    <div className="max-w-4xl mx-auto mt-16 bg-primary rounded-2xl">
+    <div className="max-w-4xl mx-auto mt-16 bg-primary rounded-2xl my-16">
       <h2 className="text-3xl font-semibold text-center text-secondary pt-5">
         {" "}
         My Request
@@ -67,7 +67,7 @@ const MyRequests = () => {
           requests.map((req) => (
             <div
               key={req._id}
-              className="bg-white shadow-md rounded-xl p-4 space-y-2"
+              className="bg-base-100 text-secondaryshadow-md rounded-xl p-4 space-y-2"
             >
               <h2 className="text-xl font-semibold">{req.donationTitle}</h2>
               <p>
@@ -81,7 +81,7 @@ const MyRequests = () => {
               <p>
                 <span className="font-medium">Status:</span>{" "}
                 <span
-                  className={`px-2 py-1 rounded text-white ${
+                  className={`px-2 py-1 rounded text-primary ${
                     req.status === "Pending"
                       ? "bg-green-600"
                       : req.status === "Accepted"

@@ -20,7 +20,7 @@ const RestaurantProfile = () => {
   if (loading || isLoading) return <Loading message="Loading profile..." />;
 
   return (
-    <div className="max-w-4xl mx-auto mt-12 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+    <div className="max-w-4xl mx-auto mt-12 bg-primary text-secondary rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
       {/* Header */}
       <div className="bg-secondary/10 p-6 text-center">
         <img
@@ -31,14 +31,14 @@ const RestaurantProfile = () => {
         <h2 className="mt-4 text-3xl font-bold text-secondary">
           {user?.displayName || "Restaurant"}
         </h2>
-        <p className="mt-1 text-gray-600 text-sm">
+        <p className="mt-1 text-secondary text-sm">
           Role:{" "}
           <span className="font-semibold text-yellow-600">Restaurant</span>
         </p>
       </div>
 
       {/* Details Section */}
-      <div className="p-6 space-y-4 text-gray-700">
+      <div className="p-6 space-y-4 text-secondary">
         <div className="flex justify-between border-b pb-2">
           <span className="font-semibold">Email:</span>
           <span>{user?.email}</span>

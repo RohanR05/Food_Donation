@@ -23,7 +23,9 @@ const ManageCharityRequests = () => {
 
   // Approve charity request
   const handleApprove = async (id, email) => {
-    const result = await axiosSecure.patch(`/charity-requests/approve/${id}`, { email });
+    const result = await axiosSecure.patch(`/charity-requests/approve/${id}`, {
+      email,
+    });
     if (result.data.modifiedCount > 0) {
       Swal.fire("Success", "Charity approved!", "success");
       refetch();
@@ -42,59 +44,63 @@ const ManageCharityRequests = () => {
   if (isLoading) return <p className="text-center text-gray-500">Loading...</p>;
 
   return (
-    <div className="overflow-x-auto mt-10 p-4">
-      <h2 className="text-2xl font-bold mb-4 text-center">Manage Charity Role Requests</h2>
-      <table className="table w-full">
-        <thead>
-          <tr className="bg-base-200">
-            <th>Name</th>
-            <th>Email</th>
-            <th>Organization</th>
-            <th>Mission</th>
-            <th>Status</th>
-            <th className="text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {charityRequests.map((req) => (
-            <tr key={req._id}>
-              <td>{req.name}</td>
-              <td>{req.email}</td>
-              <td>{req.organization}</td>
-              <td>{req.mission}</td>
-              <td>
-                <span
-                  className={`badge ${
-                    req.status === "pending"
-                      ? "badge-warning"
-                      : req.status === "approved"
-                      ? "badge-success"
-                      : "badge-error"
-                  }`}
-                >
-                  {req.status}
-                </span>
-              </td>
-              <td className="space-x-2">
-                <button
-                  className="btn btn-secondary btn-sm"
-                  onClick={() => handleApprove(req._id, req.email)}
-                  disabled={req.status !== "pending"}
-                >
-                  Approve
-                </button>
-                <button
-                  className="btn btn-error btn-sm"
-                  onClick={() => handleReject(req._id)}
-                  disabled={req.status !== "pending"}
-                >
-                  Reject
-                </button>
-              </td>
+    <div className="max-w-4xl mx-auto">
+      <div className="overflow-x-auto mt-10 p-4 my-16 bg-primary mx-auto">
+        <h2 className="text-2xl font-bold mb-4 text-center text-secondary">
+          Manage Charity Role Requests
+        </h2>
+        <table className="table w-full">
+          <thead>
+            <tr className="bg-base-200">
+              <th>Name</th>
+              <th>Email</th>
+              <th>Organization</th>
+              <th>Mission</th>
+              <th>Status</th>
+              <th className="text-center">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {charityRequests.map((req) => (
+              <tr key={req._id}>
+                <td>{req.name}</td>
+                <td>{req.email}</td>
+                <td>{req.organization}</td>
+                <td>{req.mission}</td>
+                <td>
+                  <span
+                    className={`badge ${
+                      req.status === "pending"
+                        ? "badge-warning"
+                        : req.status === "approved"
+                        ? "badge-success"
+                        : "badge-error"
+                    }`}
+                  >
+                    {req.status}
+                  </span>
+                </td>
+                <td className="space-x-2">
+                  <button
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => handleApprove(req._id, req.email)}
+                    disabled={req.status !== "pending"}
+                  >
+                    Approve
+                  </button>
+                  <button
+                    className="btn btn-error btn-sm"
+                    onClick={() => handleReject(req._id)}
+                    disabled={req.status !== "pending"}
+                  >
+                    Reject
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

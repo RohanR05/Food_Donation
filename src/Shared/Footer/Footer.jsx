@@ -18,7 +18,7 @@ const Footer = () => {
   );
   return (
     <div>
-      <footer className="footer footer-horizontal footer-center bg-secondary text-primary rounded p-10 mt-16">
+      <footer className="footer footer-horizontal footer-center bg-[#00458b] text-white rounded p-10 mt-16">
         <ul className="grid grid-flow-col gap-4">{links}</ul>
 
         <nav>
