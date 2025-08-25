@@ -66,23 +66,23 @@ const DonationDetails = () => {
     );
 
   return (
-    <div className="mx-auto px-6 py-12 space-y-12 bg-[#e1e2e2]">
+    <div className="mx-auto px-6 py-12 space-y-12 bg-primary">
       <h2 className="text-2xl md:text-5xl text-secondary font-medium text-center">
         Donation Details
       </h2>
       {/* Donation Info */}
-      <div className="bg-secondary rounded-2xl shadow-md p-8 space-y-6 border border-[#00458B]">
+      <div className="bg-base-100 text-secondary rounded-2xl shadow-md p-8 space-y-6 border border-secondary">
         <img
           src={donation.image || "https://via.placeholder.com/400x250"}
           alt="Food"
-          className="w-10/12 h-48 md:h-60 object-cover mx-auto rounded-lg border border-[#00458B]"
+          className="w-10/12 h-48 md:h-60 object-cover mx-auto rounded-lg border border-secondary"
         />
 
-        <h2 className="text-3xl font-bold text-center text-[#00458B]">
+        <h2 className="text-3xl font-bold text-center text-secondary">
           {donation.title}
         </h2>
 
-        <div className="space-y-2 text-[#00458B] text-lg">
+        <div className="space-y-2 text-secondary text-lg">
           <p>
             🏪 <strong>Restaurant:</strong> {donation.restaurant} (
             {donation.location})
@@ -111,7 +111,7 @@ const DonationDetails = () => {
         <div className="flex flex-wrap gap-4 justify-center mt-6">
           <button
             onClick={() => favoriteMutation.mutate()}
-            className=" btn btn-secondary text-white hover:bg-white hover:text-secondary transition"
+            className=" btn btn-secondary text-primary hover:bg-primary hover:text-secondary transition"
           >
             Save to Favorites
           </button>
@@ -119,7 +119,7 @@ const DonationDetails = () => {
           {role === "charity" && donation.status === "Verified" && (
             <button
               onClick={() => setShowRequestModal(true)}
-              className="btn btn-secondary text-white hover:bg-white hover:text-secondary transition"
+              className="btn btn-primary text-secondary hover:opacity-70 hover:text-secondary transition"
             >
               Request Donation
             </button>
@@ -128,7 +128,7 @@ const DonationDetails = () => {
           {role === "charity" && donation.status === "Accepted" && (
             <button
               onClick={handleConfirmPickup}
-              className="w-full md:w-auto py-2 px-4 rounded-lg border border-[#00458B] text-[#00458B] hover:bg-[#00458B] hover:text-white transition"
+              className="w-full md:w-auto py-2 px-4 rounded-lg border border-[#00458B] text-secondary hover:bg-[#00458B] hover:text-white transition"
             >
               Confirm Pickup
             </button>
@@ -136,7 +136,7 @@ const DonationDetails = () => {
 
           <button
             onClick={() => setShowReviewModal(true)}
-            className="btn btn-outline border-[#00458B] text-[#00458B] hover:bg-[#00458B] hover:text-white transition"
+            className="btn btn-outline border-[#00458B] text-secondary hover:bg-[#00458B] hover:text-white transition"
           >
             Add Review
           </button>
@@ -144,19 +144,19 @@ const DonationDetails = () => {
       </div>
 
       {/* Reviews */}
-      <div className="bg-white rounded-2xl shadow-md p-8 border border-[#00458B] space-y-6">
-        <h3 className="text-2xl font-bold text-center text-[#00458B] mb-4">
+      <div className="bg-base-100 rounded-2xl shadow-md p-8 border border-secondary space-y-6">
+        <h3 className="text-2xl font-bold text-center text-secondary mb-4">
           Reviews
         </h3>
         {reviews.length === 0 ? (
-          <p className="text-center text-[#00458B]">No reviews yet.</p>
+          <p className="text-center text-secondary">No reviews yet.</p>
         ) : (
           <div className="space-y-4">
             {reviews.map((r, i) => (
-              <div key={i} className="border-b border-[#00458B] pb-4">
-                <p className="font-semibold text-[#00458B]">{r.reviewerName}</p>
-                <p className="text-sm text-[#00458B]">Rating: {r.rating}/5</p>
-                <p className="text-[#00458B]">{r.description}</p>
+              <div key={i} className="border-b border-secondary pb-4">
+                <p className="font-semibold text-secondary">{r.reviewerName}</p>
+                <p className="text-sm text-secondary">Rating: {r.rating}/5</p>
+                <p className="text-secondary">{r.description}</p>
               </div>
             ))}
           </div>
