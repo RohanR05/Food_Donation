@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FaSun, FaMoon } from "react-icons/fa";
 
 const Theme = () => {
   const [theme, setTheme] = useState("light");
@@ -9,17 +10,24 @@ const Theme = () => {
     document.querySelector("html").setAttribute("data-theme", newTheme);
   };
 
-  // Initialize theme on load
   useEffect(() => {
     document.querySelector("html").setAttribute("data-theme", theme);
   }, [theme]);
 
   return (
     <button
-      className="btn btn-sm "
       onClick={toggleTheme}
+      className="btn btn-sm flex items-center transition-all duration-300 bg-primary text-accent hover:bg-secondary rounded-full"
     >
-      {theme === "light" ? "Dark Mode" : "Light Mode"}
+      {theme === "light" ? (
+        <>
+          <FaMoon className="text-lg" />
+        </>
+      ) : (
+        <>
+          <FaSun className="text-lg" />
+        </>
+      )}
     </button>
   );
 };
