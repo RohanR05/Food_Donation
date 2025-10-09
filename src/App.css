@@ -6,7 +6,9 @@
   name: "light";
   --color-primary: #00458b;
   --color-secondary: #5D8736;
-  --color-accent: #E9E9E9
+  --color-accent: #E9E9E9;
+  --color-neutral:#ffffff;
+  --color-info:#0f0f0f;
 }
 
 /* Dark theme */
@@ -14,5 +16,7 @@
   name: "dark";
   --color-primary: #82CD47;
   --color-secondary: #A2AADB;
-  --color-accent: #0b0c10
+  --color-accent: #0b0c10;
+  --color-neutral:#000000;
+  --color-info:#f0f0f0
 }

@@ -1,5 +1,6 @@
 import React, { use } from "react";
 import { Link, NavLink } from "react-router";
+import { FaHome, FaHandsHelping, FaUserShield, FaCode, FaInfoCircle } from "react-icons/fa";
 import Logo from "../Logo/Logo";
 import { AuthContext } from "../../Contexts/AuthContext";
 import Swal from "sweetalert2";
@@ -22,46 +23,35 @@ const Navbar = () => {
       .catch((error) => console.log(error));
   };
 
+  const linkClass = ({ isActive }) =>
+    `flex items-center gap-2 text-lg font-medium transition-all duration-300 ${
+      isActive ? "underline" : ""
+    }`;
+
   const links = (
     <>
-      <li className="text-[#00458b]  font-medium text-lg">
-        <NavLink
-          className={({ isActive }) => (isActive ? "underline" : "")}
-          to={"/"}
-        >
-          Home
+      <li>
+        <NavLink to="/" className={linkClass}>
+          <FaHome className="text-secondary text-xl" />
+          <span className="text-primary">Home</span>
         </NavLink>
       </li>
-      <li className="text-[#00458b] font-medium text-lg">
-        <NavLink
-          className={({ isActive }) => (isActive ? "underline" : "")}
-          to={"/allDonations"}
-        >
-          All Donations
+      <li>
+        <NavLink to="/allDonations" className={linkClass}>
+          <FaHandsHelping className="text-secondary text-xl" />
+          <span className="text-primary">All Donations</span>
         </NavLink>
       </li>
-      <li className="text-[#00458b] font-medium text-lg">
-        <NavLink
-          className={({ isActive }) => (isActive ? "underline" : "")}
-          to={"/dashBoard"}
-        >
-          Dashboard
+      <li>
+        <NavLink to="/dashBoard" className={linkClass}>
+          <FaUserShield className="text-secondary text-xl" />
+          <span className="text-primary">Dashboard</span>
         </NavLink>
       </li>
-      <li className="text-[#00458b] font-medium text-lg">
-        <NavLink
-          className={({ isActive }) => (isActive ? "underline" : "")}
-          to={"/aboutDeveloper"}
-        >
-          About Developer
-        </NavLink>
-      </li>
-      <li className="text-[#00458b] font-medium text-lg">
-        <NavLink
-          className={({ isActive }) => (isActive ? "underline" : "")}
-          to={"/comingSoon"}
-        >
-          About Us
+      <li>
+        <NavLink to="/comingSoon" className={linkClass}>
+          <FaInfoCircle className="text-secondary text-xl" />
+          <span className="text-primary">About Us</span>
         </NavLink>
       </li>
     </>
@@ -69,15 +59,16 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-50 shadow-lg w-full ">
+      <div className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-lg border-b border-primary/10 bg-neutral/40 shadow-md">
         <div className="navbar mx-auto">
+          {/* Left */}
           <div className="navbar-start">
-            {/* Mobile menu */}
+            {/* Mobile Menu */}
             <div className="dropdown">
-              <label tabIndex={0} className="btn btn-ghost lg:hidden">
+              <label tabIndex={0} className="btn btn-sm btn-ghost lg:hidden">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
+                  className="h-6 w-6 text-primary"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -92,7 +83,7 @@ const Navbar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-2 p-2 shadow bg-base-100 rounded-box w-52 absolute z-50"
+                className="menu menu-sm dropdown-content mt-2 p-2 shadow bg-base-100 rounded-box w-56 absolute z-50"
               >
                 {links}
               </ul>
@@ -100,19 +91,21 @@ const Navbar = () => {
             <Logo />
           </div>
 
+          {/* Center */}
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">{links}</ul>
+            <ul className="menu menu-horizontal px-1 flex items-center gap-2">
+              {links}
+            </ul>
           </div>
 
-          <div className="navbar-end">
-            <div>
-              <Theme></Theme>
-            </div>
+          {/* Right */}
+          <div className="navbar-end flex items-center gap-3">
+            <Theme />
             {user ? (
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleLogout}
-                  className="btn btn-outline text-[#00458b]"
+                  className="btn btn-sm md:btn-lg btn-outline border-primary text-primary hover:bg-primary hover:text-white"
                 >
                   Log Out
                 </button>
@@ -123,7 +116,10 @@ const Navbar = () => {
                 />
               </div>
             ) : (
-              <Link className="btn btn-[#00458b] text-secondary" to="/login">
+              <Link
+                className="btn bg-primary btn-sm md:btn-lg  text-white hover:bg-secondary hover:text-white"
+                to="/login"
+              >
                 Login
               </Link>
             )}
@@ -131,7 +127,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Add top padding to prevent content from being hidden behind navbar */}
+      {/* To offset the fixed navbar height */}
       <div className="pt-20"></div>
     </>
   );
