@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router";
 import Logo from "../Logo/Logo";
 import { AuthContext } from "../../Contexts/AuthContext";
 import Swal from "sweetalert2";
+import Theme from "../Theme/Theme";
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
@@ -104,6 +105,9 @@ const Navbar = () => {
           </div>
 
           <div className="navbar-end">
+            <div>
+              <Theme></Theme>
+            </div>
             {user ? (
               <div className="flex items-center gap-3">
                 <button
