@@ -37,25 +37,25 @@ const ImpactStats = () => {
 
   return (
     <div className="py-12 bg-base-100 text-center text-secondary">
-      <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-8">
+      <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">
         Platform Impact
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto px-4">
-        <div className="stat bg-primary rounded-box shadow">
-          <div className="stat-figure text-secondary text-5xl">
+        <div className="stat bg-accent rounded-box shadow">
+          <div className="stat-figure text-primary text-5xl">
             <FaBoxOpen />
           </div>
-          <div className="stat-title text-secondary">Total Food Donated</div>
+          <div className="stat-title text-primary">Total Food Donated</div>
           <div className="stat-value">{donations.length} Times</div>
         </div>
-        <div className="stat bg-primary rounded-box shadow">
+        <div className="stat bg-accent rounded-box shadow">
           <div className="stat-figure text-secondary text-5xl">
             <FaHandHoldingHeart />
           </div>
           <div className="stat-title text-secondary">Total User</div>
           <div className="stat-value text-secondary">{users.length} Person</div>
         </div>
-        <div className="stat bg-primary rounded-box shadow">
+        <div className="stat bg-accent rounded-box shadow">
           <div className="stat-figure text-secondary text-5xl">
             <FaLeaf />
           </div>

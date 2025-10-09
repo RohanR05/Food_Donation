@@ -68,7 +68,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg w-full ">
+      <div className="fixed top-0 left-0 right-0 z-50 shadow-lg w-full ">
         <div className="navbar mx-auto">
           <div className="navbar-start">
             {/* Mobile menu */}

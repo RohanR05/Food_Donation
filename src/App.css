@@ -4,13 +4,15 @@
 /* Light theme */
 @plugin "daisyui/theme" {
   name: "light";
-  --color-primary: #E9E9E9;
-  --color-secondary: #00458b;
+  --color-primary: #00458b;
+  --color-secondary: #5D8736;
+  --color-accent: #E9E9E9
 }
 
 /* Dark theme */
 @plugin "daisyui/theme" {
   name: "dark";
-  --color-primary: #0b0c10;
-  --color-secondary: #66fcf1;
+  --color-primary: #82CD47;
+  --color-secondary: #A2AADB;
+  --color-accent: #0b0c10
 }
