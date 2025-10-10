@@ -18,8 +18,7 @@ const fadeUp = {
 
 const Home = () => {
   return (
-    <div className="flex flex-col gap-16">
-      
+    <div className="space-y-8 md:space-y-12 lg:space-y-16">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -69,7 +68,6 @@ const Home = () => {
       >
         <LatestCharityRequests />
       </motion.div>
-
     </div>
   );
 };

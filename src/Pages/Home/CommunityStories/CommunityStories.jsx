@@ -28,7 +28,7 @@ const CommunityStories = () => {
   }
 
   return (
-    <div className="py-16 bg-base-100">
+    <div className="">
       {/* Title */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -36,11 +36,11 @@ const CommunityStories = () => {
         transition={{ duration: 0.6 }}
         className="text-center mb-10"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-secondary">
-          🌟 Community Reviews
+        <h2 className="text-3xl md:text-4xl font-bold text-info">
+          Community <span className="text-secondary">Reviews</span>
         </h2>
-        <p className="max-w-2xl mx-auto text-base-content mt-3 text-lg">
-          See how donors, restaurants, and charities are making an impact 🍽️.
+        <p className="max-w-2xl mx-auto text-info mt-3 text-lg">
+          See how donors, restaurants, and charities are making an impact.
         </p>
       </motion.div>
 
