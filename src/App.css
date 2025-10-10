@@ -4,8 +4,8 @@
 /* Light theme */
 @plugin "daisyui/theme" {
   name: "light";
-  --color-primary: #00458b;
-  --color-secondary: #5D8736;
+  --color-primary: #34656D;
+  --color-secondary: #3B0270;
   --color-accent: #E9E9E9;
   --color-neutral:#ffffff;
   --color-info:#0f0f0f;
@@ -14,8 +14,8 @@
 /* Dark theme */
 @plugin "daisyui/theme" {
   name: "dark";
-  --color-primary: #82CD47;
-  --color-secondary: #A2AADB;
+  --color-primary: #0BA6DF;
+  --color-secondary: #FCC61D;
   --color-accent: #0b0c10;
   --color-neutral:#000000;
   --color-info:#f0f0f0

@@ -1,8 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
 import img1 from "../../../assets/1.jpg";
 import img2 from "../../../assets/2.jpg";
@@ -29,36 +28,40 @@ const slides = [
 
 const Banner = () => {
   return (
-    <div className="w-full relative">
+    <div className="m-3 md:my-12 rounded-2xl shadow-xl shadow-primary/50 overflow-hidden">
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Pagination, Autoplay]}
         autoplay={{ delay: 3500 }}
         pagination={{ clickable: true }}
-        navigation={true}
         loop={true}
+        className="rounded-2xl"
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-full h-[90vh]">
-              {/* Background Image */}
+            <div className="relative w-full h-[55vh] md:h-[70vh] lg:h-[80vh] rounded-2xl">
               <img
                 src={slide.img}
                 alt={`Banner ${index + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-2xl"
               />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/30"></div>
+              {/* Slight overlay for readability */}
+              <div className="absolute inset-0 bg-black/20 rounded-2xl"></div>
 
-              {/* Content */}
+              {/* Text Content */}
               <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
-                <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-xl animate-fadeInUp">
+                <h1 className="text-3xl md:text-5xl font-extrabold text drop-shadow-lg leading-tight">
                   {slide.title}
                 </h1>
-                <p className="text-lg md:text-xl text-gray-200 mt-4 max-w-2xl animate-fadeInUp delay-200">
+                <p className="text-base md:text-lg text-gray-100 mt-4 max-w-2xl">
                   {slide.subtitle}
                 </p>
-           <NavLink to={'/dashBoard'} className={`btn btn-[#00458b] mt-3`}>Explore Your DashBoard</NavLink>
+                <NavLink
+                  to="/dashBoard"
+                  className="btn mt-6 bg-primary border-none text-white font-semibold hover:bg-secondary transition-all duration-300 px-8 py-2 rounded-full shadow-md hover:shadow-lg"
+                >
+                  Explore Dashboard
+                </NavLink>
               </div>
             </div>
           </SwiperSlide>

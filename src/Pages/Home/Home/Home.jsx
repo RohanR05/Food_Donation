@@ -18,7 +18,7 @@ const fadeUp = {
 
 const Home = () => {
   return (
-    <div className="flex flex-col gap-16 pt-14 md:pt-16 lg:pt-16">
+    <div className="flex flex-col gap-16">
       
       <motion.div
         initial="hidden"
