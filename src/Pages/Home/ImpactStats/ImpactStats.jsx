@@ -1,17 +1,21 @@
-import React, { use } from "react";
-import { FaLeaf, FaHandHoldingHeart, FaBoxOpen } from "react-icons/fa";
+import React, { useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLeaf,
+  faHandHoldingHeart,
+  faBoxOpen,
+} from "@fortawesome/free-solid-svg-icons";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../Contexts/AuthContext";
 
 const ImpactStats = () => {
   const axiosSecure = useAxiosSecure();
-
-  const { user } = use(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const { data: users = [] } = useQuery({
     queryKey: ["users"],
-    enabled: !!user?.email, // ✅ Run only when user is ready
+    enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
       return res.data;
@@ -36,30 +40,39 @@ const ImpactStats = () => {
   });
 
   return (
-    <div className="py-12 bg-base-100 text-center text-secondary">
-      <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">
-        Platform Impact
+    <div className="py-12 text-center">
+      <h2 className="text-3xl md:text-4xl font-bold mb-8">
+        Platform <span className="text-secondary">Impact</span>
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto px-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto px-4">
+        {/* Total Food Donated */}
         <div className="stat bg-accent rounded-box shadow">
           <div className="stat-figure text-primary text-5xl">
-            <FaBoxOpen />
+            <FontAwesomeIcon icon={faBoxOpen} />
           </div>
-          <div className="stat-title text-primary">Total Food Donated</div>
-          <div className="stat-value">{donations.length} Times</div>
+          <div className="text-2xl font-medium text-primary">
+            Total Food Donated
+          </div>
+          <div className="stat-value text-secondary">
+            {donations.length} Times
+          </div>
         </div>
+
+        {/* Total User */}
         <div className="stat bg-accent rounded-box shadow">
-          <div className="stat-figure text-secondary text-5xl">
-            <FaHandHoldingHeart />
+          <div className="stat-figure text-primary text-5xl">
+            <FontAwesomeIcon icon={faHandHoldingHeart} />
           </div>
-          <div className="stat-title text-secondary">Total User</div>
+          <div className="text-2xl font-medium text-primary">Total User</div>
           <div className="stat-value text-secondary">{users.length} Person</div>
         </div>
+
+        {/* My Reviews */}
         <div className="stat bg-accent rounded-box shadow">
-          <div className="stat-figure text-secondary text-5xl">
-            <FaLeaf />
+          <div className="stat-figure text-primary text-5xl">
+            <FontAwesomeIcon icon={faLeaf} />
           </div>
-          <div className="stat-title">My Total Reviews</div>
+          <div className="text-2xl font-medium text-primary">My Total Reviews</div>
           <div className="stat-value text-secondary">
             {myReviews.length} Reviews
           </div>
