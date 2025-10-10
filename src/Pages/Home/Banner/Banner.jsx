@@ -3,9 +3,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import img1 from "../../../assets/1.jpg";
-import img2 from "../../../assets/2.jpg";
-import img3 from "../../../assets/3.jpg";
+import img1 from "../../../assets/1.webp";
+import img2 from "../../../assets/2.webp";
+import img3 from "../../../assets/3.webp";
 import { NavLink } from "react-router";
 
 const slides = [
@@ -46,14 +46,14 @@ const Banner = () => {
               />
 
               {/* Slight overlay for readability */}
-              <div className="absolute inset-0 bg-black/20 rounded-2xl"></div>
+              <div className="absolute inset-0 bg-neutral/40 rounded-2xl"></div>
 
               {/* Text Content */}
               <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
-                <h1 className="text-3xl md:text-5xl font-extrabold text drop-shadow-lg leading-tight">
+                <h1 className="text-3xl md:text-5xl font-extrabold text drop-shadow-lg leading-tight text-secondary">
                   {slide.title}
                 </h1>
-                <p className="text-base md:text-lg text-gray-100 mt-4 max-w-2xl">
+                <p className="text-base md:text-lg text-black mt-4 max-w-2xl">
                   {slide.subtitle}
                 </p>
                 <NavLink
