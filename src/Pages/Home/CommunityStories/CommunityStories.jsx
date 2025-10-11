@@ -55,7 +55,7 @@ const CommunityStories = () => {
       </motion.div>
 
       {/* Reviews Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 px-4 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto">
         {reviews.map((r, i) => (
           <motion.div
             key={r._id}
@@ -63,7 +63,7 @@ const CommunityStories = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
-            className="card bg-accent rounded-2xl shadow-lg border border-base-200 hover:shadow-xl transition-all duration-500 p-6 flex flex-col justify-between"
+            className="card bg-accent rounded-2xl shadow-lg shadow-primary/40 border border-primary/30  hover:shadow-xl hover:shadow-secondary/50 hover:scale-110 transition-all duration-500 p-6 flex flex-col justify-between"
           >
             {/* Reviewer Info */}
             <div className="flex items-center gap-4 mb-4">
@@ -74,14 +74,14 @@ const CommunityStories = () => {
                 <h3 className="text-lg font-semibold text-primary">
                   {r.reviewerName}
                 </h3>
-                <p className="text-sm text-secondary flex items-center gap-1">
+                <p className="text-sm text-info flex items-center gap-1">
                   <FontAwesomeIcon
                     icon={faEnvelope}
                     className="text-secondary"
                   />
                   {r.reviewerEmail}
                 </p>
-                <p className="text-xs text-secondary flex items-center gap-1 opacity-70">
+                <p className="text-xs text-info flex items-center gap-1 opacity-80">
                   <FontAwesomeIcon
                     icon={faCalendar}
                     className="text-secondary"
@@ -94,7 +94,7 @@ const CommunityStories = () => {
             {/* Review Text */}
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className="mt-4 text-secondary italic"
+              className="mt-4 text-primary italic"
             >
               "{r.description}"
             </motion.div>
