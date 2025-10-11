@@ -59,7 +59,7 @@ const IceGold = () => {
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-4xl md:text-5xl font-bold text-primary text-center"
+        className="text-2xl md:text-4xl font-bold text-primary text-center"
       >
         <FontAwesomeIcon icon={faUtensils} className="text-secondary mr-2" />
         Food Donation <span className="text-secondary">Platform</span>
@@ -117,7 +117,7 @@ const IceGold = () => {
 >
   <FontAwesomeIcon
     icon={faCogs}
-    className="text-secondary text-4xl drop-shadow-md"
+    className="text-secondary text-2xl md:text-4xl drop-shadow-md"
   />
   Platform <span className="text-secondary">Features</span>
 </motion.h2>

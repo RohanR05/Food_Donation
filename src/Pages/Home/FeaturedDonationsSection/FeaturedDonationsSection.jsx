@@ -36,7 +36,7 @@ const FeaturedDonationsSection = () => {
   return (
     <div className="mx-auto px-4">
       {/* Section Title */}
-      <h2 className="text-4xl font-bold text-center mb-12 text-primary flex items-center justify-center gap-3">
+      <h2 className="text-2xl md:text-4xl font-bold text-center mb-12 text-primary flex items-center justify-center gap-3">
         <FontAwesomeIcon icon={faHeart} className="text-secondary text-4xl drop-shadow-md" />
 
         Featured <span className="text-secondary">Donations</span>
