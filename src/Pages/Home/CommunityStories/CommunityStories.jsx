@@ -2,7 +2,13 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { FaStar } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faStar as faSolidStar,
+  faEnvelope,
+  faCalendar,
+} from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
 
 const CommunityStories = () => {
   const axiosSecure = useAxiosSecure();
@@ -20,11 +26,15 @@ const CommunityStories = () => {
   });
 
   if (isLoading) {
-    return <p className="text-center text-secondary">Loading stories...</p>;
+    return (
+      <p className="text-center text-secondary mt-8">Loading stories...</p>
+    );
   }
 
   if (error) {
-    return <p className="text-center text-red-500">Failed to load stories.</p>;
+    return (
+      <p className="text-center text-error mt-8">Failed to load stories.</p>
+    );
   }
 
   return (
@@ -34,18 +44,18 @@ const CommunityStories = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-10"
+        className="text-center mb-12 px-4"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-info">
+        <h2 className="text-3xl md:text-4xl font-bold text-primary">
           Community <span className="text-secondary">Reviews</span>
         </h2>
-        <p className="max-w-2xl mx-auto text-info mt-3 text-lg">
+        <p className="max-w-2xl mx-auto text-secondary mt-3 text-lg">
           See how donors, restaurants, and charities are making an impact.
         </p>
       </motion.div>
 
       {/* Reviews Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto px-4 ">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 px-4 max-w-7xl mx-auto">
         {reviews.map((r, i) => (
           <motion.div
             key={r._id}
@@ -53,39 +63,56 @@ const CommunityStories = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
-            className="card bg-primary border border-base-200 shadow-md hover:shadow-xl shadow-secondary transition p-6"
+            className="card bg-accent rounded-2xl shadow-lg border border-base-200 hover:shadow-xl transition-all duration-500 p-6 flex flex-col justify-between"
           >
             {/* Reviewer Info */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 flex items-center justify-center bg-primary/20 text-primary rounded-full">
+                <FontAwesomeIcon icon={faUser} size="lg" />
+              </div>
               <div>
-                <h3 className="text-lg font-semibold text-secondary">
+                <h3 className="text-lg font-semibold text-primary">
                   {r.reviewerName}
                 </h3>
-                <p className="text-sm text-secondary opacity-70">
+                <p className="text-sm text-secondary flex items-center gap-1">
+                  <FontAwesomeIcon
+                    icon={faEnvelope}
+                    className="text-secondary"
+                  />
                   {r.reviewerEmail}
                 </p>
-                <p className="text-xs text-secondary opacity-60">
+                <p className="text-xs text-secondary flex items-center gap-1 opacity-70">
+                  <FontAwesomeIcon
+                    icon={faCalendar}
+                    className="text-secondary"
+                  />
                   {new Date(r.createdAt).toLocaleDateString()}
                 </p>
               </div>
             </div>
 
             {/* Review Text */}
-            <div className="mt-4">
-              <p className="italic text-base-content">"{r.description}"</p>
-            </div>
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="mt-4 text-secondary italic"
+            >
+              "{r.description}"
+            </motion.div>
 
             {/* Rating */}
-            <div className="mt-4 flex items-center gap-1 text-yellow-500">
-              {[...Array(5)].map((_, index) => (
-                <FaStar
-                  key={index}
-                  className={
-                    index < r.rating ? "fill-yellow-500" : "opacity-30"
-                  }
+            <div className="mt-4 flex items-center gap-1">
+              {[...Array(5)].map((_, idx) => (
+                <FontAwesomeIcon
+                  key={idx}
+                  icon={faSolidStar}
+                  className={`${
+                    idx < r.rating
+                      ? "text-secondary"
+                      : "opacity-30 text-secondary"
+                  }`}
                 />
               ))}
-              <span className="ml-2 font-semibold text-base-content">
+              <span className="ml-2 text-primary font-semibold">
                 {r.rating}/5
               </span>
             </div>
