@@ -2,6 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUtensils,
+  faMapMarkerAlt,
+  faClipboardList,
+} from "@fortawesome/free-solid-svg-icons";
 import Loading from "../../../Shared/Loading/Loadign";
 
 const FeaturedDonationsSection = () => {
@@ -13,33 +19,23 @@ const FeaturedDonationsSection = () => {
     error,
   } = useQuery({
     queryKey: ["verifiedDonations"],
-    // enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get("/donations");
       return res.data.slice(0, 4);
     },
   });
 
-  if (isLoading) return <Loading></Loading>;
-
-  // if (!user?.email)
-  //   return (
-  //     <p className="text-center py-10 text-gray-600">
-  //       Loading featured donations...
-  //     </p>
-  //   );
+  if (isLoading) return <Loading />;
 
   if (error)
     return (
-      <p className="text-center py-10 text-red-500">
-        Failed to load donations.
-      </p>
+      <p className="text-center py-10 text-error">Failed to load donations.</p>
     );
 
   return (
-    <div className=" bg-base-100 mx-auto px-4 py-16">
-      <h2 className="text-4xl font-bold text-center mb-12 text-secondary">
-        🌟 Featured Donations
+    <div className="mx-auto px-4">
+      <h2 className="text-4xl font-bold text-center mb-12 text-primary">
+        Featured <span className="text-secondary">Donations</span>
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -50,40 +46,42 @@ const FeaturedDonationsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="relative bg-primary rounded-xl
-             shadow-md shadow-secondary overflow-hidden transform hover:scale-105 hover:shadow-2xl transition duration-300"
+            className="relative bg-accent rounded-2xl shadow-lg hover:shadow-xl shadow-primary/50 hover:shadow-secondary/50 overflow-hidden transform hover:-translate-y-1 transition-all duration-300"
           >
-            {/* Image with gradient overlay */}
+            {/* Image with overlay */}
             <div className="relative h-48">
               <img
                 src={
                   donation.image || "https://source.unsplash.com/400x300/?food"
                 }
                 alt={donation.foodType}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-              <span className="absolute top-3 right-3 px-3 py-1 bg-secondary text-primary text-xs font-semibold rounded">
+              <div className="absolute inset-0 bg-black/20"></div>
+              <span className="absolute top-3 right-3 px-3 py-1 bg-primary text-neutral text-xs font-semibold rounded flex items-center gap-1">
+                <FontAwesomeIcon icon={faClipboardList} />
                 {donation.status}
               </span>
             </div>
 
             {/* Card Content */}
-            <div className="p-4 text-center">
-              <h3 className="text-lg md:text-xl font-bold text-secondary mb-1">
-                {donation.foodType}
+            <div className="p-4 text-center space-y-2">
+              <h3 className="text-lg md:text-xl font-bold text-secondary mb-1 flex items-center justify-center gap-2">
+                <FontAwesomeIcon icon={faUtensils} />
+                <p className="text-primary"> {donation.foodType}</p>{" "}
               </h3>
-              <p className="text-secondary text-sm mb-3">
-                🍽 {donation.restaurant} <br />
-                📍 {donation.location || "Unknown"}
+              <p className="text-secondary text-sm flex items-center justify-center gap-2">
+                <FontAwesomeIcon icon={faMapMarkerAlt} />{" "}
+                <p className="text-info font-medium">
+                  {" "}
+                  {donation.location || "Unknown"}
+                </p>
+              </p>
+              <p className="text-secondary text-sm flex items-center justify-center gap-2">
+                🍽 {donation.restaurant}
               </p>
               <Link to={`/donations/${donation._id}`}>
-                <button
-                  className="w-full text-white py-2 rounded-lg font-medium transition"
-                  style={{
-                    background: "linear-gradient(to right, #00458B, #0066CC)", // gradient using #00458B
-                  }}
-                >
+                <button className="w-full py-2 rounded-lg font-medium bg-primary text-neutral hover:bg-secondary hover:text-primary transition">
                   View Details
                 </button>
               </Link>
