@@ -7,6 +7,7 @@ import {
   faStar as faSolidStar,
   faEnvelope,
   faCalendar,
+  faComments,
 } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 
@@ -46,9 +47,18 @@ const CommunityStories = () => {
         transition={{ duration: 0.6 }}
         className="text-center mb-12 px-4"
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-primary">
-          Community <span className="text-secondary">Reviews</span>
-        </h2>
+      <motion.h2
+  initial={{ opacity: 0, y: -15 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+  className="text-3xl md:text-4xl font-bold text-primary flex items-center justify-center gap-3"
+>
+  <FontAwesomeIcon
+    icon={faComments}
+    className="text-secondary text-4xl drop-shadow-md"
+  />
+  Community <span className="text-secondary">Reviews</span>
+</motion.h2>
         <p className="max-w-2xl mx-auto text-secondary mt-3 text-lg">
           See how donors, restaurants, and charities are making an impact.
         </p>

@@ -10,6 +10,7 @@ import {
   faCreditCard,
   faBuilding,
   faClipboardCheck,
+  faCogs,
 } from "@fortawesome/free-solid-svg-icons";
 
 const features = [
@@ -58,7 +59,7 @@ const IceGold = () => {
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-4xl md:text-5xl font-bold text-center"
+        className="text-4xl md:text-5xl font-bold text-primary text-center"
       >
         <FontAwesomeIcon icon={faUtensils} className="text-secondary mr-2" />
         Food Donation <span className="text-secondary">Platform</span>
@@ -108,14 +109,18 @@ const IceGold = () => {
       </motion.div>
 
       {/* Features */}
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
-        className="text-3xl md:text-4xl font-bold text-center"
-      >
-        Platform <span className="text-secondary">Features</span>
-      </motion.h2>
+<motion.h2
+  initial={{ opacity: 0, y: -20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.5, duration: 0.8 }}
+  className="text-3xl md:text-4xl font-bold text-center flex items-center justify-center gap-3 text-primary"
+>
+  <FontAwesomeIcon
+    icon={faCogs}
+    className="text-secondary text-4xl drop-shadow-md"
+  />
+  Platform <span className="text-secondary">Features</span>
+</motion.h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {features.map((feature, index) => (
