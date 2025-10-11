@@ -53,7 +53,7 @@ const features = [
 
 const IceGold = () => {
   return (
-    <div className="mx-auto space-y-8 md:space-y-12 lg:space-x-16 px-2">
+    <div className="mx-auto space-y-8 md:space-y-12 px-2">
       {/* Title */}
       <motion.h1
         initial={{ opacity: 0, y: -40 }}
