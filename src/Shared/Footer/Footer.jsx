@@ -1,71 +1,138 @@
-import React from "react";
-import { Link } from "react-router";
-import Theme from "../Theme/Theme";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faGithub,
+  faLinkedin,
+  faWhatsapp,
+} from "@fortawesome/free-brands-svg-icons";
+import {
+  faEnvelope,
+  faMapMarkerAlt,
+  faPhone,
+  faBriefcase,
+  faMapLocationDot,
+  faBoxOpen,
+  faHouse,
+} from "@fortawesome/free-solid-svg-icons";
+import Logo from "../Logo/Logo";
+import { NavLink } from "react-router";
 
 const Footer = () => {
-  const links = (
-    <>
-      <li>
-        <Link to={"/comingSoon"}>Contact US</Link>
-      </li>
-      <li>
-        <Theme></Theme>
-      </li>
-      <li>
-        <Link to={"/aboutDeveloper"}>About Developer</Link>
-      </li>
-    </>
-  );
   return (
-    <div>
-      <footer className="footer footer-horizontal footer-center bg-[#00458b] text-white rounded p-10 mt-16">
-        <ul className="grid grid-flow-col gap-4">{links}</ul>
-
-        <nav>
-          <div className="grid grid-flow-col gap-4">
-            <a>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                className="fill-current"
-              >
-                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
-              </svg>
-            </a>
-            <a>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                className="fill-current"
-              >
-                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-              </svg>
-            </a>
-            <a>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                className="fill-current"
-              >
-                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
-              </svg>
-            </a>
+    <footer className="bg-primary/10">
+      <div className="max-w-screen-xl mx-auto p-6 md:p-12 rounded">
+        {/* Upper Section */}
+        <div className="w-full flex flex-col md:flex-row md:items-start md:justify-between gap-6 md:gap-10">
+          {/* Brand + Social Icons */}
+          <div className="flex flex-col items-start gap-3 flex-1 min-w-0">
+            <div>
+              {" "}
+              <Logo></Logo>
+            </div>
+            <h2 className="text-primary text-[17px] break-words">
+              Learning by building. Improving with every project.
+            </h2>
+            <nav>
+              <ul className="flex flex-wrap gap-3 md:gap-6 text-2xl mt-2">
+                {[faFacebook, faGithub, faLinkedin, faWhatsapp].map(
+                  (icon, idx) => (
+                    <li key={idx}>
+                      <a
+                        href={
+                          icon === faFacebook
+                            ? "https://www.facebook.com/rohan.kabir.877108"
+                            : icon === faGithub
+                            ? "https://github.com/RohanR05"
+                            : icon === faLinkedin
+                            ? "https://www.linkedin.com/in/rohan-batman/"
+                            : "https://wa.me/8801906647607"
+                        }
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="social link"
+                      >
+                        <FontAwesomeIcon
+                          className="border border-secondary p-1.5 rounded-lg text-secondary bg-neutral/30 hover:bg-primary hover:text-neutral transition"
+                          icon={icon}
+                        />
+                      </a>
+                    </li>
+                  )
+                )}
+              </ul>
+            </nav>
           </div>
-        </nav>
-        <aside>
-          <p>
-            Copyright © {new Date().getFullYear()} - All right reserved by ACME
-            Industries Ltd
-          </p>
-        </aside>
-      </footer>
-    </div>
+
+          {/* Quick Links with Icons */}
+          <nav className="flex flex-col items-start gap-3 flex-1 min-w-0">
+            <h2 className="text-xl font-bold text-secondary">Quick Links</h2>
+            <ul className="flex flex-col items-start gap-2">
+              <li className="text-primary font-bold flex items-center gap-2">
+                <NavLink
+                  className={({ isActive }) => (isActive ? "underline" : "")}
+                  to={"/"}
+                >
+                  <FontAwesomeIcon className="text-secondary" icon={faHouse} />{" "}
+                  Home
+                </NavLink>
+              </li>{" "}
+              <li className="text-primary font-bold flex items-center gap-2">
+                <NavLink
+                  className={({ isActive }) => (isActive ? "underline" : "")}
+                  to={"/coverage"}
+                >
+                  <FontAwesomeIcon
+                    className="text-secondary"
+                    icon={faMapLocationDot}
+                  />{" "}
+                  Coverage
+                </NavLink>
+              </li>
+              <li className="text-primary font-bold flex items-center gap-2">
+                <NavLink
+                  className={({ isActive }) => (isActive ? "underline" : "")}
+                  to={"/sendParcel"}
+                >
+                  <FontAwesomeIcon
+                    className="text-secondary"
+                    icon={faBoxOpen}
+                  />{" "}
+                  Send Parcel
+                </NavLink>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Contact Info with Icons */}
+          <div className="flex flex-col items-start flex-1 min-w-0">
+            <h2 className="text-xl font-bold text-secondary mb-2">
+              Contact Info..
+            </h2>
+            <p className="flex items-center gap-2 text-sm text-primary mb-1">
+              <FontAwesomeIcon icon={faMapMarkerAlt} /> Narail, Bangladesh
+            </p>
+            <p className="flex items-center gap-2 text-sm text-primary mb-1">
+              <FontAwesomeIcon icon={faEnvelope} /> rohankabir061@gmail.com
+            </p>
+            <p className="flex items-center gap-2 text-sm text-primary mb-1">
+              <FontAwesomeIcon icon={faPhone} /> +8801906647607
+            </p>
+            <p className="flex items-center gap-2 text-sm text-primary font-medium">
+              <FontAwesomeIcon icon={faBriefcase} /> Available For Work
+            </p>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <hr className="border-t border-neutral/30 w-full my-6" />
+
+        {/* Lower Section */}
+        <div className="w-full flex flex-col md:flex-row items-center justify-center gap-2 text-center text-sm">
+          <p>Copyright © {new Date().getFullYear()} - All rights reserved by</p>
+          <Logo></Logo>
+        </div>
+      </div>
+    </footer>
   );
 };
 
