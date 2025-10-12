@@ -10,10 +10,9 @@ import {
   faMapMarkerAlt,
   faPhone,
   faBriefcase,
-  faMapLocationDot,
-  faBoxOpen,
   faHouse,
 } from "@fortawesome/free-solid-svg-icons";
+import { FaHandsHelping, FaInfoCircle } from "react-icons/fa";
 import Logo from "../Logo/Logo";
 import { NavLink } from "react-router";
 
@@ -26,8 +25,7 @@ const Footer = () => {
           {/* Brand + Social Icons */}
           <div className="flex flex-col items-start gap-3 flex-1 min-w-0">
             <div>
-              {" "}
-              <Logo></Logo>
+              <Logo />
             </div>
             <h2 className="text-primary text-[17px] break-words">
               Learning by building. Improving with every project.
@@ -52,7 +50,7 @@ const Footer = () => {
                         aria-label="social link"
                       >
                         <FontAwesomeIcon
-                          className="border border-secondary p-1.5 rounded-lg text-secondary bg-neutral/30 hover:bg-primary hover:text-neutral transition"
+                          className="border border-secondary p-2 rounded-lg text-secondary bg-neutral/30 hover:bg-primary hover:text-neutral transition-all duration-300 transform hover:scale-110"
                           icon={icon}
                         />
                       </a>
@@ -69,35 +67,37 @@ const Footer = () => {
             <ul className="flex flex-col items-start gap-2">
               <li className="text-primary font-bold flex items-center gap-2">
                 <NavLink
-                  className={({ isActive }) => (isActive ? "underline" : "")}
+                  className={({ isActive }) =>
+                    isActive ? "underline flex items-center gap-2" : "flex items-center gap-2"
+                  }
                   to={"/"}
                 >
-                  <FontAwesomeIcon className="text-secondary" icon={faHouse} />{" "}
+                  <FontAwesomeIcon className="text-secondary" icon={faHouse} />
                   Home
                 </NavLink>
-              </li>{" "}
+              </li>
+
               <li className="text-primary font-bold flex items-center gap-2">
                 <NavLink
-                  className={({ isActive }) => (isActive ? "underline" : "")}
-                  to={"/coverage"}
+                  className={({ isActive }) =>
+                    isActive ? "underline flex items-center gap-2" : "flex items-center gap-2"
+                  }
+                  to="/allDonations"
                 >
-                  <FontAwesomeIcon
-                    className="text-secondary"
-                    icon={faMapLocationDot}
-                  />{" "}
-                  Coverage
+                  <FaHandsHelping className="text-secondary text-xl" />
+                  All Donations
                 </NavLink>
               </li>
+
               <li className="text-primary font-bold flex items-center gap-2">
                 <NavLink
-                  className={({ isActive }) => (isActive ? "underline" : "")}
-                  to={"/sendParcel"}
+                  className={({ isActive }) =>
+                    isActive ? "underline flex items-center gap-2" : "flex items-center gap-2"
+                  }
+                  to="/comingSoon"
                 >
-                  <FontAwesomeIcon
-                    className="text-secondary"
-                    icon={faBoxOpen}
-                  />{" "}
-                  Send Parcel
+                  <FaInfoCircle className="text-secondary text-xl" />
+                  About Us
                 </NavLink>
               </li>
             </ul>
@@ -106,7 +106,7 @@ const Footer = () => {
           {/* Contact Info with Icons */}
           <div className="flex flex-col items-start flex-1 min-w-0">
             <h2 className="text-xl font-bold text-secondary mb-2">
-              Contact Info..
+              Contact Info
             </h2>
             <p className="flex items-center gap-2 text-sm text-primary mb-1">
               <FontAwesomeIcon icon={faMapMarkerAlt} /> Narail, Bangladesh
@@ -129,7 +129,7 @@ const Footer = () => {
         {/* Lower Section */}
         <div className="w-full flex flex-col md:flex-row items-center justify-center gap-2 text-center text-sm">
           <p>Copyright © {new Date().getFullYear()} - All rights reserved by</p>
-          <Logo></Logo>
+          <Logo />
         </div>
       </div>
     </footer>
