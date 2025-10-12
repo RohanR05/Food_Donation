@@ -18,7 +18,7 @@ const fadeUp = {
 
 const Home = () => {
   return (
-    <div className="space-y-8 md:space-y-12 lg:space-y-16">
+    <div className="space-y-8 md:space-y-12 lg:space-y-16 mb-8 md:mb-12 lg:mb-16">
       <motion.div
         initial="hidden"
         whileInView="visible"

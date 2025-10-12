@@ -33,7 +33,7 @@ const LatestCharityRequests = () => {
     );
 
   return (
-    <div className="w-full mx-auto px-6 py-12 bg-base-100">
+    <div className="w-full mx-auto px-3">
       {/* Section Title */}
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
