@@ -1,8 +1,18 @@
 import React, { useState, useContext } from "react";
 import { useParams } from "react-router";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { motion } from "framer-motion";
+import {
+  FaHeart,
+  FaUtensils,
+  FaMapMarkerAlt,
+  FaBoxOpen,
+  FaClock,
+  FaClipboardCheck,
+  FaStar,
+} from "react-icons/fa";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import RequestDonationModal from "./RequestDonationModal";
 import AddReviewModal from "./AddReviewModal";
 import { AuthContext } from "../../Contexts/AuthContext";
@@ -59,47 +69,78 @@ const DonationDetails = () => {
     }
   };
 
-  if (isLoading) return <Loading></Loading>;
+  if (isLoading) return <Loading />;
   if (error)
     return (
-      <p className="text-center py-10 text-red-500">Failed to load donation.</p>
+      <p className="text-center py-10 text-error">
+        Failed to load donation details.
+      </p>
     );
 
   return (
-    <div className="mx-auto px-6 py-12 space-y-12 bg-primary">
-      <h2 className="text-2xl md:text-5xl text-secondary font-medium text-center">
-        Donation Details
-      </h2>
-      {/* Donation Info */}
-      <div className="bg-base-100 text-secondary rounded-2xl shadow-md p-8 space-y-6 border border-secondary">
-        <img
-          src={donation.image || "https://via.placeholder.com/400x250"}
-          alt="Food"
-          className="w-10/12 h-48 md:h-60 object-cover mx-auto rounded-lg border border-secondary"
-        />
+    <div className="mx-auto px-6 py-12 space-y-12">
+      {/* Animated Header */}
+      <motion.h2
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-3xl md:text-5xl font-bold text-center flex justify-center items-center gap-3 text-primary"
+      >
+        <FaClipboardCheck className="text-secondary text-4xl" />
+        Donation <span className="text-secondary">Details</span>
+      </motion.h2>
 
-        <h2 className="text-3xl font-bold text-center text-secondary">
+      {/* Donation Info */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="bg-accent text-info rounded-2xl shadow-lg shadow-primary/30 p-8 space-y-6 border border-primary"
+      >
+        {/* Image */}
+        <div className="flex justify-center">
+          <motion.img
+            src={donation.image || "https://via.placeholder.com/400x250"}
+            alt="Donation"
+            className="w-full md:w-10/12 h-56 md:h-72 object-cover rounded-2xl border border-secondary shadow-md"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.4 }}
+          />
+        </div>
+
+        {/* Title */}
+        <h2 className="text-3xl font-bold text-center text-primary">
           {donation.title}
         </h2>
 
-        <div className="space-y-2 text-secondary text-lg">
-          <p>
-            🏪 <strong>Restaurant:</strong> {donation.restaurant} (
+        {/* Donation Details */}
+        <div className="space-y-3 text-info text-base md:text-lg leading-relaxed">
+          <p className="flex items-center gap-2">
+            <FaUtensils className="text-secondary" />{" "}
+            <strong>Restaurant:</strong> {donation.restaurant} (
             {donation.location})
           </p>
-          <p>
-            🍽 <strong>Food Type:</strong> {donation.foodType}
+
+          <p className="flex items-center gap-2">
+            <FaBoxOpen className="text-secondary" />{" "}
+            <strong>Food Type:</strong> {donation.foodType}
           </p>
-          <p>
-            📦 <strong>Quantity:</strong> {donation.quantity}
+
+          <p className="flex items-center gap-2">
+            <FaHeart className="text-secondary" />{" "}
+            <strong>Quantity:</strong> {donation.quantity}
           </p>
-          <p>
-            ⏰ <strong>Pickup Window:</strong>{" "}
+
+          <p className="flex items-center gap-2">
+            <FaClock className="text-secondary" />{" "}
+            <strong>Pickup Window:</strong>{" "}
             {donation.pickupTime || "Not specified"}
           </p>
-          <p>
-            📌 <strong>Status:</strong>{" "}
-            <span className="font-semibold">
+
+          <p className="flex items-center gap-2">
+            <FaMapMarkerAlt className="text-secondary" />{" "}
+            <strong>Status:</strong>{" "}
+            <span className="font-semibold capitalize">
               {donation.status === "Assigned"
                 ? `Assigned to ${donation.assignedTo} (${donation.assignedType})`
                 : donation.status}
@@ -109,59 +150,77 @@ const DonationDetails = () => {
 
         {/* Buttons */}
         <div className="flex flex-wrap gap-4 justify-center mt-6">
-          <button
+          <motion.button
+            whileTap={{ scale: 0.95 }}
             onClick={() => favoriteMutation.mutate()}
-            className=" btn btn-secondary text-primary hover:bg-primary hover:text-secondary transition"
+            className="btn btn-secondary text-primary font-medium hover:brightness-110 transition"
           >
-            Save to Favorites
-          </button>
+            <FaHeart className="mr-2" /> Save to Favorites
+          </motion.button>
 
           {role === "charity" && donation.status === "Verified" && (
-            <button
+            <motion.button
+              whileTap={{ scale: 0.95 }}
               onClick={() => setShowRequestModal(true)}
-              className="btn btn-primary text-secondary hover:opacity-70 hover:text-secondary transition"
+              className="btn btn-primary text-neutral font-medium hover:opacity-80"
             >
-              Request Donation
-            </button>
+              <FaClipboardCheck className="mr-2" /> Request Donation
+            </motion.button>
           )}
 
           {role === "charity" && donation.status === "Accepted" && (
-            <button
+            <motion.button
+              whileTap={{ scale: 0.95 }}
               onClick={handleConfirmPickup}
-              className="w-full md:w-auto py-2 px-4 rounded-lg border border-[#00458B] text-secondary hover:bg-[#00458B] hover:text-white transition"
+              className="btn btn-outline border-secondary text-secondary hover:bg-secondary hover:text-neutral"
             >
               Confirm Pickup
-            </button>
+            </motion.button>
           )}
 
-          <button
+          <motion.button
+            whileTap={{ scale: 0.95 }}
             onClick={() => setShowReviewModal(true)}
-            className="btn btn-outline border-[#00458B] text-secondary hover:bg-[#00458B] hover:text-white transition"
+            className="btn btn-outline border-primary text-primary hover:bg-primary hover:text-neutral"
           >
-            Add Review
-          </button>
+            <FaStar className="mr-2" /> Add Review
+          </motion.button>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Reviews */}
-      <div className="bg-base-100 rounded-2xl shadow-md p-8 border border-secondary space-y-6">
-        <h3 className="text-2xl font-bold text-center text-secondary mb-4">
-          Reviews
+      {/* Reviews Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="bg-accent rounded-2xl shadow-md p-8 border border-primary space-y-6"
+      >
+        <h3 className="text-2xl font-bold text-center text-primary flex items-center justify-center gap-2">
+          <FaStar className="text-secondary" /> Community Reviews
         </h3>
+
         {reviews.length === 0 ? (
-          <p className="text-center text-secondary">No reviews yet.</p>
+          <p className="text-center text-info">No reviews yet.</p>
         ) : (
           <div className="space-y-4">
             {reviews.map((r, i) => (
-              <div key={i} className="border-b border-secondary pb-4">
-                <p className="font-semibold text-secondary">{r.reviewerName}</p>
-                <p className="text-sm text-secondary">Rating: {r.rating}/5</p>
-                <p className="text-secondary">{r.description}</p>
-              </div>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="p-4 rounded-lg bg-base-100 border border-secondary shadow-sm hover:shadow-md transition"
+              >
+                <p className="font-semibold text-primary">{r.reviewerName}</p>
+                <p className="text-sm text-secondary flex items-center gap-1">
+                  <FaStar className="text-yellow-400" /> Rating: {r.rating}/5
+                </p>
+                <p className="text-info mt-1">{r.description}</p>
+              </motion.div>
             ))}
           </div>
         )}
-      </div>
+      </motion.div>
 
       {/* Modals */}
       {showRequestModal && (
