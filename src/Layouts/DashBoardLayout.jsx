@@ -193,7 +193,7 @@ const DashBoardLayout = () => {
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* Navbar */}
-        <div className="navbar bg-primary w-full lg:hidden">
+        <div className="navbar bg-accent w-full lg:hidden">
           <div className="flex-none lg:hidden">
             <label
               htmlFor="my-drawer-2"
@@ -227,7 +227,7 @@ const DashBoardLayout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu text-base-content min-h-full w-80 p-4 bg-primary">
+        <ul className="menu text-base-content min-h-full w-80 p-4 bg-primary/70 backdrop-blur-md">
           {/* Sidebar content here */}
           {links}
         </ul>
