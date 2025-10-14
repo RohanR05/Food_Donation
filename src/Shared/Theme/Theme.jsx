@@ -17,7 +17,7 @@ const Theme = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="btn btn-sm flex items-center transition-all duration-300 bg-primary text-accent hover:bg-secondary rounded-full"
+      className="btn btn-sm flex items-center transition-all duration-300 bg-primary text-neutral hover:bg-secondary rounded-full"
     >
       {theme === "light" ? (
         <>

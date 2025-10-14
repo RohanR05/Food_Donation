@@ -189,7 +189,7 @@ const DashBoardLayout = () => {
   );
 
   return (
-    <div className="drawer lg:drawer-open max-w-screen-xl mx-auto">
+    <div className="drawer lg:drawer-open max-w-screen-xl bg-neutral mx-auto">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* Navbar */}
