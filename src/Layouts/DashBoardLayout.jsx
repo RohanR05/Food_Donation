@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
 import useUserRole from "../Hooks/useUserRole";
-import Logo from "../Shared/Logo/Logo";
 import {
   FiHome,
   FiUserPlus,
@@ -23,7 +22,7 @@ const DashBoardLayout = () => {
   const { role } = useUserRole();
 
   const linkStyle =
-    "flex items-center gap-3 text-lg font-medium px-3 py-2 rounded-xl bg-neutral transition-all duration-200";
+    "flex items-center gap-3 text-lg font-medium px-3 py-2 rounded-xl bg-primary text-neutral transition-all duration-200";
   const inactiveStyle = "text-info hover:bg-accent hover:translate-x-1";
   const activeStyle =
     "bg-accent text-info border-l-4 border-secondary font-semibold";
@@ -31,7 +30,6 @@ const DashBoardLayout = () => {
   const links = (
     <>
       {/* Home */}
-
       <li>
         <NavLink
           to="/"
@@ -269,9 +267,6 @@ const DashBoardLayout = () => {
               </svg>
             </label>
           </div>
-     
-            <Logo></Logo>
-         
           <h2 className="text-xl font-semibold text-info ml-2">Dashboard</h2>
         </div>
 
@@ -284,7 +279,7 @@ const DashBoardLayout = () => {
       {/* Sidebar */}
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="menu p-6 w-80 min-h-full bg-secondary/40  backdrop-blur-lg shadow-lg border-r border-accent">
+        <ul className="menu p-6 w-80 min-h-full bg-secondary/70  backdrop-blur-lg shadow-lg border-r border-accent">
           <h2 className="text-2xl font-bold mb-6 text-info text-center">
             Dashboard Menu
           </h2>
