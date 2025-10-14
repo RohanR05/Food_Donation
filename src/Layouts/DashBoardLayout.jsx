@@ -25,7 +25,7 @@ const DashBoardLayout = () => {
 
   const links = (
     <>
-      <li className="text-secondary font-medium text-lg">
+      <li className="bg-secondary font-medium text-lg">
         <NavLink
           className={({ isActive }) => (isActive ? "underline" : "")}
           to={"/"}
@@ -227,7 +227,7 @@ const DashBoardLayout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu text-base-content min-h-full w-80 p-4 bg-primary/70 backdrop-blur-md">
+        <ul className="menu min-h-full w-80 p-4 bg-primary/70 backdrop-blur-md">
           {/* Sidebar content here */}
           {links}
         </ul>

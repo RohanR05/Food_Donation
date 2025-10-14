@@ -1,6 +1,12 @@
 import React, { use } from "react";
 import { Link, NavLink } from "react-router";
-import { FaHome, FaHandsHelping, FaUserShield, FaCode, FaInfoCircle } from "react-icons/fa";
+import {
+  FaHome,
+  FaHandsHelping,
+  FaUserShield,
+  FaCode,
+  FaInfoCircle,
+} from "react-icons/fa";
 import Logo from "../Logo/Logo";
 import { AuthContext } from "../../Contexts/AuthContext";
 import Swal from "sweetalert2";
@@ -59,7 +65,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-lg border-b border-primary/10 bg-primary/10 shadow-md">
+      <div className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-lg border-b border-secondary/10 bg-neutral/10 shadow-md">
         <div className="navbar mx-auto">
           {/* Left */}
           <div className="navbar-start">

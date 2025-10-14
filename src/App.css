@@ -4,9 +4,9 @@
 /* Light theme */
 @plugin "daisyui/theme" {
   name: "light";
-  --color-primary: #0f7faf;
+  --color-primary: #0f7fbf;
   --color-secondary: #98CD00;
-  --color-accent: #E9E9E9;
+  --color-accent: #0f7faf10;
   --color-neutral:#ffffff;
   --color-info:#0f0f0f;
 }
