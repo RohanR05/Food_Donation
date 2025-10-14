@@ -14,9 +14,9 @@
 /* Dark theme */
 @plugin "daisyui/theme" {
   name: "dark";
-  --color-primary: #59AC77;
+  --color-primary: #8FA31E;
   --color-secondary: #4050f0;
-  --color-accent: #59AC7710;
+  --color-accent: #FAA53310;
   --color-neutral:#000000;
   --color-info:#f0f0f0
 }

@@ -1,186 +1,238 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
 import useUserRole from "../Hooks/useUserRole";
+import Logo from "../Shared/Logo/Logo";
 import {
   FiHome,
-  FiUser,
-  FiClipboard,
+  FiUserPlus,
+  FiHeart,
+  FiMessageSquare,
   FiCreditCard,
   FiPlusSquare,
   FiList,
   FiInbox,
+  FiSend,
+  FiBox,
   FiCheckCircle,
-  FiUserCheck,
+  FiClipboard,
   FiUsers,
   FiSettings,
-  FiSend,
-  FiUserPlus,
-  FiBox,
-  FiMessageSquare,
-  FiHeart,
 } from "react-icons/fi";
 
 const DashBoardLayout = () => {
   const { role } = useUserRole();
 
+  const linkStyle =
+    "flex items-center gap-3 text-lg font-medium px-3 py-2 rounded-xl bg-neutral transition-all duration-200";
+  const inactiveStyle = "text-info hover:bg-accent hover:translate-x-1";
+  const activeStyle =
+    "bg-accent text-info border-l-4 border-secondary font-semibold";
+
   const links = (
     <>
-      <li className="bg-secondary font-medium text-lg">
+      {/* Home */}
+
+      <li>
         <NavLink
-          className={({ isActive }) => (isActive ? "underline" : "")}
-          to={"/"}
+          to="/"
+          className={({ isActive }) =>
+            `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+          }
         >
-          <FiHome className="inline mr-2" /> Home
+          <FiHome className="text-secondary text-xl" /> <span>Home</span>
         </NavLink>
       </li>
+
+      {/* User Role */}
       {role === "user" && (
-        <>
-          {" "}
-          <li className="text-secondary font-medium text-lg">
-            <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/requestCharityRole"}
-            >
-              <FiUserPlus className="inline mr-2" /> Request Charity Role
-            </NavLink>
-          </li>
-        </>
+        <li>
+          <NavLink
+            to="/dashBoard/requestCharityRole"
+            className={({ isActive }) =>
+              `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+            }
+          >
+            <FiUserPlus className="text-secondary text-xl" />{" "}
+            <span>Request Charity Role</span>
+          </NavLink>
+        </li>
       )}
 
+      {/* Non-admin features */}
       {role !== "admin" && (
         <>
-          <li className="text-secondary font-medium text-lg">
+          <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/favorites"}
+              to="/dashBoard/favorites"
+              className={({ isActive }) =>
+                `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+              }
             >
-              <FiHeart className="inline mr-2" />
-              Favorites
+              <FiHeart className="text-secondary text-xl" />{" "}
+              <span>Favorites</span>
             </NavLink>
           </li>
-
-          <li className="text-secondary font-medium text-lg">
+          <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/myReviews"}
+              to="/dashBoard/myReviews"
+              className={({ isActive }) =>
+                `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+              }
             >
-              <FiMessageSquare className="inline mr-2" />
-              My Reviews
+              <FiMessageSquare className="text-secondary text-xl" />{" "}
+              <span>My Reviews</span>
             </NavLink>
           </li>
         </>
       )}
 
-      <li className="text-secondary font-medium text-lg">
+      {/* Transaction History */}
+      <li>
         <NavLink
-          className={({ isActive }) => (isActive ? "underline" : "")}
-          to={"/dashBoard/transactionHistory"}
+          to="/dashBoard/transactionHistory"
+          className={({ isActive }) =>
+            `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+          }
         >
-          <FiCreditCard className="inline mr-2" /> Transaction History
+          <FiCreditCard className="text-secondary text-xl" />{" "}
+          <span>Transaction History</span>
         </NavLink>
       </li>
 
-      {/* <p>Restaurant Role</p> */}
+      {/* Restaurant Role */}
       {role === "restaurant" && (
         <>
-          <li className="text-secondary font-medium text-lg">
+          <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/addDonation"}
+              to="/dashBoard/addDonation"
+              className={({ isActive }) =>
+                `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+              }
             >
-              <FiPlusSquare className="inline mr-2" /> Add Donation
+              <FiPlusSquare className="text-secondary text-xl" />{" "}
+              <span>Add Donation</span>
             </NavLink>
           </li>
-          <li className="text-secondary font-medium text-lg">
+          <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/myDonations"}
+              to="/dashBoard/myDonations"
+              className={({ isActive }) =>
+                `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+              }
             >
-              <FiList className="inline mr-2" /> My Donations
+              <FiList className="text-secondary text-xl" />{" "}
+              <span>My Donations</span>
             </NavLink>
           </li>
-          <li className="text-secondary font-medium text-lg">
+          <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/requestedDonations"}
+              to="/dashBoard/requestedDonations"
+              className={({ isActive }) =>
+                `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+              }
             >
-              <FiInbox className="inline mr-2" /> Requested Donations
+              <FiInbox className="text-secondary text-xl" />{" "}
+              <span>Requested Donations</span>
             </NavLink>
           </li>
         </>
       )}
 
-      {/* <p>Charity Role</p> */}
+      {/* Charity Role */}
       {role === "charity" && (
         <>
-          <li className="text-secondary font-medium text-lg">
+          <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/myRequests"}
+              to="/dashBoard/myRequests"
+              className={({ isActive }) =>
+                `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+              }
             >
-              <FiSend className="inline mr-2" /> My Requests
+              <FiSend className="text-secondary text-xl" />{" "}
+              <span>My Requests</span>
             </NavLink>
           </li>
-          <li className="text-secondary font-medium text-lg">
+          <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/myPickups"}
+              to="/dashBoard/myPickups"
+              className={({ isActive }) =>
+                `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+              }
             >
-              <FiBox className="inline mr-2" /> My Pickups
+              <FiBox className="text-secondary text-xl" />{" "}
+              <span>My Pickups</span>
             </NavLink>
           </li>
-          <li className="text-secondary font-medium text-lg">
+          <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/receivedDonations"}
+              to="/dashBoard/receivedDonations"
+              className={({ isActive }) =>
+                `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+              }
             >
-              <FiCheckCircle className="inline mr-2" /> Received Donations
+              <FiCheckCircle className="text-secondary text-xl" />{" "}
+              <span>Received Donations</span>
             </NavLink>
           </li>
         </>
       )}
 
-      {/* <p>Admin</p> */}
+      {/* Admin Role */}
       {role === "admin" && (
         <>
-          <li className="text-secondary font-medium text-lg">
+          <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/manageDonations"}
+              to="/dashBoard/manageDonations"
+              className={({ isActive }) =>
+                `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+              }
             >
-              <FiClipboard className="inline mr-2" /> Manage Donations
+              <FiClipboard className="text-secondary text-xl" />{" "}
+              <span>Manage Donations</span>
             </NavLink>
           </li>
-          <li className="text-secondary font-medium text-lg">
+          <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/manageUsers"}
+              to="/dashBoard/manageUsers"
+              className={({ isActive }) =>
+                `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+              }
             >
-              <FiUsers className="inline mr-2" /> Manage Users
+              <FiUsers className="text-secondary text-xl" />{" "}
+              <span>Manage Users</span>
             </NavLink>
           </li>
-          <li className="text-secondary font-medium text-lg">
+          <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/manageRoleRequests"}
+              to="/dashBoard/manageRoleRequests"
+              className={({ isActive }) =>
+                `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+              }
             >
-              <FiSettings className="inline mr-2" /> Manage Role Requests
+              <FiSettings className="text-secondary text-xl" />{" "}
+              <span>Manage Role Requests</span>
             </NavLink>
           </li>
-          <li className="text-secondary font-medium text-lg">
+          <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/manageRequests"}
+              to="/dashBoard/manageRequests"
+              className={({ isActive }) =>
+                `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+              }
             >
-              <FiClipboard className="inline mr-2" /> Manage Requests
+              <FiClipboard className="text-secondary text-xl" />{" "}
+              <span>Manage Requests</span>
             </NavLink>
           </li>
-          <li className="text-secondary font-medium text-lg">
+          <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "underline" : "")}
-              to={"/dashBoard/featureDonations"}
+              to="/dashBoard/featureDonations"
+              className={({ isActive }) =>
+                `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+              }
             >
-              <FiClipboard className="inline mr-2" /> Feature Donations
+              <FiClipboard className="text-secondary text-xl" />{" "}
+              <span>Feature Donations</span>
             </NavLink>
           </li>
         </>
@@ -189,22 +241,24 @@ const DashBoardLayout = () => {
   );
 
   return (
-    <div className="drawer lg:drawer-open max-w-screen-xl bg-neutral mx-auto">
+    <div className="drawer lg:drawer-open max-w-screen-xl mx-auto bg-neutral transition-all duration-300">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
-        {/* Navbar */}
-        <div className="navbar bg-accent w-full lg:hidden">
-          <div className="flex-none lg:hidden">
+
+      {/* Drawer content */}
+      <div className="drawer-content flex flex-col">
+        {/* Navbar for small screens */}
+        <div className="navbar bg-secondary/40 backdrop-blur-md shadow-md lg:hidden">
+          <div className="flex-none">
             <label
               htmlFor="my-drawer-2"
               aria-label="open sidebar"
-              className="btn btn-square btn-ghost"
+              className="btn btn-ghost btn-square"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                className="inline-block h-6 w-6 stroke-current"
+                className="w-6 h-6 stroke-current"
               >
                 <path
                   strokeLinecap="round"
@@ -215,21 +269,26 @@ const DashBoardLayout = () => {
               </svg>
             </label>
           </div>
-          <div className="mx-2 flex-1 px-2">DashBoard</div>
+     
+            <Logo></Logo>
+         
+          <h2 className="text-xl font-semibold text-info ml-2">Dashboard</h2>
         </div>
-        {/* Page content here */}
-        <Outlet></Outlet>
-        {/* Page content here */}
+
+        {/* Main content */}
+        <div className="p-6">
+          <Outlet />
+        </div>
       </div>
-      <div className="drawer-side ">
-        <label
-          htmlFor="my-drawer-2"
-          aria-label="close sidebar"
-          className="drawer-overlay"
-        ></label>
-        <ul className="menu min-h-full w-80 p-4 bg-primary/70 backdrop-blur-md">
-          {/* Sidebar content here */}
-          {links}
+
+      {/* Sidebar */}
+      <div className="drawer-side">
+        <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+        <ul className="menu p-6 w-80 min-h-full bg-secondary/40  backdrop-blur-lg shadow-lg border-r border-accent">
+          <h2 className="text-2xl font-bold mb-6 text-info text-center">
+            Dashboard Menu
+          </h2>
+          <div className="space-y-2">{links}</div>
         </ul>
       </div>
     </div>
