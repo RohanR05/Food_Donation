@@ -42,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <div className="card bg-base-100 w-full max-w-sm mx-auto shrink-0 shadow-2xl">
+    <div className="card bg-info w-full max-w-sm mx-auto shrink-0">
       <div className="card-body">
         <div className="w-36">
           <Logo></Logo>
