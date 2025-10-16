@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "../../../Contexts/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
@@ -7,16 +7,20 @@ import axios from "axios";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import AxiosInctanse from "../../../Hooks/AxiosSecure";
 import Logo from "../../../Shared/Logo/Logo";
+import Lottie from "lottie-react";
+import animation from "../../../assets/LoginSuccess.json";
 
 const Registration = () => {
-  const { createUser, updateUserProfile } = use(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const axiosInstance = AxiosInctanse();
 
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from || "/";
+
   const [profileImage, setProfileImage] = useState("");
   const [imageUploading, setImageUploading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const {
     register,
@@ -28,7 +32,8 @@ const Registration = () => {
     const image = e.target.files[0];
     const formData = new FormData();
     formData.append("image", image);
-    setImageUploading(true); // start uploading
+    setImageUploading(true);
+
     try {
       const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${
         import.meta.env.VITE_IMG_KEY
@@ -37,14 +42,19 @@ const Registration = () => {
       setProfileImage(res.data.data.url);
     } catch (err) {
       console.error("Image upload failed", err);
+      Swal.fire("Image Upload Failed", "Try again", "error");
     } finally {
-      setImageUploading(false); // finished uploading
+      setImageUploading(false);
     }
   };
 
   const onSubmit = (data) => {
     if (imageUploading) {
-      return Swal.fire("Please wait", "Profile image is uploading...", "info");
+      return Swal.fire(
+        "Please wait",
+        "Profile image is uploading...",
+        "info"
+      );
     }
 
     if (!profileImage) {
@@ -73,15 +83,18 @@ const Registration = () => {
 
         await axiosInstance.post("/users", userInfo);
 
-        // ✅ Show SweetAlert success message
-        await Swal.fire({
+        setIsSuccess(true); // show success animation
+
+        Swal.fire({
           title: "Registration Successful!",
-          text: "Welcome to our platform.",
           icon: "success",
-          confirmButtonText: "Go to Home",
+          timer: 1500,
+          showConfirmButton: false,
         });
 
-        navigate(from);
+        setTimeout(() => {
+          navigate(from);
+        }, 1600);
       })
       .catch((error) => {
         console.log(error);
@@ -90,70 +103,104 @@ const Registration = () => {
   };
 
   return (
-    <div className="card bg-base-100 w-full max-w-sm shrink-0 mx-auto shadow-2xl">
-       <div className="w-36">
-          <Logo></Logo>
+    <div className="flex justify-center items-center">
+      <div className="card w-full max-w-sm shrink-0">
+        <div className="w-36 mx-auto mt-4">
+          <Logo />
         </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-        <fieldset className="fieldset">
-          <h1 className="text-5xl font-bold">Regisgration now!</h1>
 
-          <label className="label">Name</label>
-          <input
-            type="text"
-            className="input"
-            placeholder="Name"
-            {...register("name", { required: true })}
-          />
-          {errors.name?.type === "required" && (
-            <p className="text-red-500">Name is required</p>
-          )}
+        {/* Success Animation */}
+        {isSuccess && (
+          <div className="flex justify-center my-4">
+            <Lottie
+              animationData={animation}
+              loop={false}
+              autoplay
+              className="w-48 h-48"
+            />
+          </div>
+        )}
 
-          <label className="label">Profile</label>
-          <input
-            type="file"
-            className="input"
-            placeholder="Your Profile Picture"
-            onChange={handleImageUpload}
-          />
+        {/* Registration Form */}
+        {!isSuccess && (
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+            <fieldset className="space-y-4">
+              <h1 className="text-4xl font-bold text-primary">
+                Registration now!
+              </h1>
 
-          <label className="label">Email</label>
-          <input
-            type="email"
-            className="input"
-            placeholder="Email"
-            {...register("email", { required: true })}
-          />
-          {errors.email?.type === "required" && (
-            <p className="text-red-500">Email is required</p>
-          )}
+              <div className="form-control">
+                <label className="label">Name</label>
+                <input
+                  type="text"
+                  className="input input-bordered"
+                  placeholder="Name"
+                  {...register("name", { required: true })}
+                />
+                {errors.name && (
+                  <p className="text-red-500">Name is required</p>
+                )}
+              </div>
 
-          <label className="label">Password</label>
-          <input
-            type="password"
-            className="input"
-            placeholder="Password"
-            {...register("password", { required: true, minLength: 5 })}
-          />
-          {errors.password?.type === "required" && (
-            <p className="text-red-500">Password is required</p>
-          )}
-          {errors.password?.type === "minLength" && (
-            <p className="text-red-500">
-              Password must be atleast 6 Charecters
-            </p>
-          )}
-          <button className="btn bg-primary mt-4">Registration</button>
-          <p>
-            Already have an acoount?
-            <Link to="/logIn" className="btn-link text-secondary ml-3">
-              {" "}
-              Login
-            </Link>
-          </p>
-        </fieldset>
-        <SocialLogin></SocialLogin>
-      </form>
+              <div className="form-control">
+                <label className="label">Profile Picture</label>
+                <input
+                  type="file"
+                  className="input input-bordered"
+                  onChange={handleImageUpload}
+                />
+              </div>
+
+              <div className="form-control">
+                <label className="label">Email</label>
+                <input
+                  type="email"
+                  className="input input-bordered"
+                  placeholder="Email"
+                  {...register("email", { required: true })}
+                />
+                {errors.email && (
+                  <p className="text-red-500">Email is required</p>
+                )}
+              </div>
+
+              <div className="form-control">
+                <label className="label">Password</label>
+                <input
+                  type="password"
+                  className="input input-bordered"
+                  placeholder="Password"
+                  {...register("password", { required: true, minLength: 6 })}
+                />
+                {errors.password?.type === "required" && (
+                  <p className="text-red-500">Password is required</p>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <p className="text-red-500">
+                    Password must be at least 6 characters
+                  </p>
+                )}
+              </div>
+
+              <button className="btn btn-primary w-full mt-4 text-black">
+                Register
+              </button>
+
+              <p className="mt-2 text-center text-base-content">
+                Already have an account?
+                <Link
+                  to="/logIn"
+                  className="btn-link text-secondary ml-2"
+                >
+                  Login
+                </Link>
+              </p>
+
+              <SocialLogin />
+            </fieldset>
+          </form>
+        )}
+      </div>
     </div>
   );
 };
