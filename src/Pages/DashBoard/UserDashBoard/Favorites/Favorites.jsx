@@ -4,6 +4,10 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../../../Contexts/AuthContext";
 import { useContext } from "react";
 import { Link } from "react-router";
+import Loading2 from "../../../../Shared/Loading/Loading2";
+import { motion } from "framer-motion";
+import { FaHeart } from "react-icons/fa";
+import { FaStore, FaInfoCircle, FaBox } from "react-icons/fa";
 
 const Favorites = () => {
   const axiosSecure = useAxiosSecure();
@@ -28,47 +32,107 @@ const Favorites = () => {
     onError: () => Swal.fire("Error", "Failed to remove favorite", "error"),
   });
 
-  if (isLoading) return <p className="text-center py-5">Loading favorites...</p>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center py-12">
+        <Loading2 size={120} />
+      </div>
+    );
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  // Animation for sequential blinking
+  const titleVariants = {
+    hidden: { opacity: 0 },
+    visible: (i = 1) => ({
+      opacity: [0, 1, 0.5, 1],
+      transition: { delay: i * 0.2, repeat: Infinity, duration: 1.5 },
+    }),
+  };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 bg-primary mt-16">
-      <h2 className="text-3xl font-bold mb-6 text-center text-secondary my-6">My Favorites</h2>
+    <div className="max-w-6xl mx-auto p-4 md:mt-8 space-y-8">
+      {/* Title with blinking effect */}
+      <motion.h2
+        custom={0}
+        variants={titleVariants}
+        initial="hidden"
+        animate="visible"
+        className="text-3xl md:text-4xl font-bold text-center text-primary flex items-center justify-center gap-3"
+      >
+        <FaHeart className="text-secondary animate-pulse" /> My Favorites
+      </motion.h2>
+
       {favorites.length === 0 ? (
-        <p>You have no favorites saved.</p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center text-info text-lg"
+        >
+          You have no favorites saved.
+        </motion.p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {favorites.map((fav) => (
-            <div key={fav.favoriteId} className="card bg-base-100 shadow-md shadow-secondary p-4 rounded text-secondary">
+            <motion.div
+              key={fav.favoriteId}
+              className="bg-accent rounded-2xl shadow-xl shadow-primary/50 p-4 flex flex-col transition-transform hover:scale-105"
+              variants={cardVariants}
+              initial="hidden"
+              animate="visible"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
               <img
                 src={fav.image}
                 alt={fav.title}
-                className="w-full h-48 object-cover rounded"
+                className="w-full h-48 object-cover rounded-xl shadow-md border-2 border-secondary"
               />
-              <h3 className="text-xl font-semibold mt-3">{fav.title}</h3>
-              <p>
-                <strong>Restaurant:</strong> {fav.restaurant} ({fav.location})
+              <div className="flex items-center gap-2 mt-3">
+                <FaHeart className="text-secondary" />
+                <h3 className="text-xl font-semibold text-primary">
+                  {fav.title}
+                </h3>
+              </div>
+
+              <p className="text-sm mt-1 flex items-center gap-2">
+                <FaStore className="text-secondary" />
+                <strong className="">Restaurant:</strong>{" "}
+                <span className="text-primary">
+                  {fav.restaurant} ({fav.location})
+                </span>
               </p>
-              <p>
-                <strong>Status:</strong> {fav.status}
+
+              <p className="text-sm flex items-center gap-2">
+                <FaInfoCircle className="text-secondary" />
+                <strong>Status:</strong>{" "}
+                <span className="text-primary">{fav.status}</span>
               </p>
-              <p>
-                <strong>Quantity:</strong> {fav.quantity}
+
+              <p className="text-sm flex items-center gap-2">
+                <FaBox className="text-secondary" />
+                <strong>Quantity:</strong>{" "}
+                <span className="text-primary">{fav.quantity}</span>
               </p>
-              <div className="mt-3 flex gap-3">
+
+              <div className="mt-4 flex gap-3">
                 <Link
                   to={`/donations/${fav.donationId}`}
-                  className="btn btn-secondary text-primary"
+                  className="btn bg-secondary hover:bg-accent border-none flex-1"
                 >
                   Details
                 </Link>
                 <button
-                  className="btn btn-secondary btn-outline"
+                  className="btn btn-outline btn-primary flex-1"
                   onClick={() => mutation.mutate(fav.favoriteId)}
                 >
                   Remove
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       )}
