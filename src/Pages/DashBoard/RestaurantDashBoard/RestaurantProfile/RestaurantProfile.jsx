@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import Loading from "../../../../Shared/Loading/Loadign";
+import Loading2 from "../../../../Shared/Loading/Loading2";
+import { motion } from "framer-motion";
 
 const RestaurantProfile = () => {
   const { user, loading } = useContext(AuthContext);
@@ -17,50 +18,94 @@ const RestaurantProfile = () => {
     },
   });
 
-  if (loading || isLoading) return <Loading message="Loading profile..." />;
+  if (loading || isLoading)
+    return (
+      <div className="flex justify-center py-12">
+        <Loading2 size={120} />
+      </div>
+    );
 
   return (
-    <div className="max-w-4xl mx-auto mt-12 bg-primary text-secondary rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
-      {/* Header */}
-      <div className="bg-secondary/10 p-6 text-center">
-        <img
-          src={user?.photoURL || "https://i.ibb.co/4Jf0x9T/user.png"}
-          alt="Profile"
-          className="w-28 h-28 mx-auto rounded-full border-4 border-secondary shadow-md object-cover"
-        />
-        <h2 className="mt-4 text-3xl font-bold text-secondary">
-          {user?.displayName || "Restaurant"}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+      className="max-w-4xl mx-auto mt-12 space-y-8"
+    >
+      {/* Mini Landing Box with Gradient */}
+      <div className="p-6 rounded-2xl bg-gradient-to-r from-primary to-secondary text-neutral shadow-lg text-center">
+        <h2 className="text-2xl md:text-3xl font-bold mb-2">
+          Welcome, Restaurant!
         </h2>
-        <p className="mt-1 text-secondary text-sm">
-          Role:{" "}
-          <span className="font-semibold text-yellow-600">Restaurant</span>
+        <p className="text-sm md:text-base">
+          Here you can manage your donations, track requests, and interact with
+          charities. Follow the instructions below to make the most of your
+          dashboard:
         </p>
+        <ul className="mt-4 text-left list-disc list-inside text-sm md:text-base space-y-1">
+          <li>Update your profile with accurate information.</li>
+          <li>Add new donations for charities to claim.</li>
+          <li>Monitor requests and pick-up schedules regularly.</li>
+          <li>Check reviews and feedback from users.</li>
+        </ul>
       </div>
 
-      {/* Details Section */}
-      <div className="p-6 space-y-4 text-secondary">
-        <div className="flex justify-between border-b pb-2">
-          <span className="font-semibold">Email:</span>
-          <span>{user?.email}</span>
+      {/* Main Profile Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="bg-base-100 text-info rounded-2xl shadow-2xl border border-accent overflow-hidden"
+      >
+        {/* Header */}
+        <div className="bg-primary/20 p-6 text-center">
+          <img
+            src={user?.photoURL || "https://i.ibb.co/4Jf0x9T/user.png"}
+            alt="Profile"
+            className="w-28 h-28 mx-auto rounded-full border-4 border-secondary shadow-md object-cover"
+          />
+          <h2 className="mt-4 text-3xl font-bold text-primary">
+            {user?.displayName || "Restaurant"}
+          </h2>
+          <p className="mt-1 text-info text-sm">
+            Role:{" "}
+            <span className="font-semibold text-secondary">Restaurant</span>
+          </p>
         </div>
-        <div className="flex justify-between border-b pb-2">
-          <span className="font-semibold">Address:</span>
-          <span>{restaurantData?.address || "Not Provided"}</span>
+
+        {/* Details Section */}
+        <div className="p-6 space-y-4">
+          <div className="flex justify-between border-b border-accent pb-2">
+            <span className="font-semibold">Email:</span>
+            <span>{user?.email}</span>
+          </div>
+          <div className="flex justify-between border-b border-accent pb-2">
+            <span className="font-semibold">Address:</span>
+            <span>{restaurantData?.address || "Not Provided"}</span>
+          </div>
+          <div className="flex justify-between border-b border-accent pb-2">
+            <span className="font-semibold">Contact Number:</span>
+            <span>{restaurantData?.phone || "Not Provided"}</span>
+          </div>
+          <div className="flex justify-between border-b border-accent pb-2">
+            <span className="font-semibold">Registered On:</span>
+            <span>
+              {restaurantData?.createdAt
+                ? new Date(restaurantData.createdAt).toLocaleDateString("en-GB")
+                : "Unknown"}
+            </span>
+          </div>
+          <div className="flex justify-between border-b border-accent pb-2">
+            <span className="font-semibold">Website:</span>
+            <span>{restaurantData?.website || "Not Provided"}</span>
+          </div>
+          <div className="flex justify-between border-b border-accent pb-2">
+            <span className="font-semibold">Operating Hours:</span>
+            <span>{restaurantData?.hours || "9:00 AM - 9:00 PM"}</span>
+          </div>
         </div>
-        <div className="flex justify-between border-b pb-2">
-          <span className="font-semibold">Contact Number:</span>
-          <span>{restaurantData?.phone || "Not Provided"}</span>
-        </div>
-        <div className="flex justify-between border-b pb-2">
-          <span className="font-semibold">Registered On:</span>
-          <span>
-            {restaurantData?.createdAt
-              ? new Date(restaurantData.createdAt).toLocaleDateString("en-GB")
-              : "Unknown"}
-          </span>
-        </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

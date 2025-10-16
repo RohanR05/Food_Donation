@@ -19,9 +19,18 @@ import {
   FiUser,
 } from "react-icons/fi";
 import DashboardWrapper from "../Shared/Dashboardwrapper/DashboardWrapper";
+import Loading from "../Shared/Loading/Loadign";
 
 const DashBoardLayout = () => {
-  const { role } = useUserRole();
+  const { role, isLoading } = useUserRole();
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center py-12">
+        <Loading size={120} />
+      </div>
+    );
+  }
 
   const linkStyle =
     "flex items-center gap-3 text-lg font-medium px-3 py-2 rounded-xl bg-primary text-neutral transition-all duration-200";

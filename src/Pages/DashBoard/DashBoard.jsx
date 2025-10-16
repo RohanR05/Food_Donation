@@ -8,11 +8,7 @@ import CharityHome from "./Home/CharityHome/CharityHome";
 import UnAuthorized from "../UnAuthorized/UnAuthorized";
 
 const DashBoard = () => {
-  const { role, isloading } = useUserRole();
-
-  if (isloading) {
-    return <Loading></Loading>;
-  }
+  const { role } = useUserRole();
 
   if (role === "user") {
     return <UserHome></UserHome>;

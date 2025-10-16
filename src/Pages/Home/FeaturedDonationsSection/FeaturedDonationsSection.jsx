@@ -93,7 +93,7 @@ const FeaturedDonationsSection = () => {
               </p>
 
               <Link to={`/donations/${donation._id}`}>
-                <button className="w-full py-2 rounded-lg font-medium bg-primary text-neutral hover:bg-secondary hover:text-primary transition">
+                <button className="w-full rounded-lg btn btn-secondary font-bold bg-neutral btn-outline hover:btn-primary transition">
                   View Details
                 </button>
               </Link>
