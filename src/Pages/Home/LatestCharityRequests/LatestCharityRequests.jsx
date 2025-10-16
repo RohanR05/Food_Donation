@@ -9,7 +9,7 @@ import {
   faBullseye,
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import Loading from "../../../Shared/Loading/Loadign";
+import Loading2 from "../../../Shared/Loading/Loading2";
 
 const LatestCharityRequests = () => {
   const axiosSecure = useAxiosSecure();
@@ -26,7 +26,7 @@ const LatestCharityRequests = () => {
     },
   });
 
-  if (isFetching) return <Loading />;
+  if (isFetching) return <Loading2 />;
   if (error)
     return (
       <p className="text-center text-error py-6">Failed to load requests.</p>

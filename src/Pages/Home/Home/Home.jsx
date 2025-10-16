@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Banner from "../Banner/Banner";
 import ImpactStats from "../ImpactStats/ImpactStats";
@@ -6,6 +6,7 @@ import CommunityStories from "../CommunityStories/CommunityStories";
 import FeaturedDonationsSection from "../FeaturedDonationsSection/FeaturedDonationsSection";
 import LatestCharityRequests from "../LatestCharityRequests/LatestCharityRequests";
 import IceGold from "../../IceGold/IceGold";
+import Loading from "../../../Shared/Loading/Loadign";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -17,6 +18,18 @@ const fadeUp = {
 };
 
 const Home = () => {
+  const [loading, setLoading] = useState(true);
+
+  // Simulate loading until components are ready
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500); // adjust delay if needed
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className="space-y-8 md:space-y-12 lg:space-y-16 mb-8 md:mb-12 lg:mb-16">
       <motion.div
@@ -27,7 +40,7 @@ const Home = () => {
       >
         <Banner />
       </motion.div>
-      <IceGold></IceGold>
+      <IceGold />
 
       <motion.div
         initial="hidden"

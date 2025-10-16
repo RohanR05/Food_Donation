@@ -45,15 +45,15 @@ const Banner = () => {
                 className="w-full h-full object-cover rounded-2xl"
               />
 
-              {/* Slight overlay for readability */}
-              <div className="absolute inset-0 bg-neutral/40 rounded-2xl"></div>
+              {/* Gradient overlay using theme colors */}
+              <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-accent/30 to-secondary/60 rounded-2xl"></div>
 
               {/* Text Content */}
               <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
-                <h1 className="text-3xl md:text-5xl font-extrabold text drop-shadow-lg leading-tight text-secondary">
+                <h1 className="text-3xl md:text-5xl font-extrabold text-primary drop-shadow-lg leading-tight">
                   {slide.title}
                 </h1>
-                <p className="text-base md:text-lg text-black mt-4 max-w-2xl">
+                <p className="text-base md:text-lg text-black mt-4 max-w-2xl drop-shadow-md">
                   {slide.subtitle}
                 </p>
                 <NavLink

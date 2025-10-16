@@ -9,7 +9,7 @@ import {
   faClipboardList,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
-import Loading from "../../../Shared/Loading/Loadign";
+import Loading2 from "../../../Shared/Loading/Loading2";
 
 const FeaturedDonationsSection = () => {
   const axiosSecure = useAxiosSecure();
@@ -26,7 +26,7 @@ const FeaturedDonationsSection = () => {
     },
   });
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <Loading2 />;
 
   if (error)
     return (
@@ -37,8 +37,10 @@ const FeaturedDonationsSection = () => {
     <div className="mx-auto px-4">
       {/* Section Title */}
       <h2 className="text-2xl md:text-4xl font-bold text-center mb-12 text-primary flex items-center justify-center gap-3">
-        <FontAwesomeIcon icon={faHeart} className="text-secondary text-4xl drop-shadow-md" />
-
+        <FontAwesomeIcon
+          icon={faHeart}
+          className="text-secondary text-4xl drop-shadow-md"
+        />
         Featured <span className="text-secondary">Donations</span>
       </h2>
 

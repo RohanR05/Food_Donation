@@ -11,7 +11,7 @@ import {
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import Loading from "../../Shared/Loading/Loadign";
+import Loading from '../../Shared/Loading/Loadign'
 
 const AllDonations = () => {
   const axiosSecure = useAxiosSecure();
@@ -28,7 +28,7 @@ const AllDonations = () => {
     },
   });
 
-  if (isLoading) return <Loading message="Fetching donations..." />;
+  if (isLoading) return <Loading/>;
   if (error)
     return (
       <p className="text-center py-10 text-error font-semibold">

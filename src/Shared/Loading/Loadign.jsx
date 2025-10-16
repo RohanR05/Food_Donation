@@ -1,9 +1,12 @@
-import { ClipLoader } from "react-spinners";
+import React from "react";
+import Lottie from "lottie-react";
+import loading from "../../assets/Loadingcube.json";
 
 const Loading = ({ message = "Loading..." }) => (
-  <div className="flex flex-col items-center justify-center min-h-[200px]">
-    <ClipLoader color="#00458b" size={80} />
-    <p className="mt-4 text-[#00458b] text-lg font-medium">{message}</p>
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-neutral/40 backdrop-blur-sm flex-col">
+      <Lottie animationData={loading} loop={true} className="w-full h-full" />
+      <p className="mt-4 text-primary text-lg font-medium">{message}</p>
+
   </div>
 );
 
