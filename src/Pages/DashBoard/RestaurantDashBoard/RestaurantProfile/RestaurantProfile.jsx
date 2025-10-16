@@ -30,7 +30,7 @@ const RestaurantProfile = () => {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7 }}
-      className="max-w-4xl mx-auto md:mt-8 lg:mt-12 space-y-8"
+      className="max-w-4xl mx-auto md:mt-8 lg:mt-12 space-y-8 bg-neutral"
     >
       {/* Mini Landing Box with Gradient */}
       <div className="p-6 rounded-2xl bg-gradient-to-r from-primary to-secondary text-neutral shadow-lg text-center">

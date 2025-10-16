@@ -19,24 +19,15 @@ import {
   FiUser,
 } from "react-icons/fi";
 import DashboardWrapper from "../Shared/Dashboardwrapper/DashboardWrapper";
-import Loading from "../Shared/Loading/Loadign";
 
 const DashBoardLayout = () => {
-  const { role, isLoading } = useUserRole();
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center py-12">
-        <Loading size={120} />
-      </div>
-    );
-  }
+  const { role } = useUserRole();
 
   const linkStyle =
     "flex items-center gap-3 text-lg font-medium px-3 py-2 rounded-xl bg-primary text-neutral transition-all duration-200";
   const inactiveStyle = "text-info hover:bg-accent hover:translate-x-1";
   const activeStyle =
-    "bg-accent text-info border-l-4 border-secondary font-semibold";
+    "bg-accent text-info border-l-6 border-info font-semibold";
 
   const links = (
     <>
@@ -262,7 +253,7 @@ const DashBoardLayout = () => {
 
   return (
     <DashboardWrapper>
-      <div className="drawer lg:drawer-open max-w-screen-xl mx-auto bg-neutral transition-all duration-300">
+      <div className="drawer lg:drawer-open max-w-screen-xl mx-auto bg-neutral min-h-screen transition-all duration-300">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
         {/* Drawer content */}
