@@ -16,7 +16,9 @@ import {
   FiClipboard,
   FiUsers,
   FiSettings,
+  FiUser,
 } from "react-icons/fi";
+import DashboardWrapper from "../Shared/Dashboardwrapper/DashboardWrapper";
 
 const DashBoardLayout = () => {
   const { role } = useUserRole();
@@ -37,10 +39,21 @@ const DashBoardLayout = () => {
             `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
           }
         >
-          <FiHome className="text-secondary text-xl" /> <span>Home</span>
+          <FiHome className="text-secondary text-xl" />{" "}
+          <span>Back to Home</span>
         </NavLink>
       </li>
-
+      <li>
+        <NavLink
+          to="/dashBoard"
+          className={({ isActive }) =>
+            `${linkStyle} ${isActive ? activeStyle : inactiveStyle}`
+          }
+        >
+          <FiUser className="text-xl text-secondary" />
+          <span>Dashboard Profile</span>
+        </NavLink>
+      </li>
       {/* User Role */}
       {role === "user" && (
         <li>
@@ -239,54 +252,56 @@ const DashBoardLayout = () => {
   );
 
   return (
-    <div className="drawer lg:drawer-open max-w-screen-xl mx-auto bg-neutral transition-all duration-300">
-      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+    <DashboardWrapper>
+      <div className="drawer lg:drawer-open max-w-screen-xl mx-auto bg-neutral transition-all duration-300">
+        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
-      {/* Drawer content */}
-      <div className="drawer-content flex flex-col">
-        {/* Navbar for small screens */}
-        <div className="navbar bg-secondary/40 backdrop-blur-md shadow-md lg:hidden">
-          <div className="flex-none">
-            <label
-              htmlFor="my-drawer-2"
-              aria-label="open sidebar"
-              className="btn btn-ghost btn-square"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="w-6 h-6 stroke-current"
+        {/* Drawer content */}
+        <div className="drawer-content flex flex-col">
+          {/* Navbar for small screens */}
+          <div className="navbar bg-secondary/40 backdrop-blur-md shadow-md lg:hidden">
+            <div className="flex-none">
+              <label
+                htmlFor="my-drawer-2"
+                aria-label="open sidebar"
+                className="btn btn-ghost btn-square"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
-            </label>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  className="w-6 h-6 stroke-current"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  ></path>
+                </svg>
+              </label>
+            </div>
+            <h2 className="text-xl font-semibold text-info ml-2">Dashboard</h2>
           </div>
-          <h2 className="text-xl font-semibold text-info ml-2">Dashboard</h2>
+
+          {/* Main content */}
+          <div className="p-6">
+            <Outlet />
+          </div>
         </div>
 
-        {/* Main content */}
-        <div className="p-6">
-          <Outlet />
+        {/* Sidebar */}
+        <div className="drawer-side">
+          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+          <ul className="menu p-6 w-80 min-h-full bg-secondary/70  backdrop-blur-lg shadow-lg border-r border-accent">
+            <h2 className="text-2xl font-bold mb-6 text-info text-center">
+              Dashboard Menu
+            </h2>
+            <div className="space-y-2">{links}</div>
+          </ul>
         </div>
       </div>
-
-      {/* Sidebar */}
-      <div className="drawer-side">
-        <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="menu p-6 w-80 min-h-full bg-secondary/70  backdrop-blur-lg shadow-lg border-r border-accent">
-          <h2 className="text-2xl font-bold mb-6 text-info text-center">
-            Dashboard Menu
-          </h2>
-          <div className="space-y-2">{links}</div>
-        </ul>
-      </div>
-    </div>
+    </DashboardWrapper>
   );
 };
 
