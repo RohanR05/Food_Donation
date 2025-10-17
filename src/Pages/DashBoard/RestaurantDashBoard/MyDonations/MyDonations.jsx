@@ -90,13 +90,13 @@ const MyDonation = () => {
     <div className="mx-auto px-2 md:pt-8">
       {/* === Page Title === */}
       <div className="">
-        <h2 className="text-3xl font-bold text-primary text-center flex flex-col">
+        <h2 className="text-3xl font-bold text-primary text-center flex flex-col mb-8">
           My Added Donations
         </h2>
       </div>
 
       {/* === Donation Cards === */}
-      <div className="rounded-2xl shadow-lg p-1 grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="rounded-2xl p-1 grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {donations.map((donation, index) => (
           <motion.div
             key={donation._id}

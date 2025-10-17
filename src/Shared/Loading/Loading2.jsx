@@ -4,7 +4,7 @@ import loading from "../../assets/LoadingLine.json";
 
 const Loading2 = ({ size = 100 }) => {
   return (
-    <div className="flex items-center justify-center rounded-full shadow-2xl shadow-primary/50">
+    <div className="flex items-center justify-center">
       <Lottie
         animationData={loading}
         loop={true}
