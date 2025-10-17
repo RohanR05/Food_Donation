@@ -1,12 +1,23 @@
-import React, { useContext, useState } from "react"; // fix useContext
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { motion } from "framer-motion";
 import { AuthContext } from "../../../../Contexts/AuthContext";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import axios from "axios"; // import axios here
+import axios from "axios";
+import {
+  FaUtensils,
+  FaClock,
+  FaMapMarkerAlt,
+  FaImage,
+  FaStore,
+  FaEnvelope,
+  FaWeightHanging,
+  FaTag,
+} from "react-icons/fa";
 
 const AddDonation = () => {
-  const { user } = useContext(AuthContext); // fixed
+  const { user } = useContext(AuthContext);
   const [profileImage, setProfileImage] = useState("");
   const [imageUploading, setImageUploading] = useState(false);
   const axiosSecure = useAxiosSecure();
@@ -16,7 +27,15 @@ const AddDonation = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title: "Evening Meal Pack",
+      foodType: "Cooked Meal",
+      quantity: 12,
+      pickupTime: "2:00 PM - 6:00 PM",
+      location: "56 Green Street, Dhaka",
+    },
+  });
 
   const handleImageUpload = async (e) => {
     const image = e.target.files[0];
@@ -25,10 +44,10 @@ const AddDonation = () => {
     formData.append("image", image);
     setImageUploading(true);
     try {
-      const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${
+      const uploadUrl = `https://api.imgbb.com/1/upload?key=${
         import.meta.env.VITE_IMG_KEY
       }`;
-      const res = await axios.post(imageUploadUrl, formData);
+      const res = await axios.post(uploadUrl, formData);
       setProfileImage(res.data.data.url);
     } catch (err) {
       console.error("Image upload failed", err);
@@ -43,11 +62,12 @@ const AddDonation = () => {
       Swal.fire("Image missing", "Please upload an image first.", "warning");
       return;
     }
+
     const donation = {
       ...data,
       restaurantName: user?.displayName || "Demo Restaurant",
       restaurantEmail: user?.email || "demo@example.com",
-      image: profileImage, // use profileImage here
+      image: profileImage,
       status: "Pending",
       createdAt: new Date().toISOString(),
     };
@@ -68,167 +88,211 @@ const AddDonation = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 my-16 ">
-      <div className="card bg-primary shadow-xl shadow-secondary p-8">
-        <h2 className="text-3xl font-bold text-secondary mb-6 text-center">
+    <div className="max-w-5xl mx-auto md:mt-8 px-2">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="bg-accent p-8 md:p-10 rounded-2xl shadow-lg shadow-primary/50"
+      >
+        <motion.h2
+          initial={{ opacity: 0, y: -15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-3xl md:text-4xl font-bold text-center text-primary mb-8"
+        >
           Add Surplus Food Donation
-        </h2>
+        </motion.h2>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-5 max-w-xl mx-auto"
+          className="space-y-6 max-w-3xl mx-auto"
         >
-          {/* Title */}
-          <div className="form-control">
-            <label className="label text-secondary font-semibold">
-              Donation Title
-            </label>
-            <br />
-            <input
-              type="text"
-              placeholder="e.g. Fresh Bread Donation"
-              className="input input-bordered"
-              {...register("title", { required: true })}
-            />
-            {errors.title && (
-              <span className="text-error text-sm">Title is required</span>
-            )}
-          </div>
-
-          {/* Food Type */}
-          <div className="form-control">
-            <label className="label text-secondary font-semibold">
-              Food Type
-            </label>
-            <br />
-            <select
-              className="select select-bordered"
-              {...register("foodType", { required: true })}
+          {/* Title + Food Type */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4 }}
+              className="form-control"
             >
-              <option value="">Select type</option>
-              <option value="Bakery">Bakery</option>
-              <option value="Produce">Produce</option>
-              <option value="Cooked Meal">Cooked Meal</option>
-              <option value="Packaged Goods">Packaged Goods</option>
-            </select>
-            {errors.foodType && (
-              <span className="text-error text-sm">Food type is required</span>
-            )}
-          </div>
-
-          {/* Quantity */}
-          <div className="form-control">
-            <label className="label text-secondary font-semibold">
-              Quantity (kg or portions)
-            </label>
-            <br />
-            <input
-              type="number"
-              placeholder="e.g. 5"
-              className="input input-bordered"
-              {...register("quantity", { required: true })}
-            />
-            {errors.quantity && (
-              <span className="text-error text-sm">Quantity is required</span>
-            )}
-          </div>
-
-          {/* Pickup Time */}
-          <div className="form-control">
-            <label className="label text-secondary font-semibold">
-              Pickup Time Window
-            </label>
-            <br />
-            <input
-              type="text"
-              placeholder="e.g. 2pm - 6pm"
-              className="input input-bordered"
-              {...register("pickupTime", { required: true })}
-            />
-            {errors.pickupTime && (
-              <span className="text-error text-sm">
-                Pickup time is required
-              </span>
-            )}
-          </div>
-
-          {/* Location */}
-          <div className="form-control">
-            <label className="label text-secondary font-semibold">
-              Location
-            </label>
-            <br />
-            <input
-              type="text"
-              placeholder="e.g. 123 Food Street, Dhaka"
-              className="input input-bordered"
-              {...register("location", { required: true })}
-            />
-            {errors.location && (
-              <span className="text-error text-sm">Location is required</span>
-            )}
-          </div>
-
-          {/* Image Upload */}
-          <div className="form-control">
-            <label className="label text-secondary font-semibold">
-              Upload Image
-            </label>
-            <br />
-            <input
-              type="file"
-              accept="image/*"
-              className="file-input file-input-bordered"
-              onChange={handleImageUpload}
-              disabled={imageUploading}
-            />
-            {profileImage && (
-              <img
-                src={profileImage}
-                alt="Preview"
-                className="mt-4 w-32 h-32 object-cover rounded"
+              <label className="label text-info font-semibold flex items-center gap-2">
+                <FaTag className="text-secondary" /> Donation Title
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. Fresh Bread Donation"
+                className="input input-bordered bg-neutral text-info"
+                {...register("title", { required: true })}
               />
-            )}
+              {errors.title && (
+                <span className="text-error text-sm">Title is required</span>
+              )}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4 }}
+              className="form-control"
+            >
+              <label className="label text-info font-semibold flex items-center gap-2">
+                <FaUtensils className="text-secondary" /> Food Type
+              </label>
+              <select
+                className="select select-bordered bg-neutral text-info"
+                {...register("foodType", { required: true })}
+              >
+                <option value="">Select type</option>
+                <option value="Bakery">Bakery</option>
+                <option value="Produce">Produce</option>
+                <option value="Cooked Meal">Cooked Meal</option>
+                <option value="Packaged Goods">Packaged Goods</option>
+              </select>
+              {errors.foodType && (
+                <span className="text-error text-sm">
+                  Food type is required
+                </span>
+              )}
+            </motion.div>
           </div>
 
-          {/* Restaurant Name */}
-          <div className="form-control">
-            <label className="label text-secondary font-semibold">
-              Restaurant Name
-            </label>
-            <br />
-            <input
-              type="text"
-              value={user?.displayName || "Demo Restaurant"}
-              readOnly
-              className="input input-bordered bg-base-200"
-            />
+          {/* Quantity + Pickup Time */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4 }}
+              className="form-control"
+            >
+              <label className="label text-info font-semibold flex items-center gap-2">
+                <FaWeightHanging className="text-secondary" /> Quantity
+              </label>
+              <input
+                type="number"
+                placeholder="e.g. 5"
+                className="input input-bordered bg-neutral text-info"
+                {...register("quantity", { required: true })}
+              />
+              {errors.quantity && (
+                <span className="text-error text-sm">Quantity is required</span>
+              )}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4 }}
+              className="form-control"
+            >
+              <label className="label text-info font-semibold flex items-center gap-2">
+                <FaClock className="text-secondary" /> Pickup Time
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. 2pm - 6pm"
+                className="input input-bordered bg-neutral text-info"
+                {...register("pickupTime", { required: true })}
+              />
+              {errors.pickupTime && (
+                <span className="text-error text-sm">
+                  Pickup time is required
+                </span>
+              )}
+            </motion.div>
           </div>
 
-          {/* Restaurant Email */}
-          <div className="form-control">
-            <label className="label text-secondary font-semibold">
-              Restaurant Email
-            </label>
-            <br />
-            <input
-              type="email"
-              value={user?.email || "demo@example.com"}
-              readOnly
-              className="input input-bordered bg-base-200"
-            />
+          {/* Location + Image */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4 }}
+              className="form-control"
+            >
+              <label className="label text-info font-semibold flex items-center gap-2">
+                <FaMapMarkerAlt className="text-secondary" /> Location
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. 123 Food Street, Dhaka"
+                className="input input-bordered bg-neutral text-info"
+                {...register("location", { required: true })}
+              />
+              {errors.location && (
+                <span className="text-error text-sm">Location is required</span>
+              )}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4 }}
+              className="form-control"
+            >
+              <label className="label text-info font-semibold flex items-center gap-2">
+                <FaImage className="text-secondary" /> Upload Image
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                className="file-input file-input-bordered bg-neutral text-info"
+                onChange={handleImageUpload}
+                disabled={imageUploading}
+              />
+              {profileImage && (
+                <img
+                  src={profileImage}
+                  alt="Preview"
+                  className="mt-4 w-32 h-32 object-cover rounded-lg border-2 border-secondary"
+                />
+              )}
+            </motion.div>
           </div>
+
+          {/* Restaurant Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            <div>
+              <label className="label text-info font-semibold flex items-center gap-2">
+                <FaStore className="text-secondary" /> Restaurant Name
+              </label>
+              <input
+                type="text"
+                value={user?.displayName || "Demo Restaurant"}
+                readOnly
+                className="input input-bordered bg-neutral text-info"
+              />
+            </div>
+            <div>
+              <label className="label text-info font-semibold flex items-center gap-2">
+                <FaEnvelope className="text-secondary" /> Restaurant Email
+              </label>
+              <input
+                type="email"
+                value={user?.email || "demo@example.com"}
+                readOnly
+                className="input input-bordered bg-neutral text-info"
+              />
+            </div>
+          </motion.div>
 
           {/* Submit Button */}
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
             type="submit"
-            className="btn bg-secondary text-primary w-full mt-4"
             disabled={imageUploading}
+            className="btn w-full bg-secondary font-semibold mt-6"
           >
-            {imageUploading ? "Uploading Image..." : "Add Donation"}
-          </button>
+            {imageUploading ? "Uploading..." : "Add Donation"}
+          </motion.button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };
