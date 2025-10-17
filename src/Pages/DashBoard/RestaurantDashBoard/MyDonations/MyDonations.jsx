@@ -3,6 +3,18 @@ import { useNavigate } from "react-router";
 import { AuthContext } from "../../../../Contexts/AuthContext";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import Loading2 from "../../../../Shared/Loading/Loading2";
+import { motion } from "framer-motion";
+import {
+  Utensils,
+  Package,
+  CheckCircle,
+  XCircle,
+  Trash2,
+  Edit,
+  Building2,
+  HandHeart,
+} from "lucide-react";
 
 const MyDonation = () => {
   const { user } = useContext(AuthContext);
@@ -13,7 +25,6 @@ const MyDonation = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch donations on mount
   useEffect(() => {
     if (!user?.email) {
       setLoading(false);
@@ -39,7 +50,6 @@ const MyDonation = () => {
     fetchDonations();
   }, [user?.email]);
 
-  // Delete donation handler
   const handleDelete = async (id) => {
     const confirmResult = await Swal.fire({
       title: "Are you sure?",
@@ -55,7 +65,7 @@ const MyDonation = () => {
       try {
         const res = await axiosSecure.delete(`/donations/${id}`);
         if (res.data.deletedCount > 0) {
-          setDonations(donations.filter((don) => don._id !== id));
+          setDonations((prev) => prev.filter((d) => d._id !== id));
           Swal.fire("Deleted!", "Your donation has been deleted.", "success");
         } else {
           Swal.fire("Error", "Failed to delete donation.", "error");
@@ -67,27 +77,33 @@ const MyDonation = () => {
     }
   };
 
-  // Update donation handler (redirect to edit page)
-  const handleUpdate = (id) => {
-    navigate(`/edit-donation/${id}`);
-  };
+  const handleUpdate = (id) => navigate(`/edit-donation/${id}`);
 
-  if (loading) return <p className="text-center py-10">Loading donations...</p>;
+  if (loading) return <Loading2 />;
   if (error) return <p className="text-center py-10 text-red-600">{error}</p>;
-
   if (donations.length === 0)
-    return <p className="text-center py-10">No donations found.</p>;
+    return (
+      <p className="text-center py-10 text-primary">No donations found.</p>
+    );
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10 my-16 bg-primary text-secondary">
-      <h2 className="text-3xl font-bold mb-8 text-center text-secondary">
-        My Donations
-      </h2>
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {donations.map((donation) => (
-          <div
+    <div className="mx-auto px-2 md:pt-8">
+      {/* === Page Title === */}
+      <div className="">
+        <h2 className="text-3xl font-bold text-primary text-center flex flex-col">
+          My Added Donations
+        </h2>
+      </div>
+
+      {/* === Donation Cards === */}
+      <div className="rounded-2xl shadow-lg p-1 grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {donations.map((donation, index) => (
+          <motion.div
             key={donation._id}
-            className="card bg-base-100 shadow-lg border border-secondary rounded-lg overflow-hidden"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            className="card bg-accent border border-secondary shadow-xl shadow-primary/50 hover:shadow-secondary/50 rounded-2xl overflow-hidden hover:shadow-2xl hover:scale-105 transition-all"
           >
             {donation.image && (
               <img
@@ -96,51 +112,66 @@ const MyDonation = () => {
                 className="w-full h-48 object-cover"
               />
             )}
-            <div className="p-4 space-y-2">
-              <h3 className="text-xl font-semibold">{donation.title}</h3>
-              <p>
-                <strong>Food Type:</strong> {donation.foodType}
+
+            <div className="p-4 space-y-2 text-primary">
+              <h3 className="text-xl font-semibold text-info flex items-center gap-2">
+                <Utensils className="text-secondary w-5 h-5" />
+                {donation.title}
+              </h3>
+
+              <p className="flex items-center gap-2">
+                <Package className="text-secondary w-4 h-4" />
+                <span className="font-bold text-info">Food Type:</span>{" "}
+                {donation.foodType}
               </p>
-              <p>
-                <strong>Quantity:</strong> {donation.quantity}
+
+              <p className="flex items-center gap-2">
+                <CheckCircle className="text-secondary w-4 h-4" />
+                <span className="font-bold text-info">Quantity:</span>{" "}
+                {donation.quantity}
               </p>
-              <p>
-                <strong>Restaurant:</strong> {donation.restaurantName}
+
+              <p className="flex items-center gap-2">
+                <Building2 className="text-secondary w-4 h-4" />
+                <span className="font-bold text-info">Restaurant:</span>{" "}
+                {donation.restaurantName}
               </p>
-              <p>
-                <strong>Status:</strong>{" "}
-                <span
-                  className={
-                    donation.status === "Verified"
-                      ? "text-secondary font-semibold"
-                      : donation.status === "Rejected"
-                      ? "text-secondary font-semibold"
-                      : "text-green-600 font-semibold"
-                  }
-                >
+
+              <p className="flex items-center gap-2">
+                {donation.status === "Verified" ? (
+                  <CheckCircle className="text-secondary w-4 h-4" />
+                ) : donation.status === "Rejected" ? (
+                  <XCircle className="text-secondary w-4 h-4" />
+                ) : (
+                  <Package className="text-secondary w-4 h-4" />
+                )}
+                <span className="font-bold text-info">Status:</span>{" "}
+                <span className="font-semibold text-secondary">
                   {donation.status}
                 </span>
               </p>
 
-              <div className="flex gap-4 mt-4">
+              <div className="flex flex-wrap gap-3 pt-4">
                 {donation.status !== "Rejected" && (
                   <button
                     onClick={() => handleUpdate(donation._id)}
-                    className="btn btn-sm btn-primary text-secondary"
+                    className="btn btn-sm bg-primary text-neutral hover:bg-secondary hover:text-neutral transition-all flex items-center gap-2"
                   >
+                    <Edit className="w-4 h-4 text-info" />
                     Update
                   </button>
                 )}
 
                 <button
                   onClick={() => handleDelete(donation._id)}
-                  className="btn btn-sm btn-secondary text-primary"
+                  className="btn btn-sm bg-secondary text-neutral hover:bg-primary transition-all flex items-center gap-2"
                 >
+                  <Trash2 className="w-4 h-4 text-info" />
                   Delete
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
