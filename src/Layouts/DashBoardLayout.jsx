@@ -27,7 +27,7 @@ const DashBoardLayout = () => {
     "flex items-center gap-3 text-lg font-medium px-3 py-2 rounded-xl bg-primary text-neutral transition-all duration-200";
   const inactiveStyle = "text-info hover:bg-accent hover:translate-x-1";
   const activeStyle =
-    "bg-accent text-info border-l-6 border-info font-semibold";
+    "bg-accent text-neutral border-l-6 border-info font-semibold";
 
   const links = (
     <>
