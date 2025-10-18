@@ -1,15 +1,25 @@
 import React, { useContext } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { motion } from "framer-motion";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../../../Contexts/AuthContext";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import Swal from "sweetalert2";
+import Loading2 from "../../../../Shared/Loading/Loading2";
+import {
+  MapPin,
+  Clock,
+  CheckCircle,
+  Package,
+  UtensilsCrossed,
+  Building2,
+} from "lucide-react";
 
 const MyPickups = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
-  // Fetch pickups assigned to this charity
+  // ✅ Fetch pickups assigned to this charity
   const {
     data: pickups = [],
     isLoading,
@@ -23,7 +33,7 @@ const MyPickups = () => {
     enabled: !!user?.email,
   });
 
-  // Mutation to confirm pickup
+  // ✅ Confirm pickup
   const { mutate: confirmPickup, isLoading: confirming } = useMutation({
     mutationFn: async (id) => {
       const res = await axiosSecure.patch(`/donations/pickup/${id}`);
@@ -38,59 +48,89 @@ const MyPickups = () => {
     },
   });
 
-  if (isLoading)
-    return <div className="text-center mt-10">Loading pickups...</div>;
+  if (isLoading) return <Loading2 />;
   if (error)
     return (
-      <div className="text-red-500 text-center">Failed to load pickups</div>
+      <p className="text-red-500 text-center mt-10">Failed to load pickups.</p>
     );
 
   return (
-    <div className="max-w-4xl mx-auto p-4 bg-primary rounded-2xl mt-16 text-secondary">
-      <h2 className="font-bold text-center mb-6 text-secondary text-4xl">
+    <motion.div
+      className="max-w-6xl mx-auto px-2 md:mt-8"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <h2 className="text-3xl font-bold text-center mb-8 text-primary">
         My Pickups
       </h2>
+
       {pickups.length === 0 ? (
-        <p className="text-center">No pickups found.</p>
+        <p className="text-center text-info">No pickups found.</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {pickups.map((pickup) => (
-            <div key={pickup._id} className="card bg-base-100 shadow-xl border">
-              <figure>
-                <img
-                  src={pickup.image}
-                  alt={pickup.donationTitle}
-                  className="w-full h-48 object-cover"
-                />
-              </figure>
-              <div className="card-body">
-                <h3 className="text-xl font-bold">{pickup.donationTitle}</h3>
-                <p>
-                  <span className="font-semibold">Restaurant:</span>{" "}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {pickups.map((pickup, index) => (
+            <motion.div
+              key={pickup._id}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.05 }}
+              className="bg-accent border border-info/10 rounded-2xl overflow-hidden shadow-md shadow-primary/30 hover:shadow-secondary/40 transition-all duration-300"
+            >
+              <img
+                src={pickup.image || "https://via.placeholder.com/400x200"}
+                alt={pickup.donationTitle}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-5 space-y-2 text-info">
+                <h3 className="text-xl font-bold text-primary flex items-center gap-2">
+                  <Package className="text-secondary w-5 h-5" />
+                  {pickup.donationTitle}
+                </h3>
+
+                <p className="flex items-center gap-2">
+                  <Building2 className="text-secondary w-4 h-4" />
+                  <strong className="text-primary">Restaurant:</strong>{" "}
                   {pickup.restaurantName}
                 </p>
-                <p>
-                  <span className="font-semibold">Location:</span>{" "}
+
+                <p className="flex items-center gap-2">
+                  <MapPin className="text-secondary w-4 h-4" />
+                  <strong className="text-primary">Location:</strong>{" "}
                   {pickup.location}
                 </p>
-                <p>
-                  <span className="font-semibold">Food Type:</span>{" "}
+
+                <p className="flex items-center gap-2">
+                  <UtensilsCrossed className="text-secondary w-4 h-4" />
+                  <strong className="text-primary">Food Type:</strong>{" "}
                   {pickup.foodType}
                 </p>
-                <p>
-                  <span className="font-semibold">Quantity:</span>{" "}
+
+                <p className="flex items-center gap-2">
+                  <Package className="text-secondary w-4 h-4" />
+                  <strong className="text-primary">Quantity:</strong>{" "}
                   {pickup.quantity}
                 </p>
-                <p>
-                  <span className="font-semibold">Pickup Time:</span>{" "}
+
+                <p className="flex items-center gap-2">
+                  <Clock className="text-secondary w-4 h-4" />
+                  <strong className="text-primary">Pickup Time:</strong>{" "}
                   {pickup.pickupTime}
                 </p>
-                <div className="mt-2">
-                  <span
-                    className={`badge ${
+
+                <div className="flex items-center gap-2 mt-3">
+                  <CheckCircle
+                    className={`w-5 h-5 ${
                       pickup.status === "Picked"
-                        ? "badge-success"
-                        : "badge-info"
+                        ? "text-green-500"
+                        : "text-secondary"
+                    }`}
+                  />
+                  <span
+                    className={`px-3 py-1 text-sm font-medium rounded-full ${
+                      pickup.status === "Picked"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-secondary/20 text-secondary"
                     }`}
                   >
                     {pickup.status}
@@ -99,24 +139,27 @@ const MyPickups = () => {
 
                 {pickup.status === "Accepted" ||
                 pickup.status === "Assigned" ? (
-                  <button
-                    className="btn btn-secondary btn-outline btn-sm mt-4"
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => confirmPickup(pickup._id)}
                     disabled={confirming}
+                    className="btn btn-outline btn-secondary w-full mt-4 hover:bg-primary hover:text-info"
                   >
                     {confirming ? "Confirming..." : "Confirm Pickup"}
-                  </button>
+                  </motion.button>
                 ) : (
-                  <p className="btn btn-secondary text-primary btn-outline mt-3">
-                    Pickup confirmed
+                  <p className="mt-4 text-center font-semibold text-green-500 flex items-center justify-center gap-2">
+                    <CheckCircle className="w-5 h-5 text-secondary" /> Pickup
+                    Confirmed
                   </p>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
