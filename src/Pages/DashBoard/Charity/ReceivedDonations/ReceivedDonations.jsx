@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { Dialog } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { FiStar, FiBox, FiUser } from "react-icons/fi";
+import Loading2 from '../../../../Shared/Loading/Loading2'
 
 const ReceivedDonations = () => {
   const axiosSecure = useAxiosSecure();
@@ -47,11 +48,7 @@ const ReceivedDonations = () => {
   };
 
   if (isLoading)
-    return (
-      <div className="flex justify-center items-center mt-20">
-        <span className="loading loading-spinner text-secondary loading-lg"></span>
-      </div>
-    );
+    return <Loading2></Loading2>
 
   return (
     <div className="max-w-5xl mx-auto px-2 md:mt-8">
