@@ -60,7 +60,7 @@ const Banner = () => {
                   to="/dashBoard"
                   className="btn mt-6 bg-primary border-none text-white font-semibold hover:bg-secondary transition-all duration-300 px-8 py-2 rounded-full shadow-md hover:shadow-lg"
                 >
-                  Explore Dashboard
+                  Explore Our
                 </NavLink>
               </div>
             </div>
