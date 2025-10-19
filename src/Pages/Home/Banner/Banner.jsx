@@ -58,7 +58,7 @@ const Banner = () => {
                 </p>
                 <NavLink
                   to="/dashBoard"
-                  className="btn mt-6 bg-primary border-none text-white font-semibold hover:bg-secondary transition-all duration-300 px-8 py-2 rounded-full shadow-md hover:shadow-lg"
+                  className="btn mt-6 bg-secondary border-none text-black font-semibold hover:bg-secondary transition-all duration-300 px-8 py-2 rounded-full shadow-md hover:shadow-lg"
                 >
                   Explore Our Website
                 </NavLink>
