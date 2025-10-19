@@ -8,7 +8,7 @@ const ComingSoon = () => {
         <FaClock className="text-5xl text-warning mx-auto mb-4" />
         <h1 className="text-3xl font-bold text-secondary mb-2">Coming Soon!</h1>
         <p className="text-base-content">
-          We are working hard to bring you this
+          We are working hard to bring
         </p>
       </div>
     </div>
