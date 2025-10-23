@@ -46,7 +46,7 @@ const Banner = () => {
               />
 
               {/* Gradient overlay using theme colors */}
-              <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-accent/30 to-secondary/60 rounded-2xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-neutral  to-secondary/60 rounded-2xl"></div>
 
               {/* Text Content */}
               <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">

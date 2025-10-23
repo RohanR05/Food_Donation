@@ -2,6 +2,8 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { motion } from "framer-motion";
+import { FaUtensils, FaEnvelope, FaUser, FaBox, FaCheck, FaTimes } from "react-icons/fa";
 
 const ManageDonations = () => {
   const axiosSecure = useAxiosSecure();
@@ -65,12 +67,13 @@ const ManageDonations = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10 mt-16 bg-primary ">
+    <div className="mx-auto px-2 md:my-8">
       <h2 className="text-3xl font-bold text-center mb-8 text-secondary">
         Manage Donations
       </h2>
 
-      <div className="overflow-x-auto shadow-lg rounded-lg bg-primary">
+      {/* Table for md+ devices */}
+      <div className="hidden md:block overflow-x-auto shadow-lg rounded-lg bg-primary/10">
         <table className="table w-full text-sm">
           <thead className="bg-primary uppercase text-xs text-secondary">
             <tr>
@@ -98,34 +101,39 @@ const ManageDonations = () => {
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-medium ${
                       donation.status === "Verified"
-                        ? " text-secondary"
+                        ? "text-secondary"
                         : donation.status === "Rejected"
                         ? "bg-red-100 text-red-600"
-                        : "bg-primary "
+                        : "bg-primary"
                     }`}
                   >
                     {donation.status || "Pending"}
                   </span>
                 </td>
                 <td className="text-center flex gap-2 justify-center items-center py-3 flex-wrap">
-                  {donation.status === "Pending" && (
+                  {donation.status === "Pending" ? (
                     <>
                       <button
-                        onClick={() => handleVerify(donation._id, donation.title)}
+                        onClick={() =>
+                          handleVerify(donation._id, donation.title)
+                        }
                         className="btn btn-xs bg-secondary text-primary"
                       >
                         Verify
                       </button>
                       <button
-                        onClick={() => handleReject(donation._id, donation.title)}
+                        onClick={() =>
+                          handleReject(donation._id, donation.title)
+                        }
                         className="btn btn-xs bg-primary text-secondary"
                       >
                         Reject
                       </button>
                     </>
-                  )}
-                  {donation.status !== "Pending" && (
-                    <span className="text-secondary opacity-80 text-xs">No action needed</span>
+                  ) : (
+                    <span className="text-primary text-xs">
+                      No action needed
+                    </span>
                   )}
                 </td>
               </tr>
@@ -137,6 +145,76 @@ const ManageDonations = () => {
           <div className="text-center py-10 text-gray-500 text-sm">
             No donations found.
           </div>
+        )}
+      </div>
+
+      {/* Card layout for small devices */}
+      <div className="grid grid-cols-1 gap-4 md:hidden">
+        {donations.map((donation, index) => (
+          <motion.div
+            key={donation._id}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.05, duration: 0.3 }}
+            className="bg-primary/10 border border-secondary/30 rounded-2xl p-4 shadow-md"
+          >
+            <h3 className="text-lg font-semibold text-secondary mb-2 flex items-center gap-2">
+              <FaUtensils className="text-secondary" /> {donation.title}
+            </h3>
+            <p className="text-sm flex items-center gap-2 text-info">
+              <FaUser className="text-secondary" />{" "}
+              {donation.restaurantName || "N/A"}
+            </p>
+            <p className="text-sm flex items-center gap-2 text-info">
+              <FaEnvelope className="text-secondary" /> {donation.restaurantEmail}
+            </p>
+            <p className="text-sm flex items-center gap-2 text-info">
+              <FaBox className="text-secondary" /> Quantity: {donation.quantity}
+            </p>
+
+            <div className="flex justify-between items-center mt-4">
+              <span
+                className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  donation.status === "Verified"
+                    ? "text-secondary"
+                    : donation.status === "Rejected"
+                    ? "bg-red-100 text-red-600"
+                    : "bg-primary text-info"
+                }`}
+              >
+                {donation.status || "Pending"}
+              </span>
+
+              {donation.status === "Pending" ? (
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleVerify(donation._id, donation.title)}
+                    className="btn btn-xs bg-secondary text-primary flex items-center gap-1"
+                  >
+                    <FaCheck /> Verify
+                  </button>
+                  <button
+                    onClick={() => handleReject(donation._id, donation.title)}
+                    className="btn btn-xs bg-primary text-secondary flex items-center gap-1"
+                  >
+                    <FaTimes /> Reject
+                  </button>
+                </div>
+              ) : (
+                <span className="text-primary text-xs">No action needed</span>
+              )}
+            </div>
+          </motion.div>
+        ))}
+
+        {!donations.length && !isLoading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-10 text-gray-500 text-sm"
+          >
+            No donations found.
+          </motion.div>
         )}
       </div>
     </div>
