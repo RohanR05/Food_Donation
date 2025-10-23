@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 import { FaUtensils, FaEnvelope, FaUser, FaBox, FaCheck, FaTimes } from "react-icons/fa";
+import Loading2 from '../../../../Shared/Loading/Loading2'
 
 const ManageDonations = () => {
   const axiosSecure = useAxiosSecure();
@@ -65,6 +66,11 @@ const ManageDonations = () => {
       }
     }
   };
+
+   if (isLoading) {
+  return <Loading2></Loading2>
+}
+
 
   return (
     <div className="mx-auto px-2 md:my-8">
