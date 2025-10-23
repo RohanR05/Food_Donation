@@ -61,7 +61,7 @@ const FeatureDonations = () => {
               <th>Feature</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-primary/20">
             {donations.map((donation, index) => (
               <tr key={donation._id}>
                 <td>{index + 1}</td>
