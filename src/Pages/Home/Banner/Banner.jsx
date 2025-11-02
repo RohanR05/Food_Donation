@@ -10,26 +10,36 @@ import { NavLink } from "react-router";
 const slides = [
   {
     title: "Donate Surplus Food",
-    subtitle: "Help reduce food waste and feed those in need. Every small act of kindness can fill a plate and a heart.",
+    subtitle:
+      "Help reduce food waste and feed those in need. Every small act of kindness can fill a plate and a heart.",
   },
   {
     title: "Support Local Charities",
-    subtitle: "Your generous contribution helps families in need. Together, we can make our community stronger and healthier.",
+    subtitle:
+      "Your generous contribution helps families in need. Together, we can make our community stronger and healthier.",
   },
   {
     title: "Join the Movement",
-    subtitle: "Be a part of something bigger — unite with us to fight hunger, reduce waste, and spread compassion across Bangladesh.",
+    subtitle:
+      "Be a part of something bigger — unite with us to fight hunger, reduce waste, and spread compassion across Bangladesh.",
   },
 ];
 
 const Banner = () => {
   return (
     <div className="m-3 md:my-6 overflow-hidden">
-      <div className="relative flex flex-col md:flex-row items-center justify-between px-6 md:px-12 lg:px-20 py-8 md:py-16">
-        
+      <div className="relative flex flex-col md:flex-row items-center justify-between px-6 py-8 md:py-16">
         {/* Left Side: Static Animation */}
         <div className="w-full md:w-1/2 flex justify-center items-center">
-          <Lottie animationData={animi} loop={true} className="max-w-md w-full border rounded-full border-secondary shadow-primary/20 shadow-xl" />
+          <div className="p-[3px] rounded-full bg-gradient-to-tr from-primary to-secondary shadow-xl shadow-primary/20">
+            <div className="bg-neutral rounded-full flex justify-center items-center">
+              <Lottie
+                animationData={animi}
+                loop={true}
+                className="max-w-md w-full rounded-full"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Right Side: Sliding Text */}
@@ -66,8 +76,8 @@ const Banner = () => {
         </div>
 
         {/* Decorative Circle Background */}
-        <div className="absolute top-0 right-0 w-48 h-48 bg-secondary/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/30 rounded-full blur-3xl"></div>
       </div>
     </div>
   );
