@@ -29,7 +29,7 @@ const Banner = () => {
         
         {/* Left Side: Static Animation */}
         <div className="w-full md:w-1/2 flex justify-center items-center">
-          <Lottie animationData={animi} loop={true} className="max-w-md w-full" />
+          <Lottie animationData={animi} loop={true} className="max-w-md w-full border rounded-full border-secondary shadow-primary/20 shadow-xl" />
         </div>
 
         {/* Right Side: Sliding Text */}
