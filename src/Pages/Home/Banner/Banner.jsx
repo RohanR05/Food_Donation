@@ -3,70 +3,72 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import img1 from "../../../assets/1.webp";
-import img2 from "../../../assets/2.webp";
-import img3 from "../../../assets/3.webp";
+import Lottie from "lottie-react";
+import animi from "../../../assets/Teamwork Hands Animated.json";
 import { NavLink } from "react-router";
 
 const slides = [
   {
-    img: img1,
     title: "Donate Surplus Food",
-    subtitle: "Help reduce food waste and feed those in need.",
+    subtitle: "Help reduce food waste and feed those in need. Every small act of kindness can fill a plate and a heart.",
   },
   {
-    img: img2,
     title: "Support Local Charities",
-    subtitle: "Your contribution brings smiles to families every day.",
+    subtitle: "Your generous contribution helps families in need. Together, we can make our community stronger and healthier.",
   },
   {
-    img: img3,
     title: "Join the Movement",
-    subtitle: "Be part of a community fighting hunger together.",
+    subtitle: "Be a part of something bigger — unite with us to fight hunger, reduce waste, and spread compassion across Bangladesh.",
   },
 ];
 
 const Banner = () => {
   return (
-    <div className="m-3 md:my-12 rounded-2xl shadow-xl shadow-primary/50 overflow-hidden">
-      <Swiper
-        modules={[Pagination, Autoplay]}
-        autoplay={{ delay: 3500 }}
-        pagination={{ clickable: true }}
-        loop={true}
-        className="rounded-2xl"
-      >
-        {slides.map((slide, index) => (
-          <SwiperSlide key={index}>
-            <div className="relative w-full h-[55vh] md:h-[70vh] lg:h-[80vh] rounded-2xl">
-              <img
-                src={slide.img}
-                alt={`Banner ${index + 1}`}
-                className="w-full h-full object-cover rounded-2xl"
-              />
+    <div className="m-3 md:my-6 overflow-hidden">
+      <div className="relative flex flex-col md:flex-row items-center justify-between px-6 md:px-12 lg:px-20 py-8 md:py-16">
+        
+        {/* Left Side: Static Animation */}
+        <div className="w-full md:w-1/2 flex justify-center items-center">
+          <Lottie animationData={animi} loop={true} className="max-w-md w-full" />
+        </div>
 
-              {/* Gradient overlay using theme colors */}
-              <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-neutral  to-secondary/60 rounded-2xl"></div>
+        {/* Right Side: Sliding Text */}
+        <div className="w-full md:w-1/2 mt-8 md:mt-0">
+          <Swiper
+            modules={[Pagination, Autoplay]}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            pagination={{ clickable: true }}
+            loop={true}
+            className="rounded-2xl"
+          >
+            {slides.map((slide, index) => (
+              <SwiperSlide key={index}>
+                <div className="text-center md:text-left">
+                  <h3 className="text-sm uppercase tracking-wide text-secondary font-semibold mb-3">
+                    Together, We Can End Hunger
+                  </h3>
+                  <h1 className="text-3xl md:text-5xl font-extrabold text-primary mb-4 leading-tight drop-shadow-lg">
+                    {slide.title}
+                  </h1>
+                  <p className="text-base md:text-lg text-info/90 mb-6 max-w-xl mx-auto md:mx-0">
+                    {slide.subtitle}
+                  </p>
+                  <NavLink
+                    to="/dashboard"
+                    className="btn bg-secondary border-none text-black font-semibold hover:bg-secondary/80 transition-all duration-300 px-8 py-2 rounded-full shadow-md hover:shadow-lg"
+                  >
+                    Explore Our Website
+                  </NavLink>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
 
-              {/* Text Content */}
-              <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
-                <h1 className="text-3xl md:text-5xl font-extrabold text-primary drop-shadow-lg leading-tight">
-                  {slide.title}
-                </h1>
-                <p className="text-base md:text-lg text-black mt-4 max-w-2xl drop-shadow-md">
-                  {slide.subtitle}
-                </p>
-                <NavLink
-                  to="/dashBoard"
-                  className="btn mt-6 bg-secondary border-none text-black font-semibold hover:bg-secondary transition-all duration-300 px-8 py-2 rounded-full shadow-md hover:shadow-lg"
-                >
-                  Explore Our Website
-                </NavLink>
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+        {/* Decorative Circle Background */}
+        <div className="absolute top-0 right-0 w-48 h-48 bg-secondary/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+      </div>
     </div>
   );
 };
