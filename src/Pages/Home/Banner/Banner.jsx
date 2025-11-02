@@ -27,7 +27,7 @@ const slides = [
 
 const Banner = () => {
   return (
-    <div className="m-3 md:my-6 overflow-hidden">
+    <div className="m-3 md:my-6 overflow-hidden shadow-lg shadow-secondary/30 bg-secondary/10">
       <div className="relative flex flex-col md:flex-row items-center justify-between px-6 py-8 md:py-16">
         {/* Left Side: Static Animation */}
         <div className="w-full md:w-1/2 flex justify-center items-center">
@@ -76,7 +76,7 @@ const Banner = () => {
         </div>
 
         {/* Decorative Circle Background */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/50 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/30 rounded-full blur-3xl"></div>
       </div>
     </div>
