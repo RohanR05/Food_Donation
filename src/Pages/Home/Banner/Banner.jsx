@@ -27,18 +27,16 @@ const slides = [
 
 const Banner = () => {
   return (
-    <div className="m-3 md:my-6 overflow-hidden shadow-lg shadow-secondary/30 bg-secondary/10">
+    <div className="m-3 md:my-6 overflow-hidden">
       <div className="relative flex flex-col md:flex-row items-center justify-between px-6 py-8 md:py-16">
         {/* Left Side: Static Animation */}
         <div className="w-full md:w-1/2 flex justify-center items-center">
-          <div className="p-[3px] rounded-full bg-gradient-to-tr from-primary to-secondary shadow-xl shadow-primary/20">
-            <div className="bg-neutral rounded-full flex justify-center items-center">
-              <Lottie
-                animationData={animi}
-                loop={true}
-                className="max-w-md w-full rounded-full"
-              />
-            </div>
+          <div className="bg-neutral rounded-full p-4">
+            <Lottie
+              animationData={animi}
+              loop={true}
+              className="max-w-md w-full rounded-full"
+            />
           </div>
         </div>
 
@@ -49,35 +47,30 @@ const Banner = () => {
             autoplay={{ delay: 4000, disableOnInteraction: false }}
             pagination={{ clickable: true }}
             loop={true}
-            className="rounded-2xl"
           >
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>
                 <div className="text-center md:text-left">
-                  <h3 className="text-sm uppercase tracking-wide text-secondary font-semibold mb-3">
+                  <h3 className="text-sm uppercase tracking-wide text-primary font-bold mb-2">
                     Together, We Can End Hunger
                   </h3>
-                  <h1 className="text-3xl md:text-5xl font-extrabold text-primary mb-4 leading-tight drop-shadow-lg">
+                  <h1 className="text-3xl md:text-4xl font-bold text-secondary mb-4 leading-snug">
                     {slide.title}
                   </h1>
-                  <p className="text-base md:text-lg text-info/90 mb-6 max-w-xl mx-auto md:mx-0">
+                  <p className="text-base md:text-lg text-primary mb-6 max-w-xl mx-auto md:mx-0">
                     {slide.subtitle}
                   </p>
-                  <NavLink
-                    to="/dashboard"
-                    className="btn bg-secondary border-none text-black font-semibold hover:bg-secondary/80 transition-all duration-300 px-8 py-2 rounded-full shadow-md hover:shadow-lg"
-                  >
-                    Explore Our Website
-                  </NavLink>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
 
-        {/* Decorative Circle Background */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/50 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/30 rounded-full blur-3xl"></div>
+        <div className="hidden md:inline-block">
+          {/* Decorative Circles */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/20 rounded-full blur-2xl"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/20 rounded-full blur-2xl"></div>
+        </div>
       </div>
     </div>
   );
