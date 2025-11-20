@@ -4,19 +4,19 @@
 /* Light theme */
 @plugin "daisyui/theme" {
   name: "light";
-  --color-primary: #0f7fbf;
-  --color-secondary: #98CD00;
-  --color-accent: #0f7faf20;
+  --color-primary: #1f1f1f;
+  --color-secondary: #0f7fbf;
+  --color-accent: #0f7fbf10;
   --color-neutral:#ffffff;
-  --color-info:#0f0f0f;
+  --color-info:#ff2020;
 }
 
 /* Dark theme */
 @plugin "daisyui/theme" {
   name: "dark";
-  --color-primary: #33A1E0;
-  --color-secondary: #98CD00;
-  --color-accent: #33A1E025;
+  --color-primary: #f1f1f1;
+  --color-secondary: #33A1E0;
+  --color-accent: #33A1E015;
   --color-neutral:#000000;
-  --color-info:#f0f0f0
+  --color-info:#ff2020
 }
