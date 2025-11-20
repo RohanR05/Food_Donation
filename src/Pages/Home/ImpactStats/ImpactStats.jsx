@@ -83,7 +83,7 @@ const ImpactStats = () => {
             <FontAwesomeIcon icon={faBoxOpen} />
           </div>
           <div className="text-xl font-medium text-primary">Total Food Donated</div>
-          <div className="stat-value text-info text-2xl mt-2 font-bold">{donations.length} Times</div>
+          <div className="stat-value text-secondary text-2xl mt-2 font-bold">{donations.length} Times</div>
         </motion.div>
 
         {/* Total User */}
@@ -98,7 +98,7 @@ const ImpactStats = () => {
             <FontAwesomeIcon icon={faHandHoldingHeart} />
           </div>
           <div className="text-xl font-medium text-primary">Total User</div>
-          <div className="stat-value text-info text-2xl mt-2 font-bold">{users.length} Person</div>
+          <div className="stat-value text-secondary text-2xl mt-2 font-bold">{users.length} Person</div>
         </motion.div>
 
         {/* My Reviews */}
@@ -113,7 +113,7 @@ const ImpactStats = () => {
             <FontAwesomeIcon icon={faLeaf} />
           </div>
           <div className="text-xl font-medium text-primary">My Total Reviews</div>
-          <div className="stat-value text-info text-2xl mt-2 font-bold">{myReviews.length} Reviews</div>
+          <div className="stat-value text-secondary text-2xl mt-2 font-bold">{myReviews.length} Reviews</div>
         </motion.div>
       </div>
     </div>

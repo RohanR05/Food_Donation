@@ -138,7 +138,7 @@ const IceGold = () => {
             whileHover={{ scale: 1.05, rotate: 2 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-accent rounded-xl shadow-xl shadow-primary/40 p-6 text-center cursor-pointer hover:shadow-primary/50 transition-all"
+            className="bg-accent rounded-xl shadow-lg shadow-primary/40 p-6 text-center cursor-pointer hover:shadow-primary/50 transition-all"
           >
             <FontAwesomeIcon
               icon={feature.icon}
