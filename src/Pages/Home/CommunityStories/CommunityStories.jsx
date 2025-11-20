@@ -10,7 +10,8 @@ import {
   faComments,
 } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import Loading2 from '../../../Shared/Loading/Loading2'
+import Loading2 from "../../../Shared/Loading/Loading2";
+import Marquee from "react-fast-marquee";
 
 const CommunityStories = () => {
   const axiosSecure = useAxiosSecure();
@@ -27,28 +28,27 @@ const CommunityStories = () => {
     },
   });
 
-  if (isLoading) {
-    return <Loading2></Loading2>
-  }
+  if (isLoading) return <Loading2 />;
 
-  if (error) {
+  if (error)
     return (
       <p className="text-center text-error mt-8">Failed to load stories.</p>
     );
-  }
 
   return (
-    <div className="">
+    <div>
       {/* Title */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-12 px-4"
+        className="text-center mb-8 px-4"
       >
         <motion.h2
           initial={{ opacity: 0, y: -15 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-2xl md:text-4xl font-bold text-primary flex items-center justify-center gap-3"
         >
@@ -58,39 +58,41 @@ const CommunityStories = () => {
           />
           Community <span className="text-secondary">Reviews</span>
         </motion.h2>
-        <p className="max-w-2xl mx-auto text-secondary mt-3 text-lg">
+        <p className="max-w-2xl mx-auto text-primary mt-3 text-lg">
           See how donors, restaurants, and charities are making an impact.
         </p>
       </motion.div>
 
-      {/* Reviews Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto">
-        {reviews.map((r, i) => (
+      {/* Marquee Reviews */}
+      <Marquee
+        gradient={false}
+        speed={50}
+        pauseOnHover
+        className="space-x-3 px-2 bg-accent py-6"
+      >
+        {reviews.map((r) => (
           <motion.div
             key={r._id}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
-            className="card bg-accent rounded-2xl shadow-lg shadow-primary/40 border border-primary/30  hover:shadow-xl hover:shadow-secondary/50 hover:scale-110 transition-all duration-500 p-6 flex flex-col justify-between"
+            whileHover={{ scale: 1.02 }}
+            className="card min-w-[300px] bg-neutral rounded-2xl shadow shadow-secondary/50 mr-5 p-6 flex flex-col justify-between"
           >
             {/* Reviewer Info */}
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 flex items-center justify-center bg-primary/20 text-primary rounded-full">
+              <div className="w-12 h-12 flex items-center justify-center bg-neutral/20 text-secondary rounded-full">
                 <FontAwesomeIcon icon={faUser} size="lg" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-primary">
+                <h3 className="text-primary text-lg font-semibold">
                   {r.reviewerName}
                 </h3>
-                <p className="text-sm text-info flex items-center gap-1">
+                <p className="text-sm flex items-center gap-1 opacity-80">
                   <FontAwesomeIcon
                     icon={faEnvelope}
                     className="text-secondary"
                   />
                   {r.reviewerEmail}
                 </p>
-                <p className="text-xs text-info flex items-center gap-1 opacity-80">
+                <p className="text-xs flex items-center gap-1 opacity-80">
                   <FontAwesomeIcon
                     icon={faCalendar}
                     className="text-secondary"
@@ -101,12 +103,7 @@ const CommunityStories = () => {
             </div>
 
             {/* Review Text */}
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="mt-4 text-primary italic"
-            >
-              "{r.description}"
-            </motion.div>
+            <div className="mt-4 text-primary italic">"{r.description}"</div>
 
             {/* Rating */}
             <div className="mt-4 flex items-center gap-1">
@@ -127,7 +124,7 @@ const CommunityStories = () => {
             </div>
           </motion.div>
         ))}
-      </div>
+      </Marquee>
     </div>
   );
 };
