@@ -65,13 +65,13 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-lg bg-secondary/20 shadow-md shadow-primary/40">
+      <div className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md shadow-md bg-neutral/30 shadow-secondary/20">
         <div className="navbar mx-auto">
           {/* Left */}
           <div className="navbar-start">
             {/* Mobile Menu */}
             <div className="dropdown">
-              <label tabIndex={0} className="btn btn-sm btn-ghost lg:hidden">
+              <label tabIndex={0} className="btn btn-sm btn-ghost btn-secondary lg:hidden">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6 text-primary"
