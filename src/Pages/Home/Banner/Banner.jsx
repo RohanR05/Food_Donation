@@ -4,7 +4,7 @@ import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Lottie from "lottie-react";
-import animi from "../../../assets/Teamwork Hands Animated.json";
+import animi from "../../../assets/Charity work.json";
 import { NavLink } from "react-router";
 
 const slides = [
