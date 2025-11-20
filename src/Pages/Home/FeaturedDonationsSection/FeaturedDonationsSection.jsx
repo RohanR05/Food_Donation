@@ -65,7 +65,7 @@ const FeaturedDonationsSection = () => {
                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/20"></div>
-              <span className="absolute top-3 right-3 px-3 py-1 bg-primary text-neutral text-xs font-semibold rounded flex items-center gap-1">
+              <span className="absolute top-3 right-3 px-3 py-1 bg-secondary text-neutral text-xs font-semibold rounded flex items-center gap-1">
                 <FontAwesomeIcon icon={faClipboardList} />
                 {donation.status}
               </span>
@@ -83,7 +83,7 @@ const FeaturedDonationsSection = () => {
                   icon={faMapMarkerAlt}
                   className="text-secondary"
                 />
-                <span className="text-info font-medium">
+                <span className="text-primary font-medium">
                   {donation.location || "Unknown"}
                 </span>
               </p>

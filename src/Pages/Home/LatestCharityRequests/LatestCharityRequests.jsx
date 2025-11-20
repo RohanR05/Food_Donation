@@ -9,7 +9,7 @@ import {
   faBullseye,
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import Loading2 from "../../../Shared/Loading/Loading2";
+import Loading from "../../../Shared/Loading/Loadign";
 
 const LatestCharityRequests = () => {
   const axiosSecure = useAxiosSecure();
@@ -26,7 +26,7 @@ const LatestCharityRequests = () => {
     },
   });
 
-  if (isFetching) return <Loading2 />;
+  if (isFetching) return <Loading />;
   if (error)
     return (
       <p className="text-center text-error py-6">Failed to load requests.</p>
@@ -71,7 +71,7 @@ const LatestCharityRequests = () => {
             </div>
 
             {/* Organization */}
-            <p className="text-info text-sm flex items-start gap-2 mb-2">
+            <p className="text-primary text-sm flex items-start gap-2 mb-2">
               <FontAwesomeIcon
                 icon={faInfoCircle}
                 className="text-secondary mt-1"
@@ -83,7 +83,7 @@ const LatestCharityRequests = () => {
             </p>
 
             {/* Mission */}
-            <p className="text-info text-sm flex items-start gap-2 mb-2">
+            <p className="text-primary text-sm flex items-start gap-2 mb-2">
               <FontAwesomeIcon
                 icon={faBullseye}
                 className="text-secondary mt-1"
@@ -96,7 +96,7 @@ const LatestCharityRequests = () => {
 
             {/* Additional visual divider */}
             <div className="mt-4 border-t border-secondary/30 pt-3 text-center">
-              <span className="text-xs text-secondary italic">
+              <span className="text-xs text-primary italic">
                 Empowering communities through compassion 💚
               </span>
             </div>

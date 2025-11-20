@@ -10,8 +10,8 @@ import {
   faComments,
 } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import Loading2 from "../../../Shared/Loading/Loading2";
 import Marquee from "react-fast-marquee";
+import Loading from "../../../Shared/Loading/Loadign";
 
 const CommunityStories = () => {
   const axiosSecure = useAxiosSecure();
@@ -28,7 +28,7 @@ const CommunityStories = () => {
     },
   });
 
-  if (isLoading) return <Loading2 />;
+  if (isLoading) return <Loading />;
 
   if (error)
     return (
