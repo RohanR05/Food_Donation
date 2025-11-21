@@ -18,8 +18,8 @@ import { NavLink } from "react-router";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary/10">
-      <div className="max-w-screen-xl mx-auto p-6 md:p-12 rounded">
+    <footer className="bg-accent">
+      <div className="max-w-screen-xl mx-auto p-6 md:py-12 rounded">
         {/* Upper Section */}
         <div className="w-full flex flex-col md:flex-row md:items-start md:justify-between gap-6 md:gap-10">
           {/* Brand + Social Icons */}

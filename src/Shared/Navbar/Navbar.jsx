@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link, NavLink } from "react-router";
-import { FaHome, FaHandsHelping, FaUserShield, FaInfoCircle } from "react-icons/fa";
+import { FaHome, FaHandsHelping, FaUserShield } from "react-icons/fa";
 import Logo from "../Logo/Logo";
 import { AuthContext } from "../../Contexts/AuthContext";
 import Swal from "sweetalert2";
@@ -54,12 +54,6 @@ const Navbar = () => {
           <span className="text-primary">Dashboard</span>
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/comingSoon" className={linkClass}>
-          <FaInfoCircle className="text-secondary text-xl" />
-          <span className="text-primary">About Us</span>
-        </NavLink>
-      </li>
     </>
   );
 
@@ -71,7 +65,10 @@ const Navbar = () => {
           <div className="navbar-start">
             {/* Mobile Menu */}
             <div className="dropdown">
-              <label tabIndex={0} className="btn btn-sm btn-ghost btn-secondary lg:hidden">
+              <label
+                tabIndex={0}
+                className="btn btn-sm btn-ghost btn-secondary lg:hidden"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6 text-primary"
@@ -79,12 +76,17 @@ const Navbar = () => {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
+                  />
                 </svg>
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-2 p-2 shadow bg-base-100 rounded-box w-56 absolute z-50"
+                className="menu menu-sm dropdown-content mt-2 p-2 shadow bg-base-100 rounded-box w-56 absolute z-5"
               >
                 {links}
               </ul>
@@ -94,7 +96,9 @@ const Navbar = () => {
 
           {/* Center */}
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1 flex items-center gap-2">{links}</ul>
+            <ul className="menu menu-horizontal px-1 flex items-center gap-2">
+              {links}
+            </ul>
           </div>
 
           {/* Right */}

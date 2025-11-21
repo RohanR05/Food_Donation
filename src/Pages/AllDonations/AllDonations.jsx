@@ -101,7 +101,7 @@ const AllDonations = () => {
                   {donation.title}
                 </h3>
 
-                <p className="text-info text-sm flex items-center gap-2">
+                <p className="text-primary text-sm flex items-center gap-2">
                   <FontAwesomeIcon
                     icon={faUtensils}
                     className="text-secondary"
@@ -110,7 +110,7 @@ const AllDonations = () => {
                   {donation.restaurantName || "N/A"}
                 </p>
 
-                <p className="text-info text-sm flex items-center gap-2">
+                <p className="text-primary text-sm flex items-center gap-2">
                   <FontAwesomeIcon
                     icon={faMapMarkerAlt}
                     className="text-secondary"
@@ -118,7 +118,7 @@ const AllDonations = () => {
                   <strong>Location:</strong> {donation.location || "Unknown"}
                 </p>
 
-                <p className="text-info text-sm flex items-center gap-2">
+                <p className="text-primary text-sm flex items-center gap-2">
                   <FontAwesomeIcon
                     icon={faBoxOpen}
                     className="text-secondary"
@@ -126,7 +126,7 @@ const AllDonations = () => {
                   <strong>Quantity:</strong> {donation.quantity}
                 </p>
 
-                <p className="text-info text-sm flex items-center gap-2">
+                <p className="text-primary text-sm flex items-center gap-2">
                   <FontAwesomeIcon
                     icon={faInfoCircle}
                     className="text-secondary"
@@ -137,7 +137,7 @@ const AllDonations = () => {
                   </span>
                 </p>
 
-                <p className="text-info text-sm flex items-center gap-2">
+                <p className="text-primary text-sm flex items-center gap-2">
                   <FontAwesomeIcon icon={faHeart} className="text-secondary" />
                   <strong>Charity:</strong>{" "}
                   {donation.charityName || "Not Assigned"}

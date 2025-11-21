@@ -114,7 +114,7 @@ const DonationDetails = () => {
         </h2>
 
         {/* Donation Details */}
-        <div className="space-y-3 text-info text-base md:text-lg leading-relaxed">
+        <div className="space-y-3 text-primary text-base md:text-lg leading-relaxed">
           <p className="flex items-center gap-2">
             <FaUtensils className="text-secondary" />{" "}
             <strong>Restaurant:</strong> {donation.restaurant} (
