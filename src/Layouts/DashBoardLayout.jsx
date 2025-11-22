@@ -24,10 +24,10 @@ const DashBoardLayout = () => {
   const { role } = useUserRole();
 
   const linkStyle =
-    "flex items-center gap-3 text-lg font-medium px-3 py-2 rounded-xl bg-primary text-neutral transition-all duration-200";
-  const inactiveStyle = "text-info hover:bg-accent hover:translate-x-1";
+    "flex items-center gap-3 text-lg font-medium px-3 py-2 rounded-xl bg-neutral text-primery transition-all duration-200";
+  const inactiveStyle = "text-primery hover:bg-accent hover:translate-x-1";
   const activeStyle =
-    "bg-accent text-neutral border-l-6 border-info font-semibold";
+    "bg-accent text-primery border-l-6 bg-primery/20   border-primery font-semibold";
 
   const links = (
     <>
@@ -253,52 +253,57 @@ const DashBoardLayout = () => {
 
   return (
     <DashboardWrapper>
-      <div className="drawer lg:drawer-open max-w-screen-xl mx-auto bg-neutral min-h-screen transition-all duration-300">
-        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+      <div className="bg-neutral">
+        <div className="drawer lg:drawer-open max-w-screen-xl mx-auto min-h-screen transition-all duration-300">
+          <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
-        {/* Drawer content */}
-        <div className="drawer-content flex flex-col">
-          {/* Navbar for small screens */}
-          <div className="navbar bg-secondary/40 backdrop-blur-md shadow-md lg:hidden">
-            <div className="flex-none">
-              <label
-                htmlFor="my-drawer-2"
-                aria-label="open sidebar"
-                className="btn btn-ghost btn-square"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  className="w-6 h-6 stroke-current"
+          {/* Drawer content */}
+          <div className="drawer-content flex flex-col">
+            {/* Navbar for small screens */}
+            <div className="navbar bg-secondary/40 backdrop-blur-md shadow-md lg:hidden">
+              <div className="flex-none">
+                <label
+                  htmlFor="my-drawer-2"
+                  aria-label="open sidebar"
+                  className="btn btn-ghost btn-square"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  ></path>
-                </svg>
-              </label>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    className="w-6 h-6 stroke-current"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    ></path>
+                  </svg>
+                </label>
+              </div>
+              <h2 className="text-xl font-semibold text-primary ml-2">
+                Dashboard
+              </h2>
             </div>
-            <h2 className="text-xl font-semibold text-info ml-2">Dashboard</h2>
+
+            {/* Main content */}
+            <div className="p-6">
+              <Outlet />
+            </div>
           </div>
 
-          {/* Main content */}
-          <div className="p-6">
-            <Outlet />
+          {/* Sidebar */}
+          <div className="drawer-side">
+            <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+            <ul className="menu p-6 w-80 min-h-full bg-secondary/70  backdrop-blur-lg shadow-lg border-r border-accent">
+              <h2 className="text-2xl font-bold mb-6 text-primary text-center">
+                Dashboard Menu
+              </h2>
+          
+              <div className="space-y-2">{links}</div>
+            </ul>
           </div>
-        </div>
-
-        {/* Sidebar */}
-        <div className="drawer-side">
-          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-6 w-80 min-h-full bg-secondary/70  backdrop-blur-lg shadow-lg border-r border-accent">
-            <h2 className="text-2xl font-bold mb-6 text-info text-center">
-              Dashboard Menu
-            </h2>
-            <div className="space-y-2">{links}</div>
-          </ul>
         </div>
       </div>
     </DashboardWrapper>

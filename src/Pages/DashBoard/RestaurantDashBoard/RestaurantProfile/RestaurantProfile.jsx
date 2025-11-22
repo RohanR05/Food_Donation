@@ -55,10 +55,10 @@ const RestaurantProfile = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="bg-base-100 text-info rounded-2xl shadow-2xl border border-accent overflow-hidden"
+        className="bg-accent text-primary rounded-2xl shadow-2xl border border-accent overflow-hidden"
       >
         {/* Header */}
-        <div className="bg-primary/20 p-6 text-center">
+        <div className="bg-accent p-6 text-center">
           <img
             src={user?.photoURL || "https://i.ibb.co/4Jf0x9T/user.png"}
             alt="Profile"
@@ -67,7 +67,7 @@ const RestaurantProfile = () => {
           <h2 className="mt-4 text-3xl font-bold text-primary">
             {user?.displayName || "Restaurant"}
           </h2>
-          <p className="mt-1 text-info text-sm">
+          <p className="mt-1 text-primary text-sm">
             Role:{" "}
             <span className="font-semibold text-secondary">Restaurant</span>
           </p>
