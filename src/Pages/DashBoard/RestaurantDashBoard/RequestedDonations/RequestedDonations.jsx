@@ -70,7 +70,7 @@ const RequestedDonations = () => {
 
   if (requests.length === 0)
     return (
-      <p className="text-center mt-10 text-info text-lg">
+      <p className="text-center mt-10 text-primary text-lg">
         No donation requests available for your restaurant.
       </p>
     );
@@ -125,7 +125,9 @@ const RequestedDonations = () => {
                 className="hover:bg-secondary/20"
               >
                 <td>{idx + 1}</td>
-                <td className="font-medium text-info">{req.donationTitle}</td>
+                <td className="font-medium text-primary">
+                  {req.donationTitle}
+                </td>
                 <td>
                   {req.charityName}
                   <br />
