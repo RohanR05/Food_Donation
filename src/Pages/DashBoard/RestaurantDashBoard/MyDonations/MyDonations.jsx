@@ -114,26 +114,26 @@ const MyDonation = () => {
             )}
 
             <div className="p-4 space-y-2 text-primary">
-              <h3 className="text-xl font-semibold text-info flex items-center gap-2">
+              <h3 className="text-xl font-semibold text-primary flex items-center gap-2">
                 <Utensils className="text-secondary w-5 h-5" />
                 {donation.title}
               </h3>
 
               <p className="flex items-center gap-2">
                 <Package className="text-secondary w-4 h-4" />
-                <span className="font-bold text-info">Food Type:</span>{" "}
+                <span className="font-bold text-primary">Food Type:</span>{" "}
                 {donation.foodType}
               </p>
 
               <p className="flex items-center gap-2">
                 <CheckCircle className="text-secondary w-4 h-4" />
-                <span className="font-bold text-info">Quantity:</span>{" "}
+                <span className="font-bold text-primary">Quantity:</span>{" "}
                 {donation.quantity}
               </p>
 
               <p className="flex items-center gap-2">
                 <Building2 className="text-secondary w-4 h-4" />
-                <span className="font-bold text-info">Restaurant:</span>{" "}
+                <span className="font-bold text-primary">Restaurant:</span>{" "}
                 {donation.restaurantName}
               </p>
 
@@ -145,28 +145,28 @@ const MyDonation = () => {
                 ) : (
                   <Package className="text-secondary w-4 h-4" />
                 )}
-                <span className="font-bold text-info">Status:</span>{" "}
+                <span className="font-bold text-primary">Status:</span>{" "}
                 <span className="font-semibold text-secondary">
                   {donation.status}
                 </span>
               </p>
 
               <div className="flex flex-wrap gap-3 pt-4">
-                {donation.status !== "Rejected" && (
+                {/* {donation.status !== "Rejected" && (
                   <button
                     onClick={() => handleUpdate(donation._id)}
                     className="btn btn-sm bg-primary text-neutral hover:bg-secondary hover:text-neutral transition-all flex items-center gap-2"
                   >
-                    <Edit className="w-4 h-4 text-info" />
+                    <Edit className="w-4 h-4 text-primary" />
                     Update
                   </button>
-                )}
+                )} */}
 
                 <button
                   onClick={() => handleDelete(donation._id)}
                   className="btn btn-sm bg-secondary text-neutral hover:bg-primary transition-all flex items-center gap-2"
                 >
-                  <Trash2 className="w-4 h-4 text-info" />
+                  <Trash2 className="w-4 h-4 text-primary" />
                   Delete
                 </button>
               </div>
