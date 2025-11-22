@@ -116,13 +116,13 @@ const AddDonation = () => {
               transition={{ duration: 0.4 }}
               className="form-control"
             >
-              <label className="label text-info font-semibold flex items-center gap-2">
+              <label className="label text-primary font-semibold flex items-center gap-2">
                 <FaTag className="text-secondary" /> Donation Title
               </label>
               <input
                 type="text"
                 placeholder="e.g. Fresh Bread Donation"
-                className="input input-bordered bg-neutral text-info"
+                className="input input-bordered bg-neutral text-primary"
                 {...register("title", { required: true })}
               />
               {errors.title && (
@@ -136,11 +136,11 @@ const AddDonation = () => {
               transition={{ duration: 0.4 }}
               className="form-control"
             >
-              <label className="label text-info font-semibold flex items-center gap-2">
+              <label className="label text-primary font-semibold flex items-center gap-2">
                 <FaUtensils className="text-secondary" /> Food Type
               </label>
               <select
-                className="select select-bordered bg-neutral text-info"
+                className="select select-bordered bg-neutral text-primary"
                 {...register("foodType", { required: true })}
               >
                 <option value="">Select type</option>
@@ -165,13 +165,13 @@ const AddDonation = () => {
               transition={{ duration: 0.4 }}
               className="form-control"
             >
-              <label className="label text-info font-semibold flex items-center gap-2">
+              <label className="label text-primary font-semibold flex items-center gap-2">
                 <FaWeightHanging className="text-secondary" /> Quantity
               </label>
               <input
                 type="number"
                 placeholder="e.g. 5"
-                className="input input-bordered bg-neutral text-info"
+                className="input input-bordered bg-neutral text-primary"
                 {...register("quantity", { required: true })}
               />
               {errors.quantity && (
@@ -185,13 +185,13 @@ const AddDonation = () => {
               transition={{ duration: 0.4 }}
               className="form-control"
             >
-              <label className="label text-info font-semibold flex items-center gap-2">
+              <label className="label text-primary font-semibold flex items-center gap-2">
                 <FaClock className="text-secondary" /> Pickup Time
               </label>
               <input
                 type="text"
                 placeholder="e.g. 2pm - 6pm"
-                className="input input-bordered bg-neutral text-info"
+                className="input input-bordered bg-neutral text-primary"
                 {...register("pickupTime", { required: true })}
               />
               {errors.pickupTime && (
@@ -210,13 +210,13 @@ const AddDonation = () => {
               transition={{ duration: 0.4 }}
               className="form-control"
             >
-              <label className="label text-info font-semibold flex items-center gap-2">
+              <label className="label text-primary font-semibold flex items-center gap-2">
                 <FaMapMarkerAlt className="text-secondary" /> Location
               </label>
               <input
                 type="text"
                 placeholder="e.g. 123 Food Street, Dhaka"
-                className="input input-bordered bg-neutral text-info"
+                className="input input-bordered bg-neutral text-primary"
                 {...register("location", { required: true })}
               />
               {errors.location && (
@@ -230,13 +230,13 @@ const AddDonation = () => {
               transition={{ duration: 0.4 }}
               className="form-control"
             >
-              <label className="label text-info font-semibold flex items-center gap-2">
+              <label className="label text-primary font-semibold flex items-center gap-2">
                 <FaImage className="text-secondary" /> Upload Image
               </label>
               <input
                 type="file"
                 accept="image/*"
-                className="file-input file-input-bordered bg-neutral text-info"
+                className="file-input file-input-bordered bg-neutral text-primary"
                 onChange={handleImageUpload}
                 disabled={imageUploading}
               />
@@ -258,25 +258,25 @@ const AddDonation = () => {
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
             <div>
-              <label className="label text-info font-semibold flex items-center gap-2">
+              <label className="label text-primary font-semibold flex items-center gap-2">
                 <FaStore className="text-secondary" /> Restaurant Name
               </label>
               <input
                 type="text"
                 value={user?.displayName || "Demo Restaurant"}
                 readOnly
-                className="input input-bordered bg-neutral text-info"
+                className="input input-bordered bg-neutral text-primary"
               />
             </div>
             <div>
-              <label className="label text-info font-semibold flex items-center gap-2">
+              <label className="label text-primary font-semibold flex items-center gap-2">
                 <FaEnvelope className="text-secondary" /> Restaurant Email
               </label>
               <input
                 type="email"
                 value={user?.email || "demo@example.com"}
                 readOnly
-                className="input input-bordered bg-neutral text-info"
+                className="input input-bordered bg-neutral text-primary"
               />
             </div>
           </motion.div>
@@ -287,7 +287,7 @@ const AddDonation = () => {
             whileTap={{ scale: 0.97 }}
             type="submit"
             disabled={imageUploading}
-            className="btn w-full bg-secondary font-semibold mt-6"
+            className="btn w-full bg-secondary text-neutral font-semibold mt-6"
           >
             {imageUploading ? "Uploading..." : "Add Donation"}
           </motion.button>
