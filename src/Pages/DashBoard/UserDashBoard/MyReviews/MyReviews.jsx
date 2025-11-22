@@ -62,7 +62,7 @@ const MyReviews = () => {
           {myReviews.map((review) => (
             <motion.div
               key={review._id}
-              className="bg-accent rounded-2xl shadow-xl shadow-primary/50 p-5 flex flex-col transition-transform hover:scale-105"
+              className="bg-accent rounded-2xl shadow-lg shadow-primary/40 p-5 flex flex-col transition-transform hover:scale-105"
               variants={cardVariants}
               initial="hidden"
               animate="visible"
@@ -96,7 +96,7 @@ const MyReviews = () => {
               </p>
 
               <button
-                className="btn btn-secondary mt-4 text-info hover:bg-accent border-none"
+                className="btn btn-secondary mt-4 text-primary hover:bg-accent border-none"
                 onClick={() =>
                   Swal.fire({
                     title: "Are you sure?",
