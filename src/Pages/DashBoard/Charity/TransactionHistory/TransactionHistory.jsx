@@ -64,7 +64,7 @@ const TransactionHistory = () => {
             animate="visible"
           >
             <table className="table-auto w-full text-sm md:text-base border border-secondary">
-              <thead className="bg-primary/20 text-info uppercase text-xs md:text-sm">
+              <thead className="bg-primary/20 text-primary uppercase text-xs md:text-sm">
                 <tr>
                   <th className="py-2 px-3">Txn ID</th>
                   <th className="flex items-center gap-1 py-2 px-3">
@@ -85,20 +85,20 @@ const TransactionHistory = () => {
                     key={txn._id}
                     className="hover:bg-primary/30 border-b"
                   >
-                    <td className="py-2 px-3 text-info truncate font-semibold">
+                    <td className="py-2 px-3 text-primary truncate font-semibold">
                       {txn.paymentId || "N/A"}
                     </td>
-                    <td className="py-2 px-3 text-info flex items-center gap-1">
+                    <td className="py-2 px-3 text-primary flex items-center gap-1">
                       <FaDollarSign className="text-secondary" />{" "}
                       <span className="font-bold text-primary">
                         ${txn.paymentAmount || 0}
                       </span>
                     </td>
-                    <td className="py-2 px-3 text-info flex items-center gap-1">
+                    <td className="py-2 px-3 text-primary flex items-center gap-1">
                       <FaBuilding className="text-secondary" />{" "}
                       {txn.organization || "N/A"}
                     </td>
-                    <td className="py-2 px-3 text-info flex items-center gap-1">
+                    <td className="py-2 px-3 text-primary flex items-center gap-1">
                       <FaCalendarAlt className="text-secondary" />{" "}
                       {new Date(txn.requestedAt).toLocaleDateString("en-GB")}
                     </td>
@@ -140,7 +140,7 @@ const TransactionHistory = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                <p className="flex items-center gap-2 text-info font-semibold">
+                <p className="flex items-center gap-2 text-primary font-semibold">
                   <span className="text-secondary">
                     <FaDollarSign />
                   </span>
@@ -148,19 +148,19 @@ const TransactionHistory = () => {
                     ${txn.paymentAmount || 0}
                   </span>
                 </p>
-                <p className="flex items-center gap-2 text-info">
+                <p className="flex items-center gap-2 text-primary">
                   <span className="text-secondary">
                     <FaBuilding />
                   </span>
                   {txn.organization || "N/A"}
                 </p>
-                <p className="flex items-center gap-2 text-info">
+                <p className="flex items-center gap-2 text-primary">
                   <span className="text-secondary">
                     <FaCalendarAlt />
                   </span>
                   {new Date(txn.requestedAt).toLocaleDateString("en-GB")}
                 </p>
-                <p className="flex items-center gap-2 text-info">
+                <p className="flex items-center gap-2 text-primary">
                   <span className="text-secondary">
                     {txn.status === "approved" && <FaCheckCircle />}
                     {txn.status === "pending" && <FaHourglassHalf />}
@@ -170,13 +170,13 @@ const TransactionHistory = () => {
                     className={`${
                       txn.status === "approved"
                         ? "font-bold text-primary"
-                        : "text-info"
+                        : "text-primary"
                     }`}
                   >
                     {txn.status}
                   </span>
                 </p>
-                <p className="text-info truncate font-semibold">
+                <p className="text-primary truncate font-semibold">
                   Txn ID: {txn.paymentId || "N/A"}
                 </p>
               </motion.div>
