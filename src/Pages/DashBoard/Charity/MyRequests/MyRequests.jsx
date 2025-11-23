@@ -65,7 +65,7 @@ const MyRequests = () => {
       </h2>
 
       {requests.length === 0 ? (
-        <p className="text-center text-info py-10">
+        <p className="text-center text-primary py-10">
           No donation requests found.
         </p>
       ) : (
@@ -86,7 +86,7 @@ const MyRequests = () => {
               </div>
 
               <div className="space-y-2 text-sm">
-                <p className="text-info flex items-center gap-2">
+                <p className="text-primary flex items-center gap-2">
                   <Building2 className="text-secondary w-5 h-5" />
                   <span>
                     <strong className="text-primary">Restaurant:</strong>{" "}
@@ -94,7 +94,7 @@ const MyRequests = () => {
                   </span>
                 </p>
 
-                <p className="text-info flex items-center gap-2">
+                <p className="text-primary flex items-center gap-2">
                   <Clock className="text-secondary w-5 h-5" />
                   <span>
                     <strong className="text-primary">Pickup Time:</strong>{" "}
@@ -102,7 +102,7 @@ const MyRequests = () => {
                   </span>
                 </p>
 
-                <p className="text-info flex items-center gap-2">
+                <p className="text-primary flex items-center gap-2">
                   {req.status === "Accepted" ? (
                     <CheckCircle className="text-secondary w-5 h-5" />
                   ) : req.status === "Pending" ? (
@@ -132,7 +132,7 @@ const MyRequests = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handleCancel(req._id)}
-                  className="mt-4 w-full btn btn-outline btn-secondary hover:bg-primary hover:text-info"
+                  className="mt-4 w-full btn btn-outline btn-secondary hover:bg-primary hover:text-primary"
                 >
                   Cancel Request
                 </motion.button>
