@@ -66,7 +66,7 @@ const MyPickups = () => {
       </h2>
 
       {pickups.length === 0 ? (
-        <p className="text-center text-info">No pickups found.</p>
+        <p className="text-center text-primary">No pickups found.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {pickups.map((pickup, index) => (
@@ -75,14 +75,14 @@ const MyPickups = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.05 }}
-              className="bg-accent border border-info/10 rounded-2xl overflow-hidden shadow-md shadow-primary/30 hover:shadow-secondary/40 transition-all duration-300"
+              className="bg-accent border border-pritext-primary/10 rounded-2xl overflow-hidden shadow-md shadow-primary/30 hover:shadow-secondary/40 transition-all duration-300"
             >
               <img
                 src={pickup.image || "https://via.placeholder.com/400x200"}
                 alt={pickup.donationTitle}
                 className="w-full h-48 object-cover"
               />
-              <div className="p-5 space-y-2 text-info">
+              <div className="p-5 space-y-2 text-primary">
                 <h3 className="text-xl font-bold text-primary flex items-center gap-2">
                   <Package className="text-secondary w-5 h-5" />
                   {pickup.donationTitle}
@@ -144,7 +144,7 @@ const MyPickups = () => {
                     whileTap={{ scale: 0.95 }}
                     onClick={() => confirmPickup(pickup._id)}
                     disabled={confirming}
-                    className="btn btn-outline btn-secondary w-full mt-4 hover:bg-primary hover:text-info"
+                    className="btn btn-outline btn-secondary w-full mt-4 hover:bg-primary hover:text-primary"
                   >
                     {confirming ? "Confirming..." : "Confirm Pickup"}
                   </motion.button>
