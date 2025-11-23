@@ -53,7 +53,7 @@ const AdminProfile = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="bg-base-100 text-info rounded-2xl shadow-2xl border border-accent overflow-hidden"
+        className="bg-base-100 text-primary rounded-2xl shadow-2xl border border-accent overflow-hidden"
       >
         {/* Header */}
         <div className="bg-primary/20 p-6 text-center">
@@ -65,7 +65,7 @@ const AdminProfile = () => {
           <h2 className="mt-4 text-3xl font-bold text-primary">
             {user?.displayName || "Admin"}
           </h2>
-          <p className="mt-1 text-info text-sm">
+          <p className="mt-1 text-primary text-sm">
             Role:{" "}
             <span className="font-semibold text-secondary">
               {roleInfo.role || "Admin"}
@@ -104,7 +104,7 @@ const AdminProfile = () => {
             <span>150+ Users</span>
           </div>
 
-          {/* Static Info / Admin Guidelines */}
+          {/* Static/ Admin Guidelines */}
           <div className="pt-4 border-t space-y-2">
             <p className="text-gray-600">
               As an admin, you have full control over the platform. You can
