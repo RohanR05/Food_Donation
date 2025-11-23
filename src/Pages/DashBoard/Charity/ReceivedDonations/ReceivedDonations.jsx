@@ -61,13 +61,13 @@ const ReceivedDonations = () => {
       </motion.h2>
 
       {donations.length === 0 ? (
-        <p className="text-center text-info">No donations picked up yet.</p>
+        <p className="text-center text-primary">No donations picked up yet.</p>
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {donations.map((donation, index) => (
             <motion.div
               key={donation._id}
-              className="bg-accent text-info rounded-2xl border border-secondary/30 shadow-md shadow-primary/50 overflow-hidden hover:shadow-2xl hover:shadow-secondary/40 transition-all flex flex-col"
+              className="bg-accent text-primary rounded-2xl border border-secondary/30 shadow-md shadow-primary/50 overflow-hidden hover:shadow-2xl hover:shadow-secondary/40 transition-all flex flex-col"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
@@ -131,7 +131,7 @@ const ReceivedDonations = () => {
             </Dialog.Title>
             <textarea
               rows="5"
-              className="textarea textarea-bordered w-full mb-4 resize-none text-info bg-neutral"
+              className="textarea textarea-bordered w-full mb-4 resize-none text-primary bg-neutral"
               placeholder="Write your review..."
               value={review}
               onChange={(e) => setReview(e.target.value)}
@@ -144,7 +144,7 @@ const ReceivedDonations = () => {
                 Cancel
               </button>
               <button
-                className="btn bg-primary text-info hover:bg-primary/90"
+                className="btn bg-primary text-primary hover:bg-primary/90"
                 onClick={handleSubmitReview}
               >
                 Submit
