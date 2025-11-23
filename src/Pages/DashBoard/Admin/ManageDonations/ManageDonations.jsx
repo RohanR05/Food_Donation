@@ -57,7 +57,7 @@ const ManageDonations = () => {
       try {
         const res = await axiosSecure.patch(`/donations/reject/${id}`);
         if (res.data.modifiedCount > 0) {
-          Swal.fire("Rejected!", `"${title}" has been rejected.`, "info");
+          Swal.fire("Rejected!", `"${title}" has been rejected.`, "pritext-primary");
           refetch();
         }
       } catch (err) {
@@ -79,9 +79,9 @@ const ManageDonations = () => {
       </h2>
 
       {/* Table for md+ devices */}
-      <div className="hidden md:block overflow-x-auto shadow-lg rounded-lg bg-primary/10">
+      <div className="hidden md:block overflow-x-auto shadow-lg rounded-lg bg-accent">
         <table className="table w-full text-sm">
-          <thead className="bg-primary uppercase text-xs text-secondary">
+          <thead className="bg-primary/20 uppercase text-xs text-secondary">
             <tr>
               <th>Title</th>
               <th>Food Type</th>
@@ -110,7 +110,7 @@ const ManageDonations = () => {
                         ? "text-secondary"
                         : donation.status === "Rejected"
                         ? "bg-red-100 text-red-600"
-                        : "bg-primary"
+                        : "bg-accent"
                     }`}
                   >
                     {donation.status || "Pending"}
@@ -167,14 +167,14 @@ const ManageDonations = () => {
             <h3 className="text-lg font-semibold text-secondary mb-2 flex items-center gap-2">
               <FaUtensils className="text-secondary" /> {donation.title}
             </h3>
-            <p className="text-sm flex items-center gap-2 text-info">
+            <p className="text-sm flex items-center gap-2 text-primary">
               <FaUser className="text-secondary" />{" "}
               {donation.restaurantName || "N/A"}
             </p>
-            <p className="text-sm flex items-center gap-2 text-info">
+            <p className="text-sm flex items-center gap-2 text-primary">
               <FaEnvelope className="text-secondary" /> {donation.restaurantEmail}
             </p>
-            <p className="text-sm flex items-center gap-2 text-info">
+            <p className="text-sm flex items-center gap-2 text-primary">
               <FaBox className="text-secondary" /> Quantity: {donation.quantity}
             </p>
 
@@ -182,10 +182,10 @@ const ManageDonations = () => {
               <span
                 className={`px-3 py-1 rounded-full text-xs font-medium ${
                   donation.status === "Verified"
-                    ? "text-secondary"
+                    ? "text-secondary bg-accent"
                     : donation.status === "Rejected"
                     ? "bg-red-100 text-red-600"
-                    : "bg-primary text-info"
+                    : "bg-accent text-primary"
                 }`}
               >
                 {donation.status || "Pending"}
