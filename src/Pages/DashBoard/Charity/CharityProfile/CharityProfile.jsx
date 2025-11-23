@@ -40,7 +40,7 @@ const CharityProfile = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="max-w-4xl mx-auto md:mt-8 bg-accent rounded-2xl shadow-2xl border border-info/10 overflow-hidden"
+      className="max-w-4xl mx-auto md:mt-8 bg-accent rounded-2xl shadow-2xl border border-pritext-primary/10 overflow-hidden"
     >
       {/* Header */}
       <div className="bg-accent/50 p-6 text-center">
@@ -55,7 +55,7 @@ const CharityProfile = () => {
         <h2 className="mt-4 text-2xl font-bold text-primary">
           {displayName || "No Name"}
         </h2>
-        <div className="flex justify-center items-center gap-2 text-info text-sm mt-1">
+        <div className="flex justify-center items-center gap-2 text-primary text-sm mt-1">
           <Mail className="text-secondary w-4 h-4" />
           <span>{email}</span>
         </div>
@@ -66,7 +66,7 @@ const CharityProfile = () => {
 
       {/* Mission */}
       <motion.div
-        className="p-6 border-t border-info/10"
+        className="p-6 border-t border-pritext-primary/10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
@@ -74,49 +74,49 @@ const CharityProfile = () => {
         <h3 className="text-lg font-semibold text-primary mb-2 flex items-center gap-2">
           <Heart className="text-secondary w-5 h-5" /> Mission Statement
         </h3>
-        <p className="text-info text-sm leading-relaxed">{mission}</p>
+        <p className="text-primary text-sm leading-relaxed">{mission}</p>
       </motion.div>
 
       {/* Contact Info */}
-      <div className="p-6 border-t border-info/10 grid md:grid-cols-2 gap-4">
+      <div className="p-6 border-t border-pritext-primary/10 grid md:grid-cols-2 gap-4">
         <div className="flex items-center gap-3">
           <MapPin className="text-secondary w-6 h-6" />
           <div>
             <p className="text-primary font-semibold">Location</p>
-            <p className="text-info text-sm">Dhaka, Bangladesh</p>
+            <p className="text-primary text-sm">Dhaka, Bangladesh</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
           <User className="text-secondary w-6 h-6" />
           <div>
             <p className="text-primary font-semibold">Founded</p>
-            <p className="text-info text-sm">Since 2021</p>
+            <p className="text-primary text-sm">Since 2021</p>
           </div>
         </div>
       </div>
 
       {/* Stats Section */}
-      <div className="bg-accent/40 p-6 grid sm:grid-cols-3 gap-4 border-t border-info/10 text-center">
+      <div className="bg-accent/40 p-6 grid sm:grid-cols-3 gap-4 border-t border-pritext-primary/10 text-center">
         <motion.div whileHover={{ scale: 1.05 }}>
           <p className="text-3xl font-bold text-primary">240+</p>
-          <p className="text-info text-sm">Meals Donated</p>
+          <p className="text-primary text-sm">Meals Donated</p>
         </motion.div>
         <motion.div whileHover={{ scale: 1.05 }}>
           <p className="text-3xl font-bold text-primary">75+</p>
-          <p className="text-info text-sm">Communities Helped</p>
+          <p className="text-primary text-sm">Communities Helped</p>
         </motion.div>
         <motion.div whileHover={{ scale: 1.05 }}>
           <p className="text-3xl font-bold text-primary">12</p>
-          <p className="text-info text-sm">Awards Won</p>
+          <p className="text-primary text-sm">Awards Won</p>
         </motion.div>
       </div>
 
       {/* Recent Impact */}
-      <div className="p-6 border-t border-info/10">
+      <div className="p-6 border-t border-pritext-primary/10">
         <h3 className="text-lg font-semibold text-primary mb-3 flex items-center gap-2">
           <Award className="text-secondary w-5 h-5" /> Recent Impact Highlights
         </h3>
-        <ul className="list-disc pl-6 text-info text-sm space-y-1">
+        <ul className="list-disc pl-6 text-primary text-sm space-y-1">
           <li>Partnered with 5 local restaurants to reduce food waste.</li>
           <li>Distributed 1200+ meals to low-income families in 2025.</li>
           <li>Conducted awareness campaigns in 8 schools across Dhaka.</li>
@@ -124,8 +124,8 @@ const CharityProfile = () => {
       </div>
 
       {/* Footer */}
-      <div className="bg-accent/50 p-4 text-center border-t border-info/10">
-        <p className="text-sm text-info">
+      <div className="bg-accent/50 p-4 text-center border-t border-pritext-primary/10">
+        <p className="text-sm text-primary">
           <Calendar className="inline-block text-secondary w-4 h-4 mr-1" />
           Member since{" "}
           <span className="text-primary font-medium">April 2023</span>
