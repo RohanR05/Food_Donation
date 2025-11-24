@@ -50,7 +50,7 @@ const FeatureDonations = () => {
       {/* Table for md/lg (unchanged) */}
       <div className="overflow-x-auto hidden sm:hidden md:block">
         <table className="table w-full">
-          <thead className="bg-primary text-info">
+          <thead className="bg-primary/20 text-primary">
             <tr>
               <th>#</th>
               <th>Image</th>
@@ -61,7 +61,7 @@ const FeatureDonations = () => {
               <th>Feature</th>
             </tr>
           </thead>
-          <tbody className="bg-primary/20">
+          <tbody className="bg-accent">
             {donations.map((donation, index) => (
               <tr key={donation._id}>
                 <td>{index + 1}</td>
@@ -125,8 +125,10 @@ const FeatureDonations = () => {
             <h3 className="text-lg font-semibold text-secondary mb-1">
               {donation.title || "Untitled"}
             </h3>
-            <p className="text-info mb-1">Food Type: {donation.foodType}</p>
-            <p className="text-info mb-1">Restaurant: {donation.restaurant}</p>
+            <p className="text-primary mb-1">Food Type: {donation.foodType}</p>
+            <p className="text-primary mb-1">
+              Restaurant: {donation.restaurant}
+            </p>
             <span
               className={`px-2 py-1 text-xs rounded-full font-medium mb-2 inline-block ${
                 donation.status === "Verified"
