@@ -106,7 +106,7 @@ const Login = () => {
                   )}
                 </div>
 
-                <button className="btn btn-primary w-full mt-4">
+                <button className="btn btn-secondary btn-outline w-full mt-4">
                   Login
                 </button>
 

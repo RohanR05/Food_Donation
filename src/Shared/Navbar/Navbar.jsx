@@ -117,10 +117,10 @@ const Navbar = () => {
 
                 {/* Dropdown */}
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-36 bg-base-100 shadow-md rounded-md p-2 z-50">
+                  <div className="absolute right-0 mt-2 w-36 bg-base-100 shadow-md rounded-md p-2 z-50 flex justify-center">
                     <button
                       onClick={handleLogout}
-                      className="w-full btn btn-sm btn-outline border-primary text-primary hover:bg-primary hover:text-white"
+                      className="btn btn-outline btn-secondary"
                     >
                       Log Out
                     </button>
@@ -129,7 +129,7 @@ const Navbar = () => {
               </div>
             ) : (
               <Link
-                className="btn bg-primary btn-sm md:btn-lg text-white hover:bg-secondary hover:text-white"
+                className="btn btn-secondary btn-outline"
                 to="/login"
               >
                 Login
