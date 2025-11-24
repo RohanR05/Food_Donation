@@ -182,7 +182,7 @@ const Registration = () => {
                 )}
               </div>
 
-              <button className="btn btn-primary w-full mt-4 text-black">
+              <button className="btn btn-secondary btn-outline w-full">
                 Register
               </button>
 
