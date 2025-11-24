@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../../Contexts/AuthContext";
-import Loading2 from '../../../../Shared/Loading/Loading2'
+import Loading2 from "../../../../Shared/Loading/Loading2";
 
 // Font Awesome Icons
 import {
@@ -37,7 +37,9 @@ const ManageUsers = () => {
 
   const handleRoleChange = async (id, newRole) => {
     try {
-      const res = await axiosSecure.patch(`/users/role/${id}`, { role: newRole });
+      const res = await axiosSecure.patch(`/users/role/${id}`, {
+        role: newRole,
+      });
       if (res.data.modifiedCount > 0) {
         Swal.fire("Success", `User role updated to ${newRole}`, "success");
         refetch();
@@ -73,9 +75,8 @@ const ManageUsers = () => {
   };
 
   if (isLoading) {
-  return <Loading2></Loading2>
-}
-
+    return <Loading2></Loading2>;
+  }
 
   return (
     <div className="mx-auto px-2 md:mt-8">
@@ -86,10 +87,10 @@ const ManageUsers = () => {
       {/* Table for md+ devices */}
       <div className="hidden md:block overflow-x-auto shadow-lg rounded-lg bg-primary/10 border border-secondary/20">
         <table className="table w-full text-sm">
-          <thead className="bg-primary text-info uppercase text-xs">
+          <thead className="bg-accent text-primary uppercase text-xs">
             <tr>
               <th className="py-4 px-6">Name</th>
-              <th>Email</th>
+              {/* <th>Email</th> */}
               <th>Role</th>
               <th className="text-center">Actions</th>
             </tr>
@@ -152,7 +153,7 @@ const ManageUsers = () => {
         </table>
 
         {!users.length && !isLoading && (
-          <div className="text-center py-10 text-info text-sm">
+          <div className="text-center py-10 text-primary text-sm">
             No users found.
           </div>
         )}
@@ -175,10 +176,10 @@ const ManageUsers = () => {
               </h3>
             </div>
 
-            <p className="text-sm flex items-center gap-2 text-info mb-1">
+            <p className="text-sm flex items-center gap-2 text-primary mb-1">
               <FaEnvelope className="text-secondary" /> {u.email}
             </p>
-            <p className="text-sm flex items-center gap-2 text-info mb-1">
+            <p className="text-sm flex items-center gap-2 text-primary mb-1">
               <FaUser className="text-secondary" /> Role:{" "}
               <span className="capitalize">{u.role || "user"}</span>
             </p>
@@ -222,7 +223,7 @@ const ManageUsers = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-10 text-info text-sm"
+            className="text-center py-10 text-primary text-sm"
           >
             No users found.
           </motion.div>
