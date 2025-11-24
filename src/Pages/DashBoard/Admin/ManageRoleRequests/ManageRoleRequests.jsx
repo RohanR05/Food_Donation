@@ -37,7 +37,7 @@ const ManageCharityRequests = () => {
   const handleReject = async (id) => {
     const result = await axiosSecure.patch(`/charity-requests/reject/${id}`);
     if (result.data.modifiedCount > 0) {
-      Swal.fire("Rejected", "Charity request rejected", "info");
+      Swal.fire("Rejected", "Charity request rejected", "pritext-primary");
       refetch();
     }
   };
@@ -62,7 +62,7 @@ const ManageCharityRequests = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: index * 0.05 }}
-            className="card bg-primary/10 border border-accent shadow-md rounded-2xl hover:shadow-xl shadow-primary/50 hover:shadow-secondary/50 transition-all duration-300"
+            className="card bg-accent border border-accent shadow-md rounded-2xl hover:shadow-xl shadow-primary/50 hover:shadow-secondary/50 transition-all duration-300"
           >
             <div className="card-body space-y-2">
               <div className="flex items-center justify-between">
@@ -82,7 +82,7 @@ const ManageCharityRequests = () => {
                 </span>
               </div>
 
-              <p className="text-sm text-info">{req.email}</p>
+              <p className="text-sm text-primary">{req.email}</p>
 
               <div className="mt-2 space-y-1">
                 <p>
@@ -91,7 +91,7 @@ const ManageCharityRequests = () => {
                   </span>{" "}
                   {req.organization}
                 </p>
-                <p className="text-sm italic text-info">{req.mission}</p>
+                <p className="text-sm italic text-primary">{req.mission}</p>
               </div>
 
               <div className="divider my-2"></div>
@@ -123,7 +123,7 @@ const ManageCharityRequests = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
-          className="text-center mt-10 text-info"
+          className="text-center mt-10 text-primary"
         >
           No charity role requests found.
         </motion.div>
