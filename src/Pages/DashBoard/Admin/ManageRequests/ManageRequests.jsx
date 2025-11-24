@@ -70,9 +70,9 @@ const ManageRequests = () => {
       </h2>
 
       {/* Table for md+ */}
-      <div className="hidden md:block overflow-x-auto bg-primary/10">
+      <div className="hidden md:block overflow-x-auto bg-accent">
         <table className="table-auto w-full border-collapse border border-secondary">
-          <thead className="bg-primary text-info">
+          <thead className="bg-primary/20 text-primary">
             <tr>
               <th className="border px-4 py-2">Donation Title</th>
               <th className="border px-4 py-2">Charity Name</th>
@@ -126,13 +126,13 @@ const ManageRequests = () => {
                 {request.donationTitle}
               </h3>
             </div>
-            <p className="flex items-center gap-2 text-info mb-1">
+            <p className="flex items-center gap-y/20 text-primary mb-1">
               <FaUser className="text-secondary" /> {request.charityName}
             </p>
-            <p className="flex items-center gap-2 text-info mb-1">
+            <p className="flex items-center gap-y/20 text-primary mb-1">
               <FaEnvelope className="text-secondary" /> {request.charityEmail}
             </p>
-            <p className="flex items-center gap-2 text-info mb-2">
+            <p className="flex items-center gap-y/20 text-primary mb-2">
               <FaInfoCircle className="text-secondary" />{" "}
               {request.requestDescription}
             </p>
